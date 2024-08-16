@@ -27,8 +27,16 @@
                 </div>
             </div>
             <div class="divider"></div>
-            <div class="nav-auth">
-                <img src="https://avatars.githubusercontent.com/u/118147438?v=4" alt="">
+            <div class="nav-auth dropdown">
+                <input type="checkbox" id="dropdown-toggler" hidden>
+                <label for="dropdown-toggler" class="profile-img">
+                    <img src="https://avatars.githubusercontent.com/u/118147438?v=4" alt="Profile" class="rounded-circle" style="width: 40px; cursor: pointer;">
+                </label>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Logout</a></li>
+                </ul>
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 body {
     height: 200vh;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato';
 }
 
 .navbar {
@@ -60,4 +60,46 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
+}
+
+/* navbar.css */
+.nav-auth {
+    position: relative;
+}
+
+.nav-auth .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    list-style: none;
+    padding: 10px 0;
+    margin: 0;
+    min-width: 150px;
+    z-index: 1000;
+}
+
+.nav-auth .dropdown-menu li {
+    padding: 8px 16px;
+}
+
+.nav-auth .dropdown-menu li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+.nav-auth .dropdown-menu li:hover {
+    background-color: #f1f1f1;
+}
+
+#dropdown-toggler:checked + .dropdown-menu {
+    display: block;
+}
+
+.profile-img {
+    cursor: pointer;
 }
