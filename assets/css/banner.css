@@ -26,8 +26,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
+    background-color: rgba(81, 81, 81, 0.5);
+    color: rgb(255, 255, 255);
     border: none;
     padding: 10px;
     cursor: pointer;

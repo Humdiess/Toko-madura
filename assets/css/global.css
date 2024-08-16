@@ -1,0 +1,13 @@
+.section-title {
+    color: #212121 !important;
+    font-weight: 700 !important;
+    font-size: 1.25rem !important;
+}
+
+.current-price {
+    color: #BDBDBD !important;
+}
+
+.bg-danger-transparent {
+    background-color: #D32F2F !important;
+}

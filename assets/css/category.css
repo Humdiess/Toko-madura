@@ -21,7 +21,7 @@
 }
 
 .category-card:hover {
-    border-color: rgb(255, 76, 76);
+    border-color: #FFD600;
     border-width: 2px;
     border-style: dashed;
     transition: transform 0.3s ease, border-color 0.3s ease-in-out;

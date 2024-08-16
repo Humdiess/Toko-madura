@@ -14,6 +14,7 @@ $products = json_decode($jsonData, true);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- css -->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/global.css">
     <link rel="stylesheet" href="assets/css/navbar.css">
     <link rel="stylesheet" href="assets/css/banner.css">
     <link rel="stylesheet" href="assets/css/category.css">
@@ -52,7 +53,7 @@ $products = json_decode($jsonData, true);
                     <li class="nav-item"><a href="#">Peralatan dapur</a></li>
                 </ul>
             </div>
-            <div class="slider-container overflow-hidden rounded-4">
+            <div class="slider-container overflow-hidden rounded-3">
                 <div class="slider">
                     <div class="slide">
                         <img src="assets/img/banner-1.png" alt="banner">
@@ -70,10 +71,10 @@ $products = json_decode($jsonData, true);
         </div>
 
         <div class="title">
-            <h1 class="fw-bold fs-4 mb-0 ps-3 py-3">Kategori teratas</h1>
+            <h1 class="fw-bold fs-4 mb-0 ps-3 py-3 section-title">Kategori teratas</h1>
         </div>
 
-        <div class="top-categories bg-light py-3 rounded-4 border">
+        <div class="top-categories bg-light py-3 rounded-3 border">
             <div class="categories-list d-flex flex-wrap gap-3 px-3">
                 <div class="category-card d-flex flex-column align-items-center">
                     <div class="category-card-icon">
@@ -131,10 +132,10 @@ $products = json_decode($jsonData, true);
         <div class="promo-wrapper">
             <div class="promo">
                 <div class="promo-title">
-                    <h1 class="fw-bold fs-4 ps-3 pt-5 pb-4 mb-0">Promo spesial kemerdekaan</h1>
+                    <h1 class="fw-bold fs-4 ps-3 pt-5 pb-4 mb-0 section-title">Promo spesial kemerdekaan</h1>
                 </div>
                 <div class="promo-content px-5 overflow-hidden d-flex align-items-center">
-                    <div class="promo-info-card p-5 rounded-4">
+                    <div class="promo-info-card p-5 rounded-3">
                         <img src="assets/img/promo-info.png" alt="">
                     </div>
                     <div class="promo-list d-flex gap-3">
@@ -143,59 +144,12 @@ $products = json_decode($jsonData, true);
                                 <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" alt="">
                             </div>
                             <div class="promo-product-card-title p-2">
-                                <p class="mb-3 word-break">Sabun colek ukuran 200ml warna biru</p>
-                                <p class="text-decoration-line-through mb-0">Rp. 13.000</p>
-                                <p class="fw-bold fs-5">Rp. 10.000</p>
-                            </div>
-                        </div>
-                        <div class="promo-product-card border shadow-sm overflow-hidden rounded-3">
-                            <div class="promo-product-card-image bg-light">
-                                <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
-                            </div>
-                            <div class="promo-product-card-title p-2">
-                                <p class="mb-3 word-break">Sabun colek ukuran 200ml warna biru</p>
-                                <p class="text-decoration-line-through mb-0">Rp. 13.000</p>
-                                <p class="fw-bold fs-5">Rp. 10.000</p>
-                            </div>
-                        </div>
-                        <div class="promo-product-card border shadow-sm overflow-hidden rounded-3">
-                            <div class="promo-product-card-image bg-light">
-                                <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
-                            </div>
-                            <div class="promo-product-card-title p-2">
-                                <p class="mb-3 word-break">Sabun colek ukuran 200ml warna biru</p>
-                                <p class="text-decoration-line-through mb-0">Rp. 13.000</p>
-                                <p class="fw-bold fs-5">Rp. 10.000</p>
-                            </div>
-                        </div>
-                        <div class="promo-product-card border shadow-sm overflow-hidden rounded-3">
-                            <div class="promo-product-card-image bg-light">
-                                <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
-                            </div>
-                            <div class="promo-product-card-title p-2">
-                                <p class="mb-3 word-break">Sabun colek ukuran 200ml warna biru</p>
-                                <p class="text-decoration-line-through mb-0">Rp. 13.000</p>
-                                <p class="fw-bold fs-5">Rp. 10.000</p>
-                            </div>
-                        </div>
-                        <div class="promo-product-card border shadow-sm overflow-hidden rounded-3">
-                            <div class="promo-product-card-image bg-light">
-                                <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
-                            </div>
-                            <div class="promo-product-card-title p-2">
-                                <p class="mb-3 word-break">Sabun colek ukuran 200ml warna biru</p>
-                                <p class="text-decoration-line-through mb-0">Rp. 13.000</p>
-                                <p class="fw-bold fs-5">Rp. 10.000</p>
-                            </div>
-                        </div>
-                        <div class="promo-product-card border shadow-sm overflow-hidden rounded-3">
-                            <div class="promo-product-card-image bg-light">
-                                <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80" alt="">
-                            </div>
-                            <div class="promo-product-card-title p-2">
-                                <p class="mb-3 word-break">Sabun colek ukuran 200ml warna biru</p>
-                                <p class="text-decoration-line-through mb-0">Rp. 13.000</p>
-                                <p class="fw-bold fs-5">Rp. 10.000</p>
+                                <p class="mb-1 word-break">Sabun colek ukuran 200ml warna biru</p>
+                                <div class="price-discount d-flex align-items-center gap-2">
+                                    <p class="fw-bold fs-6 mb-0">Rp. 10.000</p>
+                                    <!-- label discount percent -->
+                                    <span class="badge rounded-pill bg-danger-transparent">-10%</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -208,26 +162,25 @@ $products = json_decode($jsonData, true);
         <div class="product-wrapper">
             <div class="product">
                 <div class="product-title">
-                    <h1 class="fw-bold fs-4 ps-3 pt-5 pb-4 mb-0">Tumbass</h1>
+                    <h1 class="fw-bold fs-4 ps-3 pt-5 pb-4 mb-0 section-title">Tumbass</h1>
                 </div>
                 <div class="product-content">
                     <div class="product-list">
-                    <?php foreach ($products as $product) : ?>
-                        <div class="product-card border shadow-sm overflow-hidden rounded-4">
+                        <?php foreach ($products as $product) : ?>
+                        <div class="product-card">
                             <div class="product-card-image">
-                                <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" alt="product-image" loading="lazy">
+                                <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" alt="product-image">
                             </div>
-                            <div class="product-card-title p-2">
-                                <p class="mb-2 word-break"><?php echo htmlspecialchars($product['nama']); ?></p>
-                                <!-- rating -->
-                                <div class="rating d-flex align-items-center gap-2">
+                            <div class="product-card-content p-2">
+                                <p class="product-name mb-0"><?php echo htmlspecialchars($product['nama']); ?></p>
+                                <p class="product-price mb-0 fw-bold mb-2">Rp. <?php echo number_format($product['harga'], 0, ',', '.'); ?></p>
+                                <div class="product-rating d-flex align-items-center gap-1">
                                     <i class="fas fa-star text-warning"></i>
-                                    <p class="mb-0 ms-1">4.5</p>
+                                    <p class="rating-text mb-0">4.5</p>
                                 </div>
-                                <p class="card-price fw-bold fs-5">Rp. <?php echo number_format($product['harga'], 0, ',', '.'); ?></p>
                             </div>
                         </div>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
