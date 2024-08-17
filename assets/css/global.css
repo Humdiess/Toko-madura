@@ -17,3 +17,40 @@ body {
 .bg-danger-transparent {
     background-color: #D32F2F !important;
 }
+
+footer {
+    background-color: #D32F2F !important;
+    color: #ffffff;
+}
+
+footer h5 {
+    color: #333;
+}
+
+footer a {
+    color: #333;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer .form-control {
+    border-radius: 30px;
+}
+
+footer .btn-primary {
+    background-color: #007bff;
+    border-radius: 30px;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+footer .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+footer .social-icons a {
+    font-size: 1.2rem;
+}

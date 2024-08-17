@@ -21,6 +21,7 @@ $products = json_decode($jsonData, true);
     <link rel="stylesheet" href="assets/css/splash.css">
     <link rel="stylesheet" href="assets/css/promo.css">
     <link rel="stylesheet" href="assets/css/product.css">
+    <link rel="stylesheet" href="assets/css/checkout.css">
 
     <!-- aos -->
     <link href="node_modules/aos/dist/aos.css" rel="stylesheet">

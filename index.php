@@ -10,7 +10,7 @@
                     <li class="nav-item"><a href="#">Peralatan dapur</a></li>
                 </ul>
             </div>
-            <div class="slider-container overflow-hidden rounded-3">
+            <div class="slider-container overflow-hidden rounded-top-3">
                 <div class="slider">
                     <div class="slide">
                         <img src="assets/img/banner-1.png" alt="banner">
@@ -27,11 +27,7 @@
             </div>
         </div>
 
-        <div class="title">
-            <h1 class="fw-bold fs-4 mb-0 ps-3 py-3 section-title">Kategori teratas</h1>
-        </div>
-
-        <div class="top-categories bg-light py-3 rounded-3 border">
+        <div class="top-categories bg-light py-3 rounded-bottom-3 border">
             <div class="categories-list d-flex flex-wrap gap-3 px-3">
                 <div class="category-card d-flex flex-column align-items-center">
                     <div class="category-card-icon">
@@ -85,67 +81,46 @@
         </div>
     </section>
 
-    <section class="promo-container container">
-        <div class="promo-wrapper">
-            <div class="promo">
-                <div class="promo-title">
-                    <h1 class="fw-bold fs-4 ps-3 pt-5 pb-4 mb-0 section-title">Promo spesial kemerdekaan</h1>
+    <section class="promo container mt-5">
+        <div class="promo-wrapper px-5">
+            <div class="promo-content rounded-3 d-flex flex-column align-items-center justify-content-center py-4">
+                <div class="promo-header text-center">
+                    <h1 class="fw-bold mb-4 fs-4">PROMO SPESIAL 17 AGUSTUS!!</h1>
                 </div>
-                <div class="promo-content px-5 overflow-hidden d-flex align-items-center">
-                    <div class="promo-info-card p-5 rounded-3">
-                        <img src="assets/img/promo-info.png" alt="">
+                <div class="promo-product-list d-flex gap-3">
+                    <div class="promo-product-card bg-light rounded-3 shadow-sm">
+                        <div class="promo-product-card-image overflow-hidden rounded-top">
+                            <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" alt="Product Image">
+                        </div>
+                        <div class="promo-product-card-body p-3">
+                            <p class="product-title mb-2">Sabun Colek Ukuran 200ml Warna Biru</p>
+                            <div class="price-discount d-flex align-items-center justify-content-between">
+                                <p class="price fw-bold fs-6 mb-0">Rp. 10.000</p>
+                                <span class="badge rounded-pill bg-danger text-light">-10%</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="promo-list d-flex gap-3">
-                        <div class="promo-product-card overflow-hidden rounded-3 border">
-                            <div class="promo-product-card-image bg-light">
-                                <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" alt="">
-                            </div>
-                            <div class="promo-product-card-title p-2">
-                                <p class="mb-1 word-break">Sabun colek ukuran 200ml warna biru</p>
-                                <div class="price-discount d-flex align-items-center gap-2">
-                                    <p class="fw-bold fs-6 mb-0">Rp. 10.000</p>
-                                    <!-- label discount percent -->
-                                    <span class="badge rounded-pill bg-danger-transparent">-10%</span>
-                                </div>
+                    <div class="promo-product-card bg-light rounded-3 shadow-sm">
+                        <div class="promo-product-card-image overflow-hidden rounded-top">
+                            <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" alt="Product Image">
+                        </div>
+                        <div class="promo-product-card-body p-3">
+                            <p class="product-title mb-2">Sabun Colek Ukuran 200ml Warna Biru</p>
+                            <div class="price-discount d-flex align-items-center justify-content-between">
+                                <p class="price fw-bold fs-6 mb-0">Rp. 10.000</p>
+                                <span class="badge rounded-pill bg-danger text-light">-10%</span>
                             </div>
                         </div>
-                        <div class="promo-product-card overflow-hidden rounded-3 border">
-                            <div class="promo-product-card-image bg-light">
-                                <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" alt="">
-                            </div>
-                            <div class="promo-product-card-title p-2">
-                                <p class="mb-1 word-break">Sabun colek ukuran 200ml warna biru</p>
-                                <div class="price-discount d-flex align-items-center gap-2">
-                                    <p class="fw-bold fs-6 mb-0">Rp. 10.000</p>
-                                    <!-- label discount percent -->
-                                    <span class="badge rounded-pill bg-danger-transparent">-10%</span>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="promo-product-card bg-light rounded-3 shadow-sm">
+                        <div class="promo-product-card-image overflow-hidden rounded-top">
+                            <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" alt="Product Image">
                         </div>
-                        <div class="promo-product-card border overflow-hidden rounded-3">
-                            <div class="promo-product-card-image bg-light">
-                                <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" alt="">
-                            </div>
-                            <div class="promo-product-card-title p-2">
-                                <p class="mb-1 word-break">Sabun colek ukuran 200ml warna biru</p>
-                                <div class="price-discount d-flex align-items-center gap-2">
-                                    <p class="fw-bold fs-6 mb-0">Rp. 10.000</p>
-                                    <!-- label discount percent -->
-                                    <span class="badge rounded-pill bg-danger-transparent">-10%</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="promo-product-card border overflow-hidden rounded-3">
-                            <div class="promo-product-card-image bg-light">
-                                <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" alt="">
-                            </div>
-                            <div class="promo-product-card-title p-2">
-                                <p class="mb-1 word-break">Sabun colek ukuran 200ml warna biru</p>
-                                <div class="price-discount d-flex align-items-center gap-2">
-                                    <p class="fw-bold fs-6 mb-0">Rp. 10.000</p>
-                                    <!-- label discount percent -->
-                                    <span class="badge rounded-pill bg-danger-transparent">-10%</span>
-                                </div>
+                        <div class="promo-product-card-body p-3">
+                            <p class="product-title mb-2">Sabun Colek Ukuran 200ml Warna Biru</p>
+                            <div class="price-discount d-flex align-items-center justify-content-between">
+                                <p class="price fw-bold fs-6 mb-0">Rp. 10.000</p>
+                                <span class="badge rounded-pill bg-danger text-light">-10%</span>
                             </div>
                         </div>
                     </div>
@@ -154,11 +129,14 @@
         </div>
     </section>
 
-    <section class="product container">
+    <section class="product container mt-5">
         <div class="product-wrapper">
             <div class="product">
-                <div class="product-title">
-                    <h1 class="fw-bold fs-4 ps-3 pt-5 pb-4 mb-0 section-title">Tumbass</h1>
+                <div class="product-title d-flex align-items-center justify-content-between px-3">
+                    <h1 class="fw-bold fs-5">Cari semua barang yang kamu butuhkan</h1>
+                    <div class="filter-button">
+                        <a href="#">Lihat semua</a>
+                    </div>
                 </div>
                 <div class="product-content">
                     <div class="product-list">

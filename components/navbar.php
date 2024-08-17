@@ -26,11 +26,11 @@
                     </a>
                 </div>
             </div>
-            <div class="divider"></div>
+            <div class="divider d-none d-md-block"></div>
             <div class="nav-auth dropdown">
                 <input type="checkbox" id="dropdown-toggler" hidden>
                 <label for="dropdown-toggler" class="profile-img">
-                    <img src="https://avatars.githubusercontent.com/u/118147438?v=4" alt="Profile" class="rounded-circle" style="width: 40px; cursor: pointer;">
+                    <img src="https://avatars.githubusercontent.com/u/118147438?v=4" alt="Profile" class="rounded-circle">
                 </label>
                 <ul class="dropdown-menu">
                     <li><a href="#">Profile</a></li>
@@ -38,6 +38,20 @@
                     <li><a href="#">Logout</a></li>
                 </ul>
             </div>
+            <!-- Mobile Nav Button -->
+            <div class="mobile-nav-toggler d-md-none">
+                <a href="javascript:void(0);" onclick="toggleMobileNav()">
+                    <i class="fas fa-bars"></i>
+                </a>
+            </div>
         </div>
+    </div>
+    <!-- Mobile Nav Menu -->
+    <div class="mobile-nav d-md-none">
+        <ul class="mobile-nav-list">
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
     </div>
 </nav>
