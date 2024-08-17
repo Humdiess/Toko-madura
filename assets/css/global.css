@@ -1,3 +1,9 @@
+body {
+    height: 200vh;
+    font-family: 'Lato';
+    background-color: #fefefe !important;
+}
+
 .section-title {
     color: #212121 !important;
     font-weight: 700 !important;

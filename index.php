@@ -1,47 +1,4 @@
-<?php
-$jsonFilePath = 'utils/data.json';
-
-$jsonData = file_get_contents($jsonFilePath);
-
-$products = json_decode($jsonData, true);
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- css -->
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/global.css">
-    <link rel="stylesheet" href="assets/css/navbar.css">
-    <link rel="stylesheet" href="assets/css/banner.css">
-    <link rel="stylesheet" href="assets/css/category.css">
-    <link rel="stylesheet" href="assets/css/splash.css">
-    <link rel="stylesheet" href="assets/css/promo.css">
-    <link rel="stylesheet" href="assets/css/product.css">
-
-    <!-- aos -->
-    <link href="node_modules/aos/dist/aos.css" rel="stylesheet">
-    
-    
-    <!-- font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-
-    <!-- icon -->
-    <script src="https://kit.fontawesome.com/cff8b87f33.js" crossorigin="anonymous"></script>
-    <title>Madura</title>
-</head>
-<body>  
-    <?php include('components/splash-screen.php') ?>
-
-    <header class="d-flex justify-content-center">
-        <?php include('components/navbar.php');  ?>
-    </header>
-
+<?php include('themes/header.php') ?>
     <section class="hero container py-3">
         <div class="hero-wrapper">
             <div class="category-selector d-flex align-items-center gap-2 mb-3">
@@ -139,8 +96,47 @@ $products = json_decode($jsonData, true);
                         <img src="assets/img/promo-info.png" alt="">
                     </div>
                     <div class="promo-list d-flex gap-3">
-                        <div class="promo-product-card border shadow-sm overflow-hidden rounded-3">
-                            <div class="promo-product-card-image bg-light border">
+                        <div class="promo-product-card overflow-hidden rounded-3 border">
+                            <div class="promo-product-card-image bg-light">
+                                <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" alt="">
+                            </div>
+                            <div class="promo-product-card-title p-2">
+                                <p class="mb-1 word-break">Sabun colek ukuran 200ml warna biru</p>
+                                <div class="price-discount d-flex align-items-center gap-2">
+                                    <p class="fw-bold fs-6 mb-0">Rp. 10.000</p>
+                                    <!-- label discount percent -->
+                                    <span class="badge rounded-pill bg-danger-transparent">-10%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="promo-product-card overflow-hidden rounded-3 border">
+                            <div class="promo-product-card-image bg-light">
+                                <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" alt="">
+                            </div>
+                            <div class="promo-product-card-title p-2">
+                                <p class="mb-1 word-break">Sabun colek ukuran 200ml warna biru</p>
+                                <div class="price-discount d-flex align-items-center gap-2">
+                                    <p class="fw-bold fs-6 mb-0">Rp. 10.000</p>
+                                    <!-- label discount percent -->
+                                    <span class="badge rounded-pill bg-danger-transparent">-10%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="promo-product-card border overflow-hidden rounded-3">
+                            <div class="promo-product-card-image bg-light">
+                                <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" alt="">
+                            </div>
+                            <div class="promo-product-card-title p-2">
+                                <p class="mb-1 word-break">Sabun colek ukuran 200ml warna biru</p>
+                                <div class="price-discount d-flex align-items-center gap-2">
+                                    <p class="fw-bold fs-6 mb-0">Rp. 10.000</p>
+                                    <!-- label discount percent -->
+                                    <span class="badge rounded-pill bg-danger-transparent">-10%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="promo-product-card border overflow-hidden rounded-3">
+                            <div class="promo-product-card-image bg-light">
                                 <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" alt="">
                             </div>
                             <div class="promo-product-card-title p-2">
@@ -173,7 +169,7 @@ $products = json_decode($jsonData, true);
                             </div>
                             <div class="product-card-content p-2">
                                 <p class="product-name mb-0"><?php echo htmlspecialchars($product['nama']); ?></p>
-                                <p class="product-price mb-0 fw-bold mb-2">Rp. <?php echo number_format($product['harga'], 0, ',', '.'); ?></p>
+                                <p class="product-price mb-0 fw-bold mb-3">Rp. <?php echo number_format($product['harga'], 0, ',', '.'); ?></p>
                                 <div class="product-rating d-flex align-items-center gap-1">
                                     <i class="fas fa-star text-warning"></i>
                                     <p class="rating-text mb-0">4.5</p>
@@ -186,7 +182,4 @@ $products = json_decode($jsonData, true);
             </div>
         </div>
     </section>
-
-    <?php include('constant/script.php') ?>
-</body>
-</html>
+<?php include 'themes/footer.php'; ?>
