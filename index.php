@@ -13,13 +13,13 @@
             <div class="slider-container overflow-hidden rounded-top-3">
                 <div class="slider">
                     <div class="slide">
-                        <img src="assets/img/banner-1.png" alt="banner">
+                        <img src="assets/img/banner/banner-1.png" alt="banner">
                     </div>
                     <div class="slide">
-                        <img src="assets/img/banner-2.png" alt="banner">
+                        <img src="assets/img/banner/banner-2.png" alt="banner">
                     </div>
                     <div class="slide">
-                        <img src="assets/img/banner-3.png" alt="banner">
+                        <img src="assets/img/banner/banner-3.png" alt="banner">
                     </div>
                 </div>
                 <button class="slider-button prev rounded-2" onclick="prevSlide()">&#10094;</button>
@@ -90,7 +90,7 @@
                 <div class="promo-product-list d-flex gap-3">
                     <div class="promo-product-card bg-light rounded-3 shadow-sm">
                         <div class="promo-product-card-image overflow-hidden rounded-top">
-                            <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" alt="Product Image">
+                            <img src="assets/img/product/product.jpg" alt="Product Image">
                         </div>
                         <div class="promo-product-card-body p-3">
                             <p class="product-title mb-2">Sabun Colek Ukuran 200ml Warna Biru</p>
@@ -102,7 +102,7 @@
                     </div>
                     <div class="promo-product-card bg-light rounded-3 shadow-sm">
                         <div class="promo-product-card-image overflow-hidden rounded-top">
-                            <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" alt="Product Image">
+                            <img src="assets/img/product/product-1.jpg" alt="Product Image">
                         </div>
                         <div class="promo-product-card-body p-3">
                             <p class="product-title mb-2">Sabun Colek Ukuran 200ml Warna Biru</p>
@@ -114,7 +114,7 @@
                     </div>
                     <div class="promo-product-card bg-light rounded-3 shadow-sm">
                         <div class="promo-product-card-image overflow-hidden rounded-top">
-                            <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" alt="Product Image">
+                            <img src="assets/img/product/product-2.jpg" alt="Product Image">
                         </div>
                         <div class="promo-product-card-body p-3">
                             <p class="product-title mb-2">Sabun Colek Ukuran 200ml Warna Biru</p>
@@ -143,7 +143,7 @@
                         <?php foreach ($products as $product) : ?>
                         <div class="product-card">
                             <div class="product-card-image">
-                                <img src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" alt="product-image">
+                                <img src="assets/img/product/product.jpg" alt="product-image">
                             </div>
                             <div class="product-card-content p-2">
                                 <p class="product-name mb-0"><?php echo htmlspecialchars($product['nama']); ?></p>

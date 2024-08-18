@@ -2,7 +2,7 @@
 
 <div class="product-detail-wrapper container mt-4">
     <div class="banner position-relative bg-light overflow-hidden py-4 rounded-3">
-        <img src="assets/img/detail-banner.png" alt="">
+        <img src="assets/img/banner/detail-banner.png" alt="">
     </div>
 
     <div class="product-detail row gx-4 mt-4">
@@ -12,9 +12,9 @@
                     <img id="mainImage" src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" class="img-fluid w-100 rounded" alt="Product Image">
                 </div>
                 <div class="image-detail-selector d-flex gap-2">
-                    <img src="assets/img/product.jpg" class="img-thumbnail selector" alt="Product Thumbnail">
-                    <img src="assets/img/product-1.jpg" class="img-thumbnail selector" alt="Product Thumbnail">
-                    <img src="assets/img/product-2.jpg" class="img-thumbnail selector" alt="Product Thumbnail">
+                    <img src="assets/img/product/product.jpg" class="img-thumbnail selector" alt="Product Thumbnail">
+                    <img src="assets/img/product/product-1.jpg" class="img-thumbnail selector" alt="Product Thumbnail">
+                    <img src="assets/img/product/product-2.jpg" class="img-thumbnail selector" alt="Product Thumbnail">
                 </div>
             </div>
         </div>
