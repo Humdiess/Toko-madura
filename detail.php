@@ -53,7 +53,7 @@
                 <div class="input-group mb-2">
                     <button id="minusBtn" class="btn btn-outline-secondary">-</button>
                     <input type="number" id="orderQuantity" class="form-control text-center" value="1" min="1">
-                    <button id="plusBtn" class="btn btn-outline-secondary">+</button>
+                    <button id="plusBtn" class="btn btn-danger">+</button>
                 </div>
                 <p id="subtotal" class="mb-3">Subtotal: Rp. 0</p>
                 <button class="btn btn-danger w-100 mb-2">Beli Sekarang</button>

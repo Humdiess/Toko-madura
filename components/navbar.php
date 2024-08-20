@@ -1,57 +1,74 @@
-<nav class="navbar border d-flex justify-content-center" id="main-navbar">
-    <div class="d-flex justify-content-between align-items-center w-100 nav-main px-5">
-        <div class="nav-left">
-            <a class="navbar-brand fw-bold fs-3" href="#">Madura<span class="text-danger fw-bold fs-6">.shop</span></a>
-        </div>
-        <div class="nav-center">
-            <div class="nav-search">
-                <input type="text" placeholder="Search" class="form-control rounded-pill">
+    <nav class="navbar border d-flex justify-content-center" id="main-navbar">
+        <div class="d-flex justify-content-between align-items-center w-100 nav-main px-5">
+            <div class="nav-left">
+                <a class="navbar-brand fw-bold fs-3" href="#">Madura<span class="text-danger fw-bold fs-6">.shop</span></a>
+            </div>
+            <div class="nav-center">
+                <div class="nav-search">
+                    <input type="search" placeholder="Search" class="form-control rounded-pill">
+                </div>
+            </div>
+            <div class="nav-right d-flex align-items-center gap-5">
+                <div class="nav-action d-flex align-items-center gap-4">
+                    <div class="cart">
+                        <a href="#">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                    </div>
+                    <div class="notification">
+                        <a href="#">
+                            <i class="fas fa-bell"></i>
+                        </a>
+                    </div>
+                    <div class="mail">
+                        <a href="#">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="divider d-none d-md-block"></div>
+                <div class="nav-auth dropdown">
+                    <input type="checkbox dropdown-toggle" id="dropdown-toggler" hidden>
+                    <label for="dropdown-toggler " class="profile-img">
+                        <img src="https://avatars.githubusercontent.com/u/118147438?v=4" alt="Profile" class="rounded-circle">
+                    </label>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="#">Logout</a></li>
+                    </ul>
+                </div>
+                <!-- Mobile Nav Button -->
+                <div class="mobile-nav-toggler d-md-none">
+                    <a href="javascript:void(0);" onclick="toggleMobileNav()">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="nav-right d-flex align-items-center gap-5">
-            <div class="nav-action d-flex align-items-center gap-4">
-                <div class="cart">
-                    <a href="#">
-                        <i class="fas fa-shopping-cart"></i>
-                    </a>
-                </div>
-                <div class="notification">
-                    <a href="#">
-                        <i class="fas fa-bell"></i>
-                    </a>
-                </div>
-                <div class="mail">
-                    <a href="#">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="divider d-none d-md-block"></div>
-            <div class="nav-auth dropdown">
-                <input type="checkbox" id="dropdown-toggler" hidden>
-                <label for="dropdown-toggler" class="profile-img">
-                    <img src="https://avatars.githubusercontent.com/u/118147438?v=4" alt="Profile" class="rounded-circle">
-                </label>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Profile</a></li>
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="#">Logout</a></li>
-                </ul>
-            </div>
-            <!-- Mobile Nav Button -->
-            <div class="mobile-nav-toggler d-md-none">
-                <a href="javascript:void(0);" onclick="toggleMobileNav()">
-                    <i class="fas fa-bars"></i>
+    </nav>
+
+    <nav class="bottom-tab-bar d-md-none fixed-bottom">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-home"></i> Home
                 </a>
-            </div>
-        </div>
-    </div>
-    <!-- Mobile Nav Menu -->
-    <div class="mobile-nav d-md-none">
-        <ul class="mobile-nav-list">
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Logout</a></li>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-search"></i> Search
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-cart-plus"></i> Cart
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-user"></i> Profile
+                </a>
+            </li>
         </ul>
-    </div>
-</nav>
+    </nav>

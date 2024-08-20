@@ -51,3 +51,24 @@
     width: 60px;
 }
 
+.image-detail-preview {
+    position: relative;
+    overflow: hidden; /* Menyembunyikan bagian gambar yang berada di luar area preview */
+    cursor: crosshair; /* Mengubah kursor menjadi crosshair saat di atas gambar */
+}
+
+.image-detail-preview img {
+    transition: transform 0.2s ease;
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.image-detail-preview.zoom img {
+    transform-origin: center; /* Zoom dari titik pusat awal */
+    cursor: zoom-in; /* Mengubah kursor menjadi tanda plus saat zoom in */
+}
+
+.image-detail-preview.zoom:hover img {
+    transform: scale(2); /* Mengatur tingkat zoom, bisa diubah sesuai kebutuhan */
+}

@@ -24,5 +24,18 @@ function prevSlide() {
     showSlide(index - 1);
 }
 
-// Optionally, set an interval to change slides automatically
-setInterval(nextSlide, 5000); // Change slide every 5 seconds
+setInterval(nextSlide, 5000);
+
+document.querySelector('.scroll-btn-left').addEventListener('click', () => {
+    document.querySelector('.promo-product-list').scrollBy({
+        left: -200,
+        behavior: 'smooth'
+    });
+});
+
+document.querySelector('.scroll-btn-right').addEventListener('click', () => {
+    document.querySelector('.promo-product-list').scrollBy({
+        left: 200,
+        behavior: 'smooth'
+    });
+});

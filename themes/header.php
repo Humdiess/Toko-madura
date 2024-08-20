@@ -22,6 +22,7 @@ $products = json_decode($jsonData, true);
     <link rel="stylesheet" href="assets/css/promo.css">
     <link rel="stylesheet" href="assets/css/product.css">
     <link rel="stylesheet" href="assets/css/checkout.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
 
     <!-- aos -->
     <link href="node_modules/aos/dist/aos.css" rel="stylesheet">

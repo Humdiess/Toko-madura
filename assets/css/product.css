@@ -5,55 +5,139 @@
     padding: 20px;
 }
 
+@media (max-width: 768px) {
+    .product-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 10px;
+    }
+}
+
 .product-card {
     background: #ffffff;
-    cursor: pointer;
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
 }
 
 .product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    border: #e53935 1px solid !important;
+    transition: all;
 }
 
 .product-card-image img {
     width: 100%;
-    height: auto;
+    height: 150px;
     object-fit: cover;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 2px solid #e53935;
 }
 
 .product-card-content {
-    padding: 16px;
+    padding: 15px;
+    text-align: left;
 }
 
 .product-name {
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: bold;
     color: #333;
-    margin-bottom: 8px;
 }
 
 .product-price {
-    font-size: 16px;
+    font-size: 18px;
     color: #e53935;
     font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.product-location {
+    font-size: 14px;
+    color: #757575;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.product-location i {
+    margin-right: 5px;
+    color: #e53935;
 }
 
 .product-rating {
     display: flex;
     align-items: center;
-    gap: 4px;
-    margin-top: 8px;
-}
-
-.product-rating .fas.fa-star {
+    font-size: 14px;
     color: #ffb400;
 }
 
-.rating-text {
-    font-size: 14px;
+.product-rating .fas.fa-star {
+    margin-right: 5px;
+}
+
+.rating-value {
+    font-weight: bold;
+    color: #333;
+    margin-right: 5px;
+}
+
+.rating-count {
     color: #757575;
+}
+
+.product-title {
+    font-size: 1rem;
+    color: #333;
+}
+
+.price-discount {
+    color: #333;
+}
+
+.original-price {
+    font-size: 0.9rem;
+}
+
+.discounted-price {
+    color: #ff4e50;
+    font-size: 1.1rem;
+}
+
+.badge {
+    background-color: #ff6b6b;
+}
+
+.promo-wrapper {
+    overflow-x: auto;
+    padding: 0 15px;
+}
+
+.promo-product-list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 15px;
+}
+
+@media (max-width: 767px) {
+    .promo.container {
+        padding: 0 !important;
+    }
+
+    .promo-wrapper {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
+
+    .promo-content {
+        border-radius: 0 !important;
+    }
+
+    .promo-product-list {
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+    }
+
+    .promo-product-card {
+        width: 180px !important;
+    }
 }

@@ -9,7 +9,7 @@
 
 .navbar.scrolled {
     width: 80%;
-    margin:  8px;
+    margin: 8px;
     border-radius: 50px;
     position: fixed;
     z-index: 55;
@@ -27,11 +27,13 @@
 }
 
 .nav-search {
-    margin-right: 20rem;
+    flex: 1;
+    margin: 0 10px;
 }
 
 .nav-search input {
-    width: 240%;
+    width: 100%;
+    max-width: 400px;
     border-radius: 5px;
     border: 1px solid rgba(128, 128, 128, 0.374);
 }
@@ -42,7 +44,7 @@
 
 .nav-action a:hover {
     color: rgb(236, 26, 26);
-    transition: color 0.3s ease; /* Transisi warna */
+    transition: color 0.3s ease;
 }
 
 .divider {
@@ -57,7 +59,6 @@
     border-radius: 50%;
 }
 
-/* navbar.css */
 .nav-auth {
     position: relative;
 }
@@ -97,4 +98,61 @@
 
 .profile-img {
     cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .nav-search {
+        margin: 0;
+        display: none;
+    }
+
+    .divider {
+        display: none;
+    }
+
+    .nav-action a {
+        display: none;
+    }
+
+    .nav-auth {
+        display: none;
+    }
+
+    .nav-search input {
+        width: 100%;
+        max-width: none;
+    }
+
+    .navbar.scrolled {
+        width: 100% !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+    }
+
+    .mobile-nav-toggler {
+        display: block !important;
+    }
+
+    .mobile-nav {
+        display: block  !important;
+    }
+}
+
+.bottom-tab-bar {
+    background-color: #ffffff;
+    border-top: 1px solid #e0e0e0;
+}
+
+.bottom-tab-bar .nav-tabs {
+    justify-content: space-around;
+}
+
+.bottom-tab-bar .nav-link {
+    color: #333;
+    font-size: 14px;
+}
+
+.bottom-tab-bar .nav-link i {
+    display: block;
+    font-size: 18px;
 }
