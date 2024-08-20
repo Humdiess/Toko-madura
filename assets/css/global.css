@@ -1,6 +1,6 @@
 body {
     height: 200vh;
-    font-family: 'Lato';
+    font-family: 'SF Pro Display', sans-serif !important;
     background-color: #ffffff !important;
     cursor: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReIpWZer2h64FLyc6qW5Ulw8qL6aucHuUyZw&s'), auto;
 }

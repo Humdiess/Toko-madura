@@ -38,36 +38,34 @@
                         <li><a href="#">Logout</a></li>
                     </ul>
                 </div>
-                <!-- Mobile Nav Button -->
-                <div class="mobile-nav-toggler d-md-none">
-                    <a href="javascript:void(0);" onclick="toggleMobileNav()">
-                        <i class="fas fa-bars"></i>
-                    </a>
-                </div>
             </div>
         </div>
     </nav>
 
-    <nav class="bottom-tab-bar d-md-none fixed-bottom">
-        <ul class="nav nav-tabs">
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-home"></i> Home
+    <nav class="bottom-tab-bar d-md-none py-3 fixed-bottom container">
+        <ul class="nav justify-content-between container">
+            <li class="nav-item d-flex flex-column justify-content-center align-items-center">
+                <i class="fas fa-home"></i>
+                <a class="nav-link m-0 p-0" href="#">
+                    Home
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-search"></i> Search
+            <li class="nav-item d-flex flex-column justify-content-center align-items-center">
+                <i class="fas fa-home"></i>
+                <a class="nav-link m-0 p-0" href="#">
+                    Home
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-cart-plus"></i> Cart
+            <li class="nav-item d-flex flex-column justify-content-center align-items-center">
+                <i class="fas fa-home"></i>
+                <a class="nav-link m-0 p-0" href="#">
+                    Home
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-user"></i> Profile
+            <li class="nav-item d-flex flex-column justify-content-center align-items-center">
+                <i class="fas fa-home"></i>
+                <a class="nav-link m-0 p-0" href="#">
+                    Home
                 </a>
             </li>
         </ul>

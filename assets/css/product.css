@@ -22,7 +22,7 @@
 }
 
 .product-card:hover {
-    border: #e53935 1px solid !important;
+    border: #e53935 0.1px solid !important;
     transition: all;
 }
 
@@ -118,7 +118,15 @@
     gap: 15px;
 }
 
+.category-selector {
+    display: flex;
+}
+
 @media (max-width: 767px) {
+    .category-selector {
+        display: none !important;
+    }
+
     .promo.container {
         padding: 0 !important;
     }

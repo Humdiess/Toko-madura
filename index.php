@@ -1,7 +1,7 @@
 <?php include('themes/header.php') ?>
     <section class="hero container py-3">
         <div class="hero-wrapper">
-            <div class="category-selector d-flex align-items-center gap-2 mb-3">
+            <div class="category-selector align-items-center gap-2 mb-3">
                 <p class="text-center mb-0 fw-semibold">Kategori pilihan : </p>
                 <ul class="category-list nav gap-3">
                     <li class="nav-item"><a href="./detail.php">Sabun</a></li>
@@ -85,57 +85,43 @@
         </div>
     </section>
 
-    <section class="promo container">
-        <div class="promo-content position-relative p-4 rounded shadow-lg">
-            <div class="promo-header text-center mb-5">
-                <h1 class="fw-bold text-uppercase text-light">Promo Spesial 17 Agustus!</h1>
-                <p class="text-warning">Diskon besar-besaran untuk semua produk terbaik kami</p>
-            </div>
-            <div class="promo-product-list d-flex gap-4">
-                <div class="promo-product-card position-relative overflow-hidden">
-                    <div class="ribbon bg-danger text-light position-absolute top-0 end-0">Promo</div>
-                    <img src="assets/img/product/product.jpg" alt="Product Image" class="img-fluid rounded-top">
-                    <div class="promo-product-card-body p-3 bg-white text-center">
-                        <p class="product-title fw-bold">Sabun Colek Ukuran 200ml Warna Biru</p>
-                        <div class="price-discount">
-                            <p class="text-muted text-decoration-line-through">Rp. 12.000</p>
-                            <p class="discounted-price text-danger fw-bold">Rp. 9.960 <span class="badge bg-danger">-17%</span></p>
-                        </div>
-                    </div>
+    <section class="promo-container py-5">
+        <div class="promo-wrapper container text-center">
+            <div class="promo">
+                <div class="promo-header mb-4">
+                    <h1 class="promo-title fw-bold fs-3 text-white">Rayakan Kemerdekaan dengan Diskon Merdeka 17%!</h1>
                 </div>
-                <div class="promo-product-card position-relative overflow-hidden">
-                    <div class="ribbon bg-danger text-light position-absolute top-0 end-0">Promo</div>
-                    <img src="assets/img/product/product.jpg" alt="Product Image" class="img-fluid rounded-top">
-                    <div class="promo-product-card-body p-3 bg-white text-center">
-                        <p class="product-title fw-bold">Sabun Colek Ukuran 200ml Warna Biru</p>
-                        <div class="price-discount">
-                            <p class="text-muted text-decoration-line-through">Rp. 12.000</p>
-                            <p class="discounted-price text-danger fw-bold">Rp. 9.960 <span class="badge bg-danger">-17%</span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="promo-product-card position-relative overflow-hidden">
-                    <div class="ribbon bg-danger text-light position-absolute top-0 end-0">Promo</div>
-                    <img src="assets/img/product/product.jpg" alt="Product Image" class="img-fluid rounded-top">
-                    <div class="promo-product-card-body p-3 bg-white text-center">
-                        <p class="product-title fw-bold">Sabun Colek Ukuran 200ml Warna Biru</p>
-                        <div class="price-discount">
-                            <p class="text-muted text-decoration-line-through">Rp. 12.000</p>
-                            <p class="discounted-price text-danger fw-bold">Rp. 9.960 <span class="badge bg-danger">-17%</span></p>
+                <div class="promo-content">
+                    <div class="promo-list d-flex">
+                        <div class="product-card rounded-4 border" onclick="window.location.href='./detail.php' ">
+                            <div class="product-card-image">
+                                <img src="assets/img/product/product.jpg" alt="product-image">
+                            </div>
+                            <div class="product-card-content">
+                                <h5 class="product-name">Cupcake</h5>
+                                <p class="product-price mb-0">Rp. 15.000</p>
+                                <p class="product-location mb-2">
+                                    <i class="fas fa-map-marker-alt text-secondary"></i>
+                                    Jakarta
+                                </p>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span class="rating-value">4.5</span>
+                                    <span class="rating-count">(200 ulasan)</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="btn btn-warning mt-4 d-block mx-auto">Lihat Semua Produk</button>
         </div>
     </section>
-
 
     <section class="product container mt-5">
         <div class="product-wrapper">
             <div class="product">
                 <div class="product-header mb-3 d-flex justify-content-between">
-                    <h1 class="fw-medium fs-5">Kategori terpopuler</h1>
+                    <h1 class="fw-medium fs-5">Produk terlaris</h1>
                     <a class="text-decoration-none text-dark fw-normal fs-6" href="#">Lihat semua</a>
                 </div>
                 <div class="product-content">
