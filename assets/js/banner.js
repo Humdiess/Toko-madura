@@ -39,3 +39,16 @@ document.querySelector('.scroll-btn-right').addEventListener('click', () => {
         behavior: 'smooth'
     });
 });
+
+const promoList = document.querySelector('.promo-list');
+const promoNext = document.querySelector('.promo-next');
+const promoPrev = document.querySelector('.promo-prev');
+
+promoNext.addEventListener('click', () => {
+    promoList.scrollBy({ left: promoList.offsetWidth, behavior: 'smooth' });
+});
+
+promoPrev.addEventListener('click', () => {
+    promoList.scrollBy({ left: -promoList.offsetWidth, behavior: 'smooth' });
+});
+

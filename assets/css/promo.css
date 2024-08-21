@@ -3,6 +3,10 @@
     position: relative;
 }
 
+.promo-wrapper {
+    padding: 0 1rem;
+}
+
 .promo-product-card {
     width: 12rem;
     border: 1px solid #ddd;
@@ -11,9 +15,9 @@
     cursor: pointer;
     overflow: hidden;
     background-color: #fff;
-    scroll-snap-align: start;
     display: flex;
     flex-direction: column;
+    margin: 0 0.5rem;
 }
 
 .promo-product-card:hover {
@@ -91,17 +95,16 @@
 }
 
 .promo-list {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: 21%;
+    display: flex;
     overflow-x: auto;
-    overscroll-behavior-inline: contain;
-    scroll-snap-type: mandatory inline;
     padding-bottom: 1rem;
-    scroll-padding-left: 1rem;
+    gap: 1rem;
+    scroll-behavior: smooth;
+    padding-left: 1rem;
 }
 
-.promo-list > * {
+.promo-list > .promo-product-card {
+    flex-shrink: 0;
     scroll-snap-align: start;
 }
 
@@ -131,13 +134,14 @@
 
 @media (max-width: 768px) {
     .promo-list {
-        grid-auto-columns: 83%;
+        gap: 2rem;
         padding-left: 6px;
     }
 
     .promo-product-card {
         flex-direction: row;
-        width: 20rem;
+        width: 100%;
+        max-width: 20rem;
     }
 
     .promo-product-card-image {
