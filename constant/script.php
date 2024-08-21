@@ -3,6 +3,7 @@
 <script src="assets/js/splash.js"></script>
 <script src="assets/js/checkout.js"></script>
 <script src="assets/js/backtotop.js"></script>
+<script src="assets/js/animation.js"></script>
 <script src="node_modules/aos/dist/aos.js"></script>
 <script>
     AOS.init();

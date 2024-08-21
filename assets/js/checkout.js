@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function() {
     function updateSubtotal() {
         let quantity = parseInt(quantityInput.value);
 
-        // Jika input adalah NaN atau kurang dari 1, set nilai ke 1
         if (isNaN(quantity) || quantity < 1) {
             quantity = 1;
             quantityInput.value = quantity;
@@ -42,8 +41,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const selectors = document.querySelectorAll('.image-detail-selector .selector');
     const preview = document.querySelector('.image-detail-preview');
 
+    if (selectors.length > 0) {
+        const firstSelector = selectors[0];
+        firstSelector.classList.add('active');
+        mainImage.src = firstSelector.src;
+    }
+
     selectors.forEach(function(selector) {
         selector.addEventListener('click', function() {
+            selectors.forEach(img => img.classList.remove('active'));
+            
+            this.classList.add('active');
+            
             mainImage.src = this.src;
         });
     });
@@ -62,3 +71,22 @@ document.addEventListener('DOMContentLoaded', function() {
         mainImage.style.transform = 'scale(1)';
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const descriptionText = document.querySelector('.description-text');
+    const readMoreLink = document.querySelector('.read-more');
+    const fullText = descriptionText.textContent.trim();
+
+    if (fullText.length > 200) {
+        const truncatedText = fullText.substring(0, 200) + '...';
+        descriptionText.textContent = truncatedText;
+        readMoreLink.style.display = 'inline';
+
+        readMoreLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            descriptionText.textContent = fullText;
+            readMoreLink.style.display = 'none';
+        });
+    }
+});
+

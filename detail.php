@@ -41,8 +41,10 @@
                 </div>
 
                 <div class="product-description mt-3">
-                    <p>Deskripsi singkat mengenai produk ini. Anda bisa menambahkan informasi penting mengenai produk, seperti ukuran, bahan, dan lain-lain.</p>
+                    <p class="description-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque, dolorum culpa? Quidem, dolorem aspernatur? Cumque similique quod, enim ex culpa minus cum a sequi quas eius rerum in accusantium tempora sed reprehenderit itaque aut aperiam dignissimos laborum officia. Reiciendis eius nostrum nihil, consectetur non iste accusantium inventore, qui numquam doloribus incidunt libero magnam neque mollitia vel eveniet placeat enim nesciunt quasi, adipisci labore? Aut temporibus assumenda voluptate culpa perferendis reiciendis, dolorum possimus debitis exercitationem pariatur autem eaque similique obcaecati voluptas eveniet ipsum et aspernatur alias sit? Incidunt, eos sapiente vero nostrum omnis hic natus deserunt ea repellat eveniet possimus at necessitatibus ipsam quam pariatur ipsum architecto nulla ullam dolorem iste alias nihil dolore? Sequi mollitia molestiae expedita illum! Labore, debitis veniam? Nam magnam ex velit explicabo libero est iusto? Architecto, labore qui totam itaque esse ullam obcaecati quia vero eum. Labore similique nisi obcaecati excepturi exercitationem quasi, repudiandae asperiores? Nulla necessitatibus qui, ullam saepe iste harum! Fugiat error velit fugit eos nihil, cupiditate explicabo voluptates minus sit dolorum harum assumenda, modi accusantium, quo laboriosam doloribus perferendis rem officia alias. Tenetur, provident natus a commodi obcaecati consequatur perferendis reiciendis aliquid quaerat illum accusantium eos ipsa? Sapiente delectus ea architecto eius vitae distinctio sequi nemo culpa esse, consequuntur tempora. Ullam necessitatibus quo iure adipisci inventore fugiat animi voluptatum repellendus architecto minus quisquam dolore tempora veritatis harum assumenda sit, earum eligendi explicabo? Molestias vitae pariatur natus officia esse, est incidunt quis minima dolor expedita accusantium voluptatum iure quaerat eaque, itaque inventore. Itaque, incidunt!.</p>
+                    <a href="#" class="read-more text-primary" style="display: none;">Baca Lebih Lanjut</a>
                 </div>
+
             </div>
         </div>
 
@@ -50,17 +52,118 @@
         <div class="product-checkout col-lg-3 col-md-12 mb-4">
             <div class="border p-2 rounded-3">
                 <p class="mb-3">Jumlah barang</p>
-                <div class="input-group mb-2">
-                    <button id="minusBtn" class="btn btn-outline-secondary">-</button>
-                    <input type="number" id="orderQuantity" class="form-control text-center" value="1" min="1">
-                    <button id="plusBtn" class="btn btn-danger">+</button>
+                <div class="input-group mb-2 border rounded-3">
+                    <button id="minusBtn" class="btn">-</button>
+                    <input type="number" id="orderQuantity" class="form-control border border-0 text-center" value="1" min="1">
+                    <button id="plusBtn" class="btn">+</button>
                 </div>
                 <p id="subtotal" class="mb-3">Subtotal: Rp. 0</p>
                 <button class="btn btn-danger w-100 mb-2">Tambah ke Keranjang</button>
-                <button class="btn btn-outline-secondary w-100">Beli Sekarang</button>
+                <button class="btn border w-100">Beli Sekarang</button>
             </div>
         </div>
 
+    </div>
+</div>
+
+<div class="product-reviews container mt-4">
+    <h1 class="mb-4 fs-5 fw-medium">Ulasan Produk</h2>
+
+    <div class="review-list d-flex flex-column gap-4 container">
+        <div class="review-item border rounded-3 p-3">
+            <div class="review-content">
+                <div class="reviewer-photo rounded-circle overflow-hidden">
+                    <img src="https://avatars.githubusercontent.com/u/118147438?v=4" alt="Reviewer Photo">
+                </div>
+                <div class="reviewer-info">
+                    <h5 class="mb-1">Reviewer Name</h5>
+                    <p class="text-muted mb-2">Jakarta</p>
+                    <div class="rating mb-2">
+                        <span class="text-warning">&#9733;&#9733;&#9733;&#9733;&#9734;</span>
+                        <span class="text-muted">(4.0)</span>
+                    </div>
+                    <p class="review-text">Deskripsi singkat mengenai ulasan produk ini. Ulasan ini memberikan gambaran tentang pengalaman reviewer dengan produk.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="review-item border rounded-3 p-3">
+            <div class="d-flex gap-3">
+                <div class="reviewer-photo rounded-circle overflow-hidden">
+                    <img src="https://avatars.githubusercontent.com/u/118147438?v=4" alt="Reviewer Photo">
+                </div>
+                <div class="reviewer-info">
+                    <h5 class="mb-1">Reviewer Name</h5>
+                    <p class="text-muted mb-2">Jakarta</p>
+                    <div class="rating mb-2">
+                        <span class="text-warning">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span class="text-muted">(5.0)</span>
+                    </div>
+                    <p class="review-text">Deskripsi singkat mengenai ulasan produk ini. Ulasan ini memberikan gambaran tentang pengalaman reviewer dengan produk.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="review-item border rounded-3 p-3">
+            <div class="d-flex gap-3">
+                <div class="reviewer-photo rounded-circle overflow-hidden">
+                    <img src="https://avatars.githubusercontent.com/u/118147438?v=4" alt="Reviewer Photo">
+                </div>
+                <div class="reviewer-info">
+                    <h5 class="mb-1">Reviewer Name</h5>
+                    <p class="text-muted mb-2">Jakarta</p>
+                    <div class="rating mb-2">
+                        <span class="text-warning">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+                        <span class="text-muted">(3.0)</span>
+                    </div>
+                    <p class="review-text">Deskripsi singkat mengenai ulasan produk ini. Ulasan ini memberikan gambaran tentang pengalaman reviewer dengan produk.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<section class="product container mt-5">
+    <div class="product-wrapper">
+        <div class="product">
+            <div class="product-header mb-3 d-flex justify-content-between">
+                <h1 class="fw-medium fs-5">Produk serupa</h1>
+                <a class="text-decoration-none text-dark fw-normal fs-6" href="#">Lihat semua</a>
+            </div>
+            <div class="product-content">
+                <div class="product-list">
+                    <?php foreach ($products as $product) : ?>
+                        <div class="product-card rounded-4 border" onclick="window.location.href='./detail.php' ">
+                            <div class="product-card-image">
+                                <img src="assets/img/product/product.jpg" alt="product-image" loading="lazy">
+                            </div>
+                            <div class="product-card-content">
+                                <h5 class="product-name"><?php echo htmlspecialchars($product['nama']); ?></h5>
+                                <p class="product-price mb-0">Rp. <?php echo number_format($product['harga'], 0, ',', '.'); ?></p>
+                                <p class="product-location mb-2">
+                                    <i class="fas fa-map-marker-alt text-secondary"></i>
+                                    Jakarta
+                                </p>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <span class="rating-value">4.5</span>
+                                    <span class="rating-count">(200 ulasan)</span>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="bottom-navbar d-lg-none">
+    <div class="container">
+        <button class="btn btn-danger w-100 mb-2">Tambah ke Keranjang</button>
+        <button class="btn border w-100">Beli Sekarang</button>
     </div>
 </div>
 

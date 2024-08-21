@@ -39,19 +39,6 @@
         "harga": 5000
     },
     {
-        "nama": "Pepsi",
-        "gambar": "/images/pepsi.jpg",
-        "deskripsi": "Minuman soda dengan rasa cola yang menyegarkan.",
-        "rating": 4.3,
-        "stok": 120,
-        "pembeli": 450,
-        "kategori": "Minuman",
-        "seller": "Minuman Segar",
-        "jumlah_terjual": 350,
-        "lokasi_kota": "Medan",
-        "harga": 5500
-    },
-    {
         "nama": "Keripik Singkong",
         "gambar": "/images/keripik_singkong.jpg",
         "deskripsi": "Snack keripik singkong renyah dengan rasa gurih.",

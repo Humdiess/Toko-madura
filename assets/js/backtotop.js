@@ -10,6 +10,6 @@ function scrollFunction() {
 }
 
 function topFunction() {
-    document.body.scrollTop = 0; // Untuk Safari
-    document.documentElement.scrollTop = 0; // Untuk Chrome, Firefox, IE dan Opera
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
 }

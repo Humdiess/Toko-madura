@@ -85,7 +85,7 @@
         </div>
     </section>
 
-    <section class="promo-container py-5 text-dark">
+    <section class="promo-container py-5 text-dark ">
         <div class="promo-wrapper container text-center">
             <div class="promo">
                 <div class="promo-header mb-4">
@@ -197,7 +197,7 @@
                         <?php foreach ($products as $product) : ?>
                             <div class="product-card rounded-4 border" onclick="window.location.href='./detail.php' ">
                                 <div class="product-card-image">
-                                    <img src="assets/img/product/product.jpg" alt="product-image">
+                                    <img src="assets/img/product/product.jpg" alt="product-image" loading="lazy">
                                 </div>
                                 <div class="product-card-content">
                                     <h5 class="product-name"><?php echo htmlspecialchars($product['nama']); ?></h5>
@@ -219,4 +219,37 @@
             </div>
         </div>
     </section>
+
+    <nav class="bottom-tab-bar d-md-none py-2 fixed-bottom container">
+        <ul class="nav justify-content-between container">
+            <li class="nav-item d-flex flex-column justify-content-center align-items-center">
+                <a class="nav-link active mb-0" href="#">
+                    <i class="fas fa-home"></i>
+                    Home
+                </a>
+            </li>
+            <li class="nav-item d-flex flex-column justify-content-center align-items-center">
+                <a class="nav-link mb-0" href="#">
+                    <i class="fas fa-search"></i>
+                    Search
+                </a>
+            </li>
+            <li class="nav-item d-flex flex-column justify-content-center align-items-center">
+                <a class="nav-link mb-0" href="#">
+                    <i class="fas fa-shopping-cart"></i>
+                    Cart
+                </a>
+            </li>
+            <li class="nav-item d-flex flex-column justify-content-center align-items-center">
+                <a class="nav-link mb-0" href="#">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <button onclick="topFunction()" id="backToTopBtn" class="btn btn-danger">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 <?php include 'themes/footer.php'; ?>

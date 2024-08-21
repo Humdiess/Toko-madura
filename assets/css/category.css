@@ -51,7 +51,7 @@
 
 @media (max-width: 768px) {
     .category-card {
-        flex: 1 1 calc(30% - 1rem); /* Lebih kecil untuk mode tablet */
+        flex: 1 1 calc(30% - 1rem);
     }
 
     .category-card-icon {
@@ -65,7 +65,7 @@
 
 @media (max-width: 576px) {
     .category-card {
-        flex: 1 1 calc(5% - 1rem); /* Dua kolom pada mode mobile */
+        flex: 1 1 calc(5% - 1rem);
     }
 
     .category-card-icon {
