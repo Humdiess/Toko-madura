@@ -56,8 +56,8 @@
                     <button id="plusBtn" class="btn btn-danger">+</button>
                 </div>
                 <p id="subtotal" class="mb-3">Subtotal: Rp. 0</p>
-                <button class="btn btn-danger w-100 mb-2">Beli Sekarang</button>
-                <button class="btn btn-outline-secondary w-100">Tambah ke Keranjang</button>
+                <button class="btn btn-danger w-100 mb-2">Tambah ke Keranjang</button>
+                <button class="btn btn-outline-secondary w-100">Beli Sekarang</button>
             </div>
         </div>
 

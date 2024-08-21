@@ -42,31 +42,32 @@
         </div>
     </nav>
 
-    <nav class="bottom-tab-bar d-md-none py-3 fixed-bottom container">
+    <nav class="bottom-tab-bar d-md-none py-2 fixed-bottom container">
         <ul class="nav justify-content-between container">
             <li class="nav-item d-flex flex-column justify-content-center align-items-center">
-                <i class="fas fa-home"></i>
-                <a class="nav-link m-0 p-0" href="#">
+                <a class="nav-link active mb-0" href="#">
+                    <i class="fas fa-home"></i>
                     Home
                 </a>
             </li>
             <li class="nav-item d-flex flex-column justify-content-center align-items-center">
-                <i class="fas fa-home"></i>
-                <a class="nav-link m-0 p-0" href="#">
-                    Home
+                <a class="nav-link mb-0" href="#">
+                    <i class="fas fa-search"></i>
+                    Search
                 </a>
             </li>
             <li class="nav-item d-flex flex-column justify-content-center align-items-center">
-                <i class="fas fa-home"></i>
-                <a class="nav-link m-0 p-0" href="#">
-                    Home
+                <a class="nav-link mb-0" href="#">
+                    <i class="fas fa-shopping-cart"></i>
+                    Cart
                 </a>
             </li>
             <li class="nav-item d-flex flex-column justify-content-center align-items-center">
-                <i class="fas fa-home"></i>
-                <a class="nav-link m-0 p-0" href="#">
-                    Home
+                <a class="nav-link mb-0" href="#">
+                    <i class="fas fa-user"></i>
+                    Profile
                 </a>
             </li>
         </ul>
     </nav>
+

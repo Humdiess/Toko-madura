@@ -3,10 +3,17 @@ document.addEventListener("DOMContentLoaded", function() {
     const plusBtn = document.getElementById("plusBtn");
     const quantityInput = document.getElementById("orderQuantity");
     const subtotalDisplay = document.getElementById("subtotal");
-    const productPrice = 100000;
+    const productPrice = 1000000;
 
     function updateSubtotal() {
-        const quantity = Math.max(1, parseInt(quantityInput.value));
+        let quantity = parseInt(quantityInput.value);
+
+        // Jika input adalah NaN atau kurang dari 1, set nilai ke 1
+        if (isNaN(quantity) || quantity < 1) {
+            quantity = 1;
+            quantityInput.value = quantity;
+        }
+
         const subtotal = quantity * productPrice;
         subtotalDisplay.textContent = `Subtotal: Rp. ${subtotal.toLocaleString()}`;
     }
@@ -23,7 +30,9 @@ document.addEventListener("DOMContentLoaded", function() {
         updateSubtotal();
     });
 
-    quantityInput.addEventListener("input", updateSubtotal);
+    quantityInput.addEventListener("input", function() {
+        updateSubtotal();
+    });
 
     updateSubtotal();
 });
@@ -33,7 +42,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const selectors = document.querySelectorAll('.image-detail-selector .selector');
     const preview = document.querySelector('.image-detail-preview');
 
-    // Ganti gambar utama dengan gambar yang dipilih
     selectors.forEach(function(selector) {
         selector.addEventListener('click', function() {
             mainImage.src = this.src;
@@ -54,4 +62,3 @@ document.addEventListener('DOMContentLoaded', function() {
         mainImage.style.transform = 'scale(1)';
     });
 });
-

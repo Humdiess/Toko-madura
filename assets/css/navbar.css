@@ -143,18 +143,45 @@
 .bottom-tab-bar {
     background-color: #ffffff;
     border-top: 1px solid #e0e0e0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.bottom-tab-bar .nav-tabs {
-    justify-content: space-around;
+.bottom-tab-bar .nav-item {
+    flex-grow: 1;
+    text-align: center;
 }
 
 .bottom-tab-bar .nav-link {
-    color: #333;
+    color: #888;
     font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0;
+    transition: color 0.3s ease;
 }
 
 .bottom-tab-bar .nav-link i {
-    display: block;
-    font-size: 18px;
+    font-size: 20px;
+    margin-bottom: 2px;
+    transition: color 0.3s ease;
+}
+
+.bottom-tab-bar .nav-link.active {
+    color: #e53935 !important;
+    font-weight: bold !important;
+    position: relative !important;
+}
+
+.bottom-tab-bar .nav-link.active i {
+    color: #e53935 !important;
+}
+
+.bottom-tab-bar .nav-link:hover {
+    color: #e53935 !important;
+}
+
+.bottom-tab-bar .nav-link:hover i {
+    color: #e53935 !important;
 }

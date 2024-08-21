@@ -1,3 +1,151 @@
 .promo-container {
-    background-color: #DC3545;
+    background-color: #dc3545 !important;
+    position: relative;
+}
+
+.promo-product-card {
+    width: 12rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: #fff;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+}
+
+.promo-product-card:hover {
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.promo-product-card-image img {
+    object-fit: cover;
+    height: 8rem;
+    width: 100%;
+}
+
+.discount-badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #cfb53b;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.5rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.promo-product-card-content {
+    padding: 0.75rem;
+}
+
+.promo-product-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.promo-product-pricing {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.promo-product-price {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #28a745;
+}
+
+.promo-product-original-price {
+    font-size: 0.8rem;
+    color: #888;
+    margin-left: 0.5rem;
+    text-decoration: line-through;
+}
+
+.promo-product-location {
+    font-size: 0.75rem;
+    color: #888;
+    margin-bottom: 0.5rem;
+}
+
+.promo-product-rating {
+    display: flex;
+    align-items: center;
+    font-size: 0.75rem;
+    color: #ffc107;
+}
+
+.rating-value {
+    margin-left: 0.25rem;
+}
+
+.rating-count {
+    color: #888;
+    margin-left: 0.25rem;
+}
+
+.promo-list {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 21%;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: mandatory inline;
+    padding-bottom: 1rem;
+    scroll-padding-left: 1rem;
+}
+
+.promo-list > * {
+    scroll-snap-align: start;
+}
+
+.promo-list::-webkit-scrollbar {
+    display: none;
+}
+
+.promo-container::before,
+.promo-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2rem;
+    pointer-events: none;
+}
+
+.promo-container::before {
+    left: 0;
+    background: linear-gradient(to right, #dc3545, transparent);
+}
+
+.promo-container::after {
+    right: 0;
+    background: linear-gradient(to left, #dc3545, transparent);
+}
+
+@media (max-width: 768px) {
+    .promo-list {
+        grid-auto-columns: 83%;
+        padding-left: 6px;
+    }
+
+    .promo-product-card {
+        flex-direction: row;
+        width: 20rem;
+    }
+
+    .promo-product-card-image {
+        width: 40%;
+    }
+
+    .promo-product-card-content {
+        width: 60%;
+        padding: 0.75rem;
+    }
 }

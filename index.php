@@ -85,29 +85,96 @@
         </div>
     </section>
 
-    <section class="promo-container py-5">
+    <section class="promo-container py-5 text-dark">
         <div class="promo-wrapper container text-center">
             <div class="promo">
                 <div class="promo-header mb-4">
                     <h1 class="promo-title fw-bold fs-3 text-white">Rayakan Kemerdekaan dengan Diskon Merdeka 17%!</h1>
                 </div>
-                <div class="promo-content">
-                    <div class="promo-list d-flex">
-                        <div class="product-card rounded-4 border" onclick="window.location.href='./detail.php' ">
-                            <div class="product-card-image">
-                                <img src="assets/img/product/product.jpg" alt="product-image">
+                <div class="promo-content d-flex justify-content-center">
+                    <div class="promo-list">
+                        <div class="promo-product-card rounded-lg-4 border position-relative overflow-hidden" onclick="window.location.href='./detail.php' ">
+                            <div class="discount-badge position-absolute top-0 start-0 text-white p-2 rounded-end">-17%</div>
+                            <div class="promo-product-card-image">
+                                <img src="assets/img/product/product.jpg" alt="product-image" class="w-100 h-100">
                             </div>
-                            <div class="product-card-content">
-                                <h5 class="product-name">Cupcake</h5>
-                                <p class="product-price mb-0">Rp. 15.000</p>
-                                <p class="product-location mb-2">
-                                    <i class="fas fa-map-marker-alt text-secondary"></i>
-                                    Jakarta
-                                </p>
-                                <div class="product-rating">
-                                    <i class="fas fa-star"></i>
-                                    <span class="rating-value">4.5</span>
-                                    <span class="rating-count">(200 ulasan)</span>
+                            <div class="promo-product-card-content p-3 text-start bg-white">
+                                <h5 class="promo-product-name text-dark mb-1">Cupcake</h5>
+                                <div class="promo-product-pricing d-flex align-items-center">
+                                    <p class="promo-product-price mb-0 text-success fw-bold">Rp. 12.450</p>
+                                    <p class="promo-product-original-price mb-0 text-muted ms-2 text-decoration-line-through">Rp. 15.000</p>
+                                </div>
+                                <p class="promo-product-location mb-2 text-secondary"><i class="fas fa-map-marker-alt"></i> Jakarta</p>
+                                <div class="promo-product-rating d-flex align-items-center gap-1 text-warning">
+                                    <i class="fas fa-star"></i><span class="rating-value">4.5</span><span class="rating-count text-muted">(200 ulasan)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="promo-product-card rounded-lg-4 border position-relative overflow-hidden" onclick="window.location.href='./detail.php' ">
+                            <div class="discount-badge position-absolute top-0 start-0 text-white p-2 rounded-end">-17%</div>
+                            <div class="promo-product-card-image">
+                                <img src="assets/img/product/product.jpg" alt="product-image" class="w-100 h-100">
+                            </div>
+                            <div class="promo-product-card-content p-3 text-start bg-white">
+                                <h5 class="promo-product-name text-dark mb-1">Cupcake</h5>
+                                <div class="promo-product-pricing d-flex align-items-center">
+                                    <p class="promo-product-price mb-0 text-success fw-bold">Rp. 12.450</p>
+                                    <p class="promo-product-original-price mb-0 text-muted ms-2 text-decoration-line-through">Rp. 15.000</p>
+                                </div>
+                                <p class="promo-product-location mb-2 text-secondary"><i class="fas fa-map-marker-alt"></i> Jakarta</p>
+                                <div class="promo-product-rating d-flex align-items-center gap-1 text-warning">
+                                    <i class="fas fa-star"></i><span class="rating-value">4.5</span><span class="rating-count text-muted">(200 ulasan)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="promo-product-card rounded-lg-4 border position-relative overflow-hidden" onclick="window.location.href='./detail.php' ">
+                            <div class="discount-badge position-absolute top-0 start-0 text-white p-2 rounded-end">-17%</div>
+                            <div class="promo-product-card-image">
+                                <img src="assets/img/product/product.jpg" alt="product-image" class="w-100 h-100">
+                            </div>
+                            <div class="promo-product-card-content p-3 text-start bg-white">
+                                <h5 class="promo-product-name text-dark mb-1">Cupcake</h5>
+                                <div class="promo-product-pricing d-flex align-items-center">
+                                    <p class="promo-product-price mb-0 text-success fw-bold">Rp. 12.450</p>
+                                    <p class="promo-product-original-price mb-0 text-muted ms-2 text-decoration-line-through">Rp. 15.000</p>
+                                </div>
+                                <p class="promo-product-location mb-2 text-secondary"><i class="fas fa-map-marker-alt"></i> Jakarta</p>
+                                <div class="promo-product-rating d-flex align-items-center gap-1 text-warning">
+                                    <i class="fas fa-star"></i><span class="rating-value">4.5</span><span class="rating-count text-muted">(200 ulasan)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="promo-product-card rounded-lg-4 border position-relative overflow-hidden" onclick="window.location.href='./detail.php' ">
+                            <div class="discount-badge position-absolute top-0 start-0 text-white p-2 rounded-end">-17%</div>
+                            <div class="promo-product-card-image">
+                                <img src="assets/img/product/product.jpg" alt="product-image" class="w-100 h-100">
+                            </div>
+                            <div class="promo-product-card-content p-3 text-start bg-white">
+                                <h5 class="promo-product-name text-dark mb-1">Cupcake</h5>
+                                <div class="promo-product-pricing d-flex align-items-center">
+                                    <p class="promo-product-price mb-0 text-success fw-bold">Rp. 12.450</p>
+                                    <p class="promo-product-original-price mb-0 text-muted ms-2 text-decoration-line-through">Rp. 15.000</p>
+                                </div>
+                                <p class="promo-product-location mb-2 text-secondary"><i class="fas fa-map-marker-alt"></i> Jakarta</p>
+                                <div class="promo-product-rating d-flex align-items-center gap-1 text-warning">
+                                    <i class="fas fa-star"></i><span class="rating-value">4.5</span><span class="rating-count text-muted">(200 ulasan)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="promo-product-card rounded-lg-4 border position-relative overflow-hidden" onclick="window.location.href='./detail.php' ">
+                            <div class="discount-badge position-absolute top-0 start-0 text-white p-2 rounded-end">-17%</div>
+                            <div class="promo-product-card-image">
+                                <img src="assets/img/product/product.jpg" alt="product-image" class="w-100 h-100">
+                            </div>
+                            <div class="promo-product-card-content p-3 text-start bg-white">
+                                <h5 class="promo-product-name text-dark mb-1">Cupcake</h5>
+                                <div class="promo-product-pricing d-flex align-items-center">
+                                    <p class="promo-product-price mb-0 text-success fw-bold">Rp. 12.450</p>
+                                    <p class="promo-product-original-price mb-0 text-muted ms-2 text-decoration-line-through">Rp. 15.000</p>
+                                </div>
+                                <p class="promo-product-location mb-2 text-secondary"><i class="fas fa-map-marker-alt"></i> Jakarta</p>
+                                <div class="promo-product-rating d-flex align-items-center gap-1 text-warning">
+                                    <i class="fas fa-star"></i><span class="rating-value">4.5</span><span class="rating-count text-muted">(200 ulasan)</span>
                                 </div>
                             </div>
                         </div>
@@ -116,6 +183,7 @@
             </div>
         </div>
     </section>
+
 
     <section class="product container mt-5">
         <div class="product-wrapper">

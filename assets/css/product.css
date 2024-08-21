@@ -126,26 +126,4 @@
     .category-selector {
         display: none !important;
     }
-
-    .promo.container {
-        padding: 0 !important;
-    }
-
-    .promo-wrapper {
-        padding-right: 0 !important;
-        padding-left: 0 !important;
-    }
-
-    .promo-content {
-        border-radius: 0 !important;
-    }
-
-    .promo-product-list {
-        flex-direction: row !important;
-        justify-content: flex-start !important;
-    }
-
-    .promo-product-card {
-        width: 180px !important;
-    }
 }
