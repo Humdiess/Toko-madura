@@ -1,13 +1,4 @@
 <?php
-$jsonFilePath = 'utils/data.json';
-
-$jsonData = file_get_contents($jsonFilePath);
-
-$products = json_decode($jsonData, true);
-
-?>
-
-<?php
     include 'utils/db.php';
     
     $stmt = $pdo->query("SELECT * FROM products");
