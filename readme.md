@@ -24,6 +24,7 @@ Selamat datang di **Toko Madura**! 🚀 Inilah panduan untuk memulai dan mengaks
    - Jika folder website Anda bernama `toko-madura`, simpan di dalam `htdocs`. Path lengkapnya akan menjadi:
 
 ```C:\xampp\htdocs\toko-madura\```
+   - Lalu buka folder ```C:\xampp\htdocs\toko-madura\``` dan jalan kan ```yarn install```
 
 ### 3. Menjalankan Server
 
@@ -45,17 +46,6 @@ Anda akan melihat website Anda dengan desain yang menarik dan interaktif!
 - **🔍 Tidak Bisa Mengakses Website:**
 - Periksa kembali lokasi folder website Anda di `htdocs` dan pastikan nama folder sesuai dengan URL yang Anda masukkan.
 
-### 5. Kontak
-
-Jika Anda mengalami masalah atau memiliki pertanyaan lebih lanjut, jangan ragu untuk menghubungi kami:
-
-- **📧 Email:** [email@domain.com](mailto:email@domain.com)
-- **🌐 Website Resmi:** [example.com](http://example.com)
-
 ---
 
 **Terima kasih telah menggunakan Toko Madura!** Kami berharap Anda menikmati pengalaman berbelanja yang meriah dan penuh warna. 🎉
-
----
-
-**Catatan:** Jangan lupa untuk mengganti `email@domain.com` dan `http://example.com` dengan informasi kontak dan URL yang relevan.
