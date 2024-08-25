@@ -106,9 +106,9 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="promo-product-card-image">
                                 <?php 
                                 $imagePaths = explode(',', $product['images']); 
-                                $imageSrc = !empty($imagePaths[0]) ? "assets/img/" . htmlspecialchars($imagePaths[0]) : "assets/img/default/default_image.png";
+                                $imageSrc = !empty($imagePaths[0]) ? "assets/img/product/" . htmlspecialchars($imagePaths[0]) : "assets/img/default/default_image.png";
                                 ?>
-                                <img src="<?php echo $imageSrc; ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="w-100 h-100">
+                                <img src="<?php echo $imageSrc; ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                             </div>
 
                             <div class="promo-product-card-content p-3 text-start bg-white">
@@ -142,7 +142,11 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php foreach ($products as $product) : ?>
                         <div class="product-card rounded-4 border" onclick="window.location.href='detail.php?id=<?php echo $product['id']; ?>' ">
                             <div class="product-card-image">
-                                <img src="assets/img/<?php echo htmlspecialchars($imagePaths[0]); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" loading="lazy">
+                            <?php 
+                                $imagePaths = explode(',', $product['images']); 
+                                $imageSrc = !empty($imagePaths[0]) ? "assets/img/product/" . htmlspecialchars($imagePaths[0]) : "assets/img/default/default_image.png";
+                                ?>
+                                <img src="<?php echo $imageSrc; ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                             </div>
                             <div class="product-card-content">
                                 <h5 class="product-name"><?php echo htmlspecialchars($product['name']); ?></h5>
