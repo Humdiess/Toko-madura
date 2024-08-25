@@ -104,9 +104,13 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <div class="promo-product-card rounded-lg-4 border position-relative overflow-hidden" onclick="window.location.href='detail.php?id=<?php echo $product['id']; ?>' ">
                             <div class="discount-badge position-absolute top-0 start-0 text-white p-2 rounded-end">-17%</div>
                             <div class="promo-product-card-image">
-                                <?php $imagePaths = explode(',', $product['images']); ?>
-                                <img src="assets/img/<?php echo htmlspecialchars($imagePaths[0]); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="w-100 h-100">
+                                <?php 
+                                $imagePaths = explode(',', $product['images']); 
+                                $imageSrc = !empty($imagePaths[0]) ? "assets/img/" . htmlspecialchars($imagePaths[0]) : "assets/img/default/default_image.png";
+                                ?>
+                                <img src="<?php echo $imageSrc; ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="w-100 h-100">
                             </div>
+
                             <div class="promo-product-card-content p-3 text-start bg-white">
                                 <h5 class="promo-product-name text-dark mb-1"><?php echo htmlspecialchars($product['name']); ?></h5>
                                 <div class="promo-product-pricing d-flex align-items-center">

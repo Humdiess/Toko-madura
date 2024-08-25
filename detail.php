@@ -28,7 +28,7 @@ if (!$product) {
                 <?php $imagePaths = explode(',', $product['images']); ?>
                 <div class="image-detail-selector d-flex gap-2">
                     <?php foreach ($imagePaths as $imagePath): ?>
-                    <img src="assets/img/<?php echo htmlspecialchars($imagePath); ?>" class="img-thumbnail selector" alt="Product Thumbnail">
+                    <img src="assets/img/product/<?php echo htmlspecialchars($imagePath); ?>" class="img-thumbnail selector" alt="Product Thumbnail">
                     <?php endforeach; ?>
                 </div>
             </div>
