@@ -1,5 +1,5 @@
 <?php
-include 'db.php';
+include 'utils/db.php';
 
 $stmt = $pdo->query("SELECT * FROM products");
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -33,7 +33,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php foreach ($imagePaths as $imagePath): ?>
                     <img src="assets/img/<?php echo htmlspecialchars($imagePath); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="200">
                 <?php endforeach; ?>
-                <form action="add_to_cart.php" method="post">
+                <form action="services/add_to_cart.php" method="post">
                     <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
                     <button type="submit">Add to Cart</button>
                 </form>

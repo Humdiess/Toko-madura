@@ -7,6 +7,13 @@ $products = json_decode($jsonData, true);
 
 ?>
 
+<?php
+    include 'utils/db.php';
+    
+    $stmt = $pdo->query("SELECT * FROM products");
+    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

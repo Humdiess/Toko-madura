@@ -1,13 +1,12 @@
 <?php
-include 'db.php';
+include 'utils/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $role = $_POST['role'];
-    $gmail = $_POST['gmail']; // Tambahkan field gmail
+    $gmail = $_POST['gmail'];
 
-    // Simpan data pengguna ke database
     $stmt = $pdo->prepare("INSERT INTO users (username, password, role, gmail) VALUES (?, ?, ?, ?)");
     $stmt->execute([$username, $password, $role, $gmail]);
 

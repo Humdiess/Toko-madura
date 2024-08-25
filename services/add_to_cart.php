@@ -19,6 +19,6 @@ if (isset($_SESSION['cart'][$product_id])) {
     $_SESSION['cart'][$product_id] = $quantity;
 }
 
-header('Location: cart.php');
+header('Location: ./cart.php');
 exit();
 ?>

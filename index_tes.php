@@ -1,8 +1,7 @@
 <?php
-include 'db.php';
+include 'utils/db.php';
 include('themes/header.php');
 
-// Fetch products from the database
 $stmt = $pdo->query("SELECT * FROM products");
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -55,7 +54,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="promo-content d-flex justify-content-center">
                 <div class="promo-list">
                     <?php foreach ($products as $product) : ?>
-                        <div class="promo-product-card rounded-lg-4 border position-relative overflow-hidden" onclick="window.location.href='./detail.php' ">
+                        <div class="promo-product-card rounded-lg-4 border position-relative overflow-hidden" onclick="window.location.href='detail.php?id=<?php echo $product['id']; ?>' ">
                             <div class="discount-badge position-absolute top-0 start-0 text-white p-2 rounded-end">-17%</div>
                             <div class="promo-product-card-image">
                                 <?php $imagePaths = explode(',', $product['images']); ?>

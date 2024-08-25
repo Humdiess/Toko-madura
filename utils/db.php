@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'belajar';
+$dbname = 'toko_madura';
 $username = 'root';
 $password = '';
 

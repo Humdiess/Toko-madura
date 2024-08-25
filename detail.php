@@ -1,5 +1,6 @@
 <?php include('themes/header.php'); ?>
 
+<?php foreach ($products as $product): ?>
 <div class="product-detail-wrapper container mt-4">
     <div class="banner position-relative bg-light overflow-hidden py-4 rounded-3">
         <img src="assets/img/banner/detail-banner.png" alt="">
@@ -9,19 +10,20 @@
         <div class="product-image-detail col-lg-4 col-md-12 mb-4">
             <div class="image-detail rounded">
                 <div class="image-detail-preview mb-3 border rounded">
-                    <img id="mainImage" src="https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//91/MTA-26202726/no-brand_no-brand_full01.jpg" class="img-fluid w-100 rounded" alt="Product Image">
+                    <img id="mainImage" class="img-fluid w-100 rounded" alt="Product Image">
                 </div>
+                <?php $imagePaths = explode(',', $product['images']); ?>
                 <div class="image-detail-selector d-flex gap-2">
-                    <img src="assets/img/product/product.jpg" class="img-thumbnail selector" alt="Product Thumbnail">
-                    <img src="assets/img/product/product-1.jpg" class="img-thumbnail selector" alt="Product Thumbnail">
-                    <img src="assets/img/product/product-2.jpg" class="img-thumbnail selector" alt="Product Thumbnail">
+                    <?php foreach ($imagePaths as $imagePath): ?>
+                    <img src="assets/img/<?php echo htmlspecialchars($imagePath); ?>" class="img-thumbnail selector" alt="Product Thumbnail">
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
 
         <div class="product-description col-lg-5 col-md-12 mb-4">
             <div class="description rounded">
-                <h2>Sabun colek kurang tau berapa mili liter hehe</h2>
+                <h2><?php echo htmlspecialchars($product['name']); ?></h2>
                 <div class="product-info d-flex gap-3">
                     <p class="mb-0">500+ terjual</p>
                     <p class="mb-0">
@@ -29,7 +31,7 @@
                         4.5 (200 ulasan)
                     </p>
                 </div>
-                <p class="product-price fs-3 text-danger">Rp 1.000.000</p>
+                <p class="product-price fs-3 text-danger">Rp. <?php echo htmlspecialchars($product['price']); ?></p>
                 <div class="seller-info d-flex align-items-center gap-3">
                     <div class="seller-photo rounded-circle overflow-hidden">
                         <img src="https://avatars.githubusercontent.com/u/118147438?v=4" alt="Seller Photo">
@@ -41,7 +43,7 @@
                 </div>
 
                 <div class="product-description mt-3">
-                    <p class="description-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque, dolorum culpa? Quidem, dolorem aspernatur? Cumque similique quod, enim ex culpa minus cum a sequi quas eius rerum in accusantium tempora sed reprehenderit itaque aut aperiam dignissimos laborum officia. Reiciendis eius nostrum nihil, consectetur non iste accusantium inventore, qui numquam doloribus incidunt libero magnam neque mollitia vel eveniet placeat enim nesciunt quasi, adipisci labore? Aut temporibus assumenda voluptate culpa perferendis reiciendis, dolorum possimus debitis exercitationem pariatur autem eaque similique obcaecati voluptas eveniet ipsum et aspernatur alias sit? Incidunt, eos sapiente vero nostrum omnis hic natus deserunt ea repellat eveniet possimus at necessitatibus ipsam quam pariatur ipsum architecto nulla ullam dolorem iste alias nihil dolore? Sequi mollitia molestiae expedita illum! Labore, debitis veniam? Nam magnam ex velit explicabo libero est iusto? Architecto, labore qui totam itaque esse ullam obcaecati quia vero eum. Labore similique nisi obcaecati excepturi exercitationem quasi, repudiandae asperiores? Nulla necessitatibus qui, ullam saepe iste harum! Fugiat error velit fugit eos nihil, cupiditate explicabo voluptates minus sit dolorum harum assumenda, modi accusantium, quo laboriosam doloribus perferendis rem officia alias. Tenetur, provident natus a commodi obcaecati consequatur perferendis reiciendis aliquid quaerat illum accusantium eos ipsa? Sapiente delectus ea architecto eius vitae distinctio sequi nemo culpa esse, consequuntur tempora. Ullam necessitatibus quo iure adipisci inventore fugiat animi voluptatum repellendus architecto minus quisquam dolore tempora veritatis harum assumenda sit, earum eligendi explicabo? Molestias vitae pariatur natus officia esse, est incidunt quis minima dolor expedita accusantium voluptatum iure quaerat eaque, itaque inventore. Itaque, incidunt!.</p>
+                    <p class="description-text"><?php echo htmlspecialchars($product['description']); ?></p>
                     <a href="#" class="read-more text-danger" style="display: none;">Baca Lebih Lanjut</a>
                 </div>
 
@@ -159,6 +161,8 @@
         </div>
     </div>
 </section>
+
+<?php endforeach; ?>
 
 <div class="bottom-navbar d-lg-none">
     <div class="container">

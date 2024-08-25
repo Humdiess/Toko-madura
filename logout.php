@@ -1,5 +1,5 @@
 <?php
-include 'db.php';
+include 'utils/db.php';
 
 session_start();
 session_unset();
