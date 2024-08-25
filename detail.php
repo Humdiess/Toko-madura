@@ -1,5 +1,18 @@
 <?php include('themes/header.php'); ?>
 
+<?php
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+// Mengambil detail produk berdasarkan ID
+$stmt = $pdo->prepare("SELECT * FROM products WHERE id = :id");
+$stmt->execute(['id' => $id]);
+$product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$product) {
+    echo "Produk tidak ditemukan!";
+    exit;
+}
+?>
 <?php foreach ($products as $product): ?>
 <div class="product-detail-wrapper container mt-4">
     <div class="banner position-relative bg-light overflow-hidden py-4 rounded-3">

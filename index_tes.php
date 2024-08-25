@@ -89,7 +89,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="product-content">
                 <div class="product-list">
                     <?php foreach ($products as $product) : ?>
-                        <div class="product-card rounded-4 border" onclick="window.location.href='./detail.php' ">
+                        <div class="product-card rounded-4 border" onclick="window.location.href='detail.php?id=<?php echo $product['id']; ?>' ">
                             <div class="product-card-image">
                                 <img src="assets/img/<?php echo htmlspecialchars($imagePaths[0]); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" loading="lazy">
                             </div>
