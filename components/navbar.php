@@ -5,7 +5,6 @@ if (session_status() === PHP_SESSION_NONE) {
 
 include 'utils/db.php';
 
-// Fetch the user data from the database based on the session user_id
 if (isset($_SESSION['user_id'])) {
     $stmt = $pdo->prepare("SELECT photo FROM users WHERE id = ?");
     $stmt->execute([$_SESSION['user_id']]);
@@ -21,7 +20,7 @@ if (isset($_SESSION['user_id'])) {
         <div class="nav-center">
             <div class="nav-search">
                 <form action="search.php" method="get">
-                    <input type="search" name="search" placeholder="Search" class="form-control rounded-pill" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" required>
+                    <input type="search" name="search" placeholder="Search" class="form-control rounded-pill" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" required autocomplete="off">
                 </form>
             </div>
         </div>
@@ -38,7 +37,7 @@ if (isset($_SESSION['user_id'])) {
                     </a>
                 </div>
                 <div class="mail">
-                    <a href="#">
+                    <a href="history.php">
                         <i class="fas fa-envelope"></i>
                     </a>
                 </div>
