@@ -9,7 +9,6 @@ if ($searchQuery) {
     $stmt->execute(['searchQuery' => '%' . $searchQuery . '%']);
     $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } else {
-    // If no search term, return all products or handle as needed
     $stmt = $pdo->query("SELECT * FROM products");
     $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

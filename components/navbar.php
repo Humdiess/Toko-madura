@@ -21,7 +21,7 @@ if (isset($_SESSION['user_id'])) {
         <div class="nav-center">
             <div class="nav-search">
                 <form action="search.php" method="get">
-                    <input type="search" name="search" placeholder="Search" class="form-control rounded-pill" required>
+                    <input type="search" name="search" placeholder="Search" class="form-control rounded-pill" value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>" required>
                 </form>
             </div>
         </div>
