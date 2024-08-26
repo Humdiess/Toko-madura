@@ -81,6 +81,7 @@ include('themes/header.php');
         </div>
     </div>
 
+    <!-- Modal Pembayaran -->
     <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -91,13 +92,13 @@ include('themes/header.php');
                 <div class="modal-body">
                     <p>Pilih metode pembayaran:</p>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentMethod1" value="transfer" checked>
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentMethod1" value="Transfer Bank" checked>
                         <label class="form-check-label" for="paymentMethod1">
                             Transfer Bank
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentMethod2" value="ewallet">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentMethod2" value="E-Wallet">
                         <label class="form-check-label" for="paymentMethod2">
                             E-Wallet
                         </label>
@@ -106,18 +107,6 @@ include('themes/header.php');
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                     <button type="button" id="confirmPaymentButton" class="btn btn-primary">Bayar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body text-center">
-                    <h5 class="modal-title" id="successModalLabel">Pembayaran Berhasil!</h5>
-                    <p>Terima kasih atas pembayaran Anda.</p>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">OK</button>
                 </div>
             </div>
         </div>
@@ -134,7 +123,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const payButton = document.getElementById('payButton');
     const paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
 
-    // Update subtotal
     function updateSubtotal() {
         let subtotal = 0;
         let anySelected = false;
@@ -163,8 +151,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.querySelectorAll('.remove-item').forEach(button => {
         button.addEventListener('click', function () {
-            this.closest('.cart-item').remove();
-            updateSubtotal();
+            const productId = this.getAttribute('data-product-id');
+            const cartItem = this.closest('.cart-item');
+
+            // AJAX request to delete the item from the database
+            fetch('delete_cart_item.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `product_id=${productId}`
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data === 'success') {
+                    cartItem.remove();  // Remove the item from the DOM
+                    updateSubtotal();
+                } else {
+                    alert('Error removing item from cart');
+                }
+            });
         });
     });
 
@@ -176,6 +182,30 @@ document.addEventListener('DOMContentLoaded', function () {
             paymentModal.show();
         }
     });
-});
 
+    document.getElementById('confirmPaymentButton').addEventListener('click', function () {
+        const form = document.getElementById('cartForm');
+        const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+
+        if (selectedPaymentMethod) {
+            // Remove previous payment method input if exists
+            const existingPaymentMethodInput = form.querySelector('input[name="paymentMethod"]');
+            if (existingPaymentMethodInput) {
+                existingPaymentMethodInput.remove();
+            }
+
+            // Create and append new payment method input
+            const paymentMethodInput = document.createElement('input');
+            paymentMethodInput.type = 'hidden';
+            paymentMethodInput.name = 'paymentMethod';
+            paymentMethodInput.value = selectedPaymentMethod.value;
+            form.appendChild(paymentMethodInput);
+
+            // Submit the form
+            form.submit();
+        } else {
+            alert('Pilih metode pembayaran.');
+        }
+    });
+});
 </script>
