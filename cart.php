@@ -70,7 +70,6 @@ include('themes/header.php');
             </form>
         </div>
 
-        <!-- Subtotal Box -->
         <div class="col-lg-4">
             <div class="total-price-wrapper p-3 border rounded-3 mt-5">
                 <h4 class="fw-bold">Subtotal Terpilih:</h4>
@@ -82,7 +81,6 @@ include('themes/header.php');
         </div>
     </div>
 
-    <!-- Payment Modal -->
     <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -113,7 +111,6 @@ include('themes/header.php');
         </div>
     </div>
 
-    <!-- Success Modal -->
     <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -130,101 +127,55 @@ include('themes/header.php');
 <?php include('themes/footer.php'); ?>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const selectAllCheckbox = document.getElementById('selectAllCheckbox');
-        const deselectAllCheckbox = document.getElementById('deselectAllCheckbox');
-        const checkboxes = document.querySelectorAll('.product-checkbox');
-        const selectedSubtotal = document.getElementById('selectedSubtotal');
+document.addEventListener('DOMContentLoaded', function () {
+    const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+    const checkboxes = document.querySelectorAll('.product-checkbox');
+    const selectedSubtotal = document.getElementById('selectedSubtotal');
+    const payButton = document.getElementById('payButton');
+    const paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
 
-        // Update subtotal
-        function updateSubtotal() {
-            let subtotal = 0;
+    // Update subtotal
+    function updateSubtotal() {
+        let subtotal = 0;
+        let anySelected = false;
 
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    const item = checkbox.closest('.cart-item');
-                    const itemSubtotal = parseInt(item.querySelector('.subtotal').textContent.replace(/\./g, ''));
-                    subtotal += itemSubtotal;
-                }
-            });
-
-            selectedSubtotal.textContent = subtotal.toLocaleString('id-ID');
-        }
-
-        // Handle "Pilih Semua" checkbox
-        selectAllCheckbox.addEventListener('change', function () {
-            checkboxes.forEach(checkbox => checkbox.checked = selectAllCheckbox.checked);
-            updateSubtotal();
-        });
-
-        // Handle "Batalkan Pilihan Semua" checkbox
-        deselectAllCheckbox.addEventListener('change', function () {
-            if (deselectAllCheckbox.checked) {
-                checkboxes.forEach(checkbox => checkbox.checked = false);
-                selectAllCheckbox.checked = false;
-                updateSubtotal();
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                anySelected = true;
+                const item = checkbox.closest('.cart-item');
+                const itemSubtotal = parseInt(item.querySelector('.subtotal').textContent.replace(/\./g, ''));
+                subtotal += itemSubtotal;
             }
         });
 
-        // Update subtotal on checkbox change
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', updateSubtotal);
-        });
+        selectedSubtotal.textContent = subtotal.toLocaleString('id-ID');
+        payButton.disabled = !anySelected;
+    }
 
-        // Increase or decrease quantity
-        document.querySelectorAll('.quantity-increase, .quantity-decrease').forEach(button => {
-            button.addEventListener('click', function () {
-                const productId = this.dataset.productId;
-                const quantityInput = this.closest('.input-group').querySelector('input');
-                let quantity = parseInt(quantityInput.value);
-                const isIncrease = this.classList.contains('quantity-increase');
-                if (isIncrease) {
-                    quantity += 1;
-                } else if (quantity > 1) {
-                    quantity -= 1;
-                }
-                quantityInput.value = quantity;
-                // Optionally, send AJAX request to update quantity on the server
-                updateSubtotal();
-            });
-        });
+    selectAllCheckbox.addEventListener('change', function () {
+        checkboxes.forEach(checkbox => checkbox.checked = selectAllCheckbox.checked);
+        updateSubtotal();
+    });
 
-        // Handle remove item
-        document.querySelectorAll('.remove-item').forEach(button => {
-            button.addEventListener('click', function () {
-                const productId = this.dataset.productId;
-                // Optionally, send AJAX request to remove item from server
-                this.closest('.cart-item').remove();
-                updateSubtotal();
-            });
-        });
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateSubtotal);
+    });
 
-        // Handle payment
-        document.getElementById('confirmPaymentButton').addEventListener('click', function () {
-            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-
-            // Submit form with selected payment method
-            const form = document.getElementById('cartForm');
-            const formData = new FormData(form);
-            formData.append('paymentMethod', paymentMethod);
-
-            fetch('checkout.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Show success modal
-                    $('#successModal').modal('show');
-                } else {
-                    alert('Pembayaran gagal. Silakan coba lagi.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Terjadi kesalahan. Silakan coba lagi.');
-            });
+    document.querySelectorAll('.remove-item').forEach(button => {
+        button.addEventListener('click', function () {
+            this.closest('.cart-item').remove();
+            updateSubtotal();
         });
     });
+
+    payButton.addEventListener('click', function (event) {
+        if (payButton.disabled) {
+            event.preventDefault();
+            alert('Silakan pilih setidaknya satu produk untuk melanjutkan pembayaran.');
+        } else {
+            paymentModal.show();
+        }
+    });
+});
+
 </script>
