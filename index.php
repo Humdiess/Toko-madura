@@ -40,52 +40,52 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <a class="text-decoration-none text-dark fw-normal fs-6" href="#">Lihat semua</a>
         </div>
         <div class="categories-list d-flex flex-wrap gap-3 px-3">
-            <div class="category-card bg-light d-flex flex-column align-items-center">
+            <div class="category-card bg-light d-flex flex-column align-items-center" onclick="window.location.href='category.php?category=Alat'">
                 <div class="category-card-icon">
                     <i class="fas fa-utensils h2 mb-2"></i>
                 </div>
                 <div class="category-card-title">
-                    <a href="#">Alat</a>
+                    <a href="category.php?category=Alat">Alat</a>
                 </div>
             </div>
-            <div class="category-card bg-light d-flex flex-column align-items-center">
+            <div class="category-card bg-light d-flex flex-column align-items-center" onclick="window.location.href='category.php?category=Minuman'">
                 <div class="category-card-icon">
                     <i class="fas fa-bottle-droplet h2 mb-2"></i>
                 </div>
                 <div class="category-card-title">
-                    <a href="#">Minuman</a>
+                    <a href="category.php?category=Minuman">Minuman</a>
                 </div>
             </div>
-            <div class="category-card bg-light d-flex flex-column align-items-center">
+            <div class="category-card bg-light d-flex flex-column align-items-center" onclick="window.location.href='category.php?category=Snack'">
                 <div class="category-card-icon">
                     <i class="fas fa-cookie-bite h2 mb-2"></i>
                 </div>
                 <div class="category-card-title">
-                    <a href="#">Snack</a>
+                    <a href="category.php?category=Snack">Snack</a>
                 </div>
             </div>
-            <div class="category-card bg-light d-flex flex-column align-items-center">
+            <div class="category-card bg-light d-flex flex-column align-items-center" onclick="window.location.href='category.php?category=Beras'">
                 <div class="category-card-icon">
                     <i class="fas fa-bowl-rice h2 mb-2"></i>
                 </div>
                 <div class="category-card-title">
-                    <a href="#">Beras</a>
+                    <a href="category.php?category=Beras">Beras</a>
                 </div>
             </div>
-            <div class="category-card bg-light d-flex flex-column align-items-center">
+            <div class="category-card bg-light d-flex flex-column align-items-center" onclick="window.location.href='category.php?category=Minyak'">
                 <div class="category-card-icon">
                     <i class="fas fa-oil-can h2 mb-2"></i>
                 </div>
                 <div class="category-card-title">
-                    <a href="#">Minyak</a>
+                    <a href="category.php?category=Minyak">Minyak</a>
                 </div>
             </div>
-            <div class="category-card bg-light d-flex flex-column align-items-center">
+            <div class="category-card bg-light d-flex flex-column align-items-center" onclick="window.location.href='category.php?category=Sabun'">
                 <div class="category-card-icon">
                     <i class="fas fa-soap h2 mb-2"></i>
                 </div>
                 <div class="category-card-title">
-                    <a href="#">Sabun</a>
+                    <a href="category.php?category=Sabun">Sabun</a>
                 </div>
             </div>
         </div>
@@ -104,17 +104,13 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <div class="promo-product-card rounded-lg-4 border position-relative overflow-hidden" onclick="window.location.href='detail.php?id=<?php echo $product['id']; ?>' ">
                             <div class="discount-badge position-absolute top-0 start-0 text-white p-2 rounded-end">-17%</div>
                             <div class="promo-product-card-image">
-                                <?php 
-                                $imagePaths = explode(',', $product['images']); 
-                                $imageSrc = !empty($imagePaths[0]) ? "assets/img/product/" . htmlspecialchars($imagePaths[0]) : "assets/img/default/default_image.png";
-                                ?>
-                                <img src="<?php echo $imageSrc; ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                                <img src="<?php echo get_product_image_src($product['images']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                             </div>
 
                             <div class="promo-product-card-content p-3 text-start bg-white">
                                 <h5 class="promo-product-name text-dark mb-1"><?php echo htmlspecialchars($product['name']); ?></h5>
                                 <div class="promo-product-pricing d-flex align-items-center">
-                                    <p class="promo-product-price mb-0 text-success fw-bold">Rp. <?php echo number_format($product['price'], 0, ',', '.'); ?></p>
+                                    <p class="promo-product-price mb-0 text-success fw-bold"><?php echo format_rupiah($product['price']); ?></p>
                                     <p class="promo-product-original-price mb-0 text-muted ms-2 text-decoration-line-through">Rp. 15.000</p>
                                 </div>
                                 <p class="promo-product-location mb-2 text-secondary"><i class="fas fa-map-marker-alt"></i> Jakarta</p>
@@ -142,11 +138,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php foreach ($products as $product) : ?>
                         <div class="product-card rounded-4 border" onclick="window.location.href='detail.php?id=<?php echo $product['id']; ?>' ">
                             <div class="product-card-image">
-                            <?php 
-                                $imagePaths = explode(',', $product['images']); 
-                                $imageSrc = !empty($imagePaths[0]) ? "assets/img/product/" . htmlspecialchars($imagePaths[0]) : "assets/img/default/default_image.png";
-                                ?>
-                                <img src="<?php echo $imageSrc; ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                                <img src="<?php echo get_product_image_src($product['images']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                             </div>
                             <div class="product-card-content">
                                 <h5 class="product-name"><?php echo htmlspecialchars($product['name']); ?></h5>

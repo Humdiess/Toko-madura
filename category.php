@@ -1,43 +1,55 @@
 <?php
 include 'utils/db.php';
+include 'config/helper.php';
 include('themes/header.php');
 
-$stmt = $pdo->query("SELECT * FROM products");
-$products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Ambil kategori dari URL
+$selectedCategory = isset($_GET['category']) ? htmlspecialchars($_GET['category']) : '';
+
+// Ambil produk berdasarkan kategori
+$products = getProductsByCategory($pdo, $selectedCategory);
 ?>
 
 <section class="product container mt-5">
     <div class="product-wrapper">
         <div class="product">
             <div class="product-header mb-3 d-flex justify-content-between">
-                <h1 class="fw-medium fs-5">Produk dengan kategori <?php echo $_GET['category']; ?></h1>
+                <h1 class="fw-medium fs-5">
+                    <?php 
+                    if ($products) {
+                        echo "Produk dengan kategori " . $selectedCategory;
+                    } else {
+                        echo "Tidak ada produk yang ditemukan untuk kategori " . $selectedCategory;
+                    }
+                    ?>
+                </h1>
             </div>
             <div class="product-content">
                 <div class="product-list">
-                    <?php foreach ($products as $product) : ?>
-                        <div class="product-card rounded-4 border" onclick="window.location.href='detail.php?id=<?php echo $product['id']; ?>' ">
-                            <div class="product-card-image">
-                            <?php 
-                                $imagePaths = explode(',', $product['images']); 
-                                $imageSrc = !empty($imagePaths[0]) ? "assets/img/product/" . htmlspecialchars($imagePaths[0]) : "assets/img/default/default_image.png";
-                                ?>
-                                <img src="<?php echo $imageSrc; ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
-                            </div>
-                            <div class="product-card-content">
-                                <h5 class="product-name"><?php echo htmlspecialchars($product['name']); ?></h5>
-                                <p class="product-price mb-0">Rp. <?php echo number_format($product['price'], 0, ',', '.'); ?></p>
-                                <p class="product-location mb-2">
-                                    <i class="fas fa-map-marker-alt text-secondary"></i>
-                                    Jakarta
-                                </p>
-                                <div class="product-rating">
-                                    <i class="fas fa-star"></i>
-                                    <span class="rating-value">4.5</span>
-                                    <span class="rating-count">(200 ulasan)</span>
+                    <?php if ($products): ?>
+                        <?php foreach ($products as $product) : ?>
+                            <div class="product-card rounded-4 border" onclick="window.location.href='detail.php?id=<?php echo $product['id']; ?>' ">
+                                <div class="product-card-image">
+                                    <img src="<?php echo get_product_image_src($product['images']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                                </div>
+                                <div class="product-card-content">
+                                    <h5 class="product-name"><?php echo htmlspecialchars($product['name']); ?></h5>
+                                    <p class="product-price mb-0">Rp. <?php echo number_format($product['price'], 0, ',', '.'); ?></p>
+                                    <p class="product-location mb-2">
+                                        <i class="fas fa-map-marker-alt text-secondary"></i>
+                                        Jakarta
+                                    </p>
+                                    <div class="product-rating">
+                                        <i class="fas fa-star"></i>
+                                        <span class="rating-value">4.5</span>
+                                        <span class="rating-count">(200 ulasan)</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <!-- Tidak ada produk, jadi tidak ada yang ditampilkan di sini -->
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
