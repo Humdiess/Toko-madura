@@ -26,4 +26,10 @@
     
         return $imageSrcArray;
     }
+
+    function searchProductsByName($pdo, $productName) {
+        $stmt = $pdo->prepare("SELECT * FROM products WHERE name LIKE ?");
+        $stmt->execute(['%' . $productName . '%']);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 ?>
