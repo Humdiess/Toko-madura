@@ -10,19 +10,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];
-    $category_id = $_POST['category_id']; // Get the category ID from the form
+    $category_id = $_POST['category_id']; 
     $images = $_FILES['images'];
 
     $targetDir = "../assets/img/product/";
     $imagePaths = [];
 
-    // Loop through each file
     for ($i = 0; $i < count($images['name']); $i++) {
         $targetFile = $targetDir . basename($images["name"][$i]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-        // Check if image file is an actual image or fake image
         $check = getimagesize($images["tmp_name"][$i]);
         if ($check === false) {
             $uploadOk = 0;
@@ -35,13 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Sorry, your file " . $images["name"][$i] . " is too large.";
         }
 
-        // Allow certain file formats
         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
             $uploadOk = 0;
             echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed for file " . $images["name"][$i] . ".";
         }
 
-        // Check if $uploadOk is set to 0 by an error
         if ($uploadOk == 0) {
             echo "Sorry, your file " . $images["name"][$i] . " was not uploaded.";
         } else {
@@ -53,7 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Insert product with image paths and category_id
     $imagePathsString = implode(',', $imagePaths);
     $stmt = $pdo->prepare("INSERT INTO products (name, description, price, images, category_id) VALUES (?, ?, ?, ?, ?)");
     $stmt->execute([$name, $description, $price, $imagePathsString, $category_id]);
