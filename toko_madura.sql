@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2024 at 03:26 AM
+-- Generation Time: Aug 26, 2024 at 02:24 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `toko_madura`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `carts`
+--
+
+CREATE TABLE `carts` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL DEFAULT 1,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -64,7 +79,15 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `customer_name`, `customer_email`, `total_price`, `created_at`) VALUES
-(1, 1, '123', '123@gmail', 100.00, '2024-08-24 15:48:31');
+(1, 1, '123', '123@gmail', 100.00, '2024-08-24 15:48:31'),
+(2, 1, '123', '123@gmail', 0.00, '2024-08-26 12:12:25'),
+(3, 1, '123', '123@gmail', 0.00, '2024-08-26 12:14:06'),
+(4, 1, '123', '123@gmail', 0.00, '2024-08-26 12:14:27'),
+(5, 1, '123', '123@gmail', 0.00, '2024-08-26 12:15:08'),
+(6, 1, '123', '123@gmail', 0.00, '2024-08-26 12:19:59'),
+(7, 1, '123', '123@gmail', 0.00, '2024-08-26 12:21:20'),
+(8, 1, '123', '123@gmail', 99999999.99, '2024-08-26 12:22:05'),
+(9, 1, '123', '123@gmail', 10000000.00, '2024-08-26 12:22:58');
 
 -- --------------------------------------------------------
 
@@ -79,6 +102,14 @@ CREATE TABLE `order_items` (
   `quantity` int(11) NOT NULL,
   `price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`) VALUES
+(2, 8, 5, 37, 10000000.00),
+(3, 9, 5, 1, 10000000.00);
 
 -- --------------------------------------------------------
 
@@ -101,7 +132,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `images`, `created_at`, `category_id`) VALUES
-(5, 'akusukaeskrim', 'qwdasdasdasd', 2312.00, 'WIN_20240730_10_54_48_Pro.jpg,WIN_20240730_10_55_15_Pro.jpg,WIN_20240730_10_55_42_Pro.jpg', '2024-08-25 02:06:31', 4);
+(5, 'Musang Surabaya', 'Musang adalah hewan hitam seperti di foto', 10000000.00, 'WIN_20240730_10_54_48_Pro.jpg,WIN_20240730_10_55_15_Pro.jpg,WIN_20240730_10_55_42_Pro.jpg', '2024-08-25 02:06:31', 6);
 
 -- --------------------------------------------------------
 
@@ -132,6 +163,14 @@ INSERT INTO `users` (`id`, `username`, `password`, `role`, `gmail`, `created_at`
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `carts`
+--
+ALTER TABLE `carts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_user` (`user_id`),
+  ADD KEY `fk_product` (`product_id`);
 
 --
 -- Indexes for table `categories`
@@ -174,6 +213,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `carts`
+--
+ALTER TABLE `carts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
@@ -183,19 +228,19 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -206,6 +251,13 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `carts`
+--
+ALTER TABLE `carts`
+  ADD CONSTRAINT `fk_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `orders`

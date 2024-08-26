@@ -12,11 +12,6 @@ if (!$product) {
     exit;
 }
 
-echo "<pre>";
-var_dump($product['price']);
-var_dump($product['name']);
-echo "</pre>";
-
 $allImages = get_all_product_images_src($product['images']);
 ?>
 
@@ -64,33 +59,33 @@ $allImages = get_all_product_images_src($product['images']);
                     <p class="description-text"><?php echo htmlspecialchars($product['description']); ?></p>
                     <a href="#" class="read-more text-danger" style="display: none;">Baca Lebih Lanjut</a>
                 </div>
-
             </div>
         </div>
 
         <div class="product-checkout col-lg-3 col-md-12 mb-4">
-            <!-- <form action=""> -->
-                <input type="text" id="orderName" class="form-control mb-2" placeholder="Masukkan Nama" value="<?php echo htmlspecialchars($product['name']); ?>" hidden>
-                <input type="text" id="orderName" class="form-control mb-2" placeholder="Masukkan Nama" value="<?php echo htmlspecialchars($product['price']); ?>" hidden>
-                <div class="border p-2 rounded-3">
-                    <p class="mb-3">Jumlah barang</p>
-                    <div class="input-group mb-2 border rounded-3">
-                        <button id="minusBtn" class="btn">-</button>
-                        <input type="number" id="orderQuantity" class="form-control border border-0 text-center" value="1" min="1">
-                        <button id="plusBtn" class="btn">+</button>
-                    </div>
-                    <p id="subtotal" class="mb-3">Subtotal: Rp. 0</p>
-                    <button class="btn btn-danger w-100 mb-2" type="submit">Tambah ke Keranjang</button>
-                    <button class="btn border w-100">Beli Sekarang</button>
-                </div>
-            <!-- </form> -->
+        <form action="services/add_to_cart.php" method="post">
+    <input type="hidden" id="productId" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
+    <input type="hidden" id="orderName" name="product_name" value="<?php echo htmlspecialchars($product['name']); ?>">
+    <input type="hidden" id="orderPrice" name="product_price" value="<?php echo htmlspecialchars($product['price']); ?>">
+    <div class="border p-2 rounded-3">
+        <p class="mb-3">Jumlah barang</p>
+        <div class="input-group mb-2 border rounded-3">
+            <button type="button" id="minusBtn" class="btn">-</button>
+            <input type="number" id="orderQuantity" name="quantity" class="form-control border border-0 text-center" value="1" min="1">
+            <button type="button" id="plusBtn" class="btn">+</button>
         </div>
+        <p id="subtotal" class="mb-3">Subtotal: Rp. 0</p>
+        <button class="btn btn-danger w-100 mb-2" type="submit">Tambah ke Keranjang</button>
+        <a href="checkout.php" class="btn border w-100">Beli Sekarang</a>
+    </div>
+</form>
 
+        </div>
     </div>
 </div>
 
 <div class="product-reviews container mt-4">
-    <h1 class="mb-4 fs-5 fw-medium">Ulasan Produk</h2>
+    <h1 class="mb-4 fs-5 fw-medium">Ulasan Produk</h1>
 
     <div class="review-list d-flex flex-column gap-4 container">
         <div class="review-item border rounded-3 p-3">
@@ -143,10 +138,8 @@ $allImages = get_all_product_images_src($product['images']);
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-
 
 <section class="product container mt-5">
     <div class="product-wrapper">
@@ -183,65 +176,42 @@ $allImages = get_all_product_images_src($product['images']);
     </div>
 </section>
 
-<div class="bottom-navbar d-lg-none">
-    <div class="container">
-        <button class="btn btn-danger w-100 mb-2">Tambah ke Keranjang</button>
-        <button class="btn border w-100">Beli Sekarang</button>
-    </div>
-</div>
-
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const mainImage = document.getElementById('mainImage');
-        const selectors = document.querySelectorAll('.image-detail-selector .selector');
+document.addEventListener('DOMContentLoaded', function() {
+    var mainImage = document.getElementById('mainImage');
+    var thumbnails = document.querySelectorAll('.image-detail-selector .selector');
 
-        selectors.forEach(function(selector) {
-            selector.addEventListener('click', function() {
-                mainImage.src = this.src;
-            });
+    thumbnails.forEach(function(thumbnail) {
+        thumbnail.addEventListener('click', function() {
+            mainImage.src = this.src;
         });
     });
 
-    document.addEventListener("DOMContentLoaded", function() {
-    const minusBtn = document.getElementById("minusBtn");
-    const plusBtn = document.getElementById("plusBtn");
-    const quantityInput = document.getElementById("orderQuantity");
-    const subtotalDisplay = document.getElementById("subtotal");
-    const productPrice = <?php echo htmlspecialchars($product['price']); ?>;
+    var plusBtn = document.getElementById('plusBtn');
+    var minusBtn = document.getElementById('minusBtn');
+    var quantityInput = document.getElementById('orderQuantity');
+    var subtotal = document.getElementById('subtotal');
 
-    console.log(productPrice);
+    plusBtn.addEventListener('click', function() {
+        var currentValue = parseInt(quantityInput.value, 10);
+        quantityInput.value = currentValue + 1;
+        updateSubtotal();
+    });
 
-    function updateSubtotal() {
-        let quantity = parseInt(quantityInput.value);
-
-        if (isNaN(quantity) || quantity < 1) {
-            quantity = 1;
-            quantityInput.value = quantity;
-        }
-
-        const subtotal = quantity * productPrice;
-        subtotalDisplay.textContent = `Subtotal: Rp. ${subtotal.toLocaleString()}`;
-    }
-
-    minusBtn.addEventListener("click", function() {
-        if (quantityInput.value > 1) {
-            quantityInput.value = parseInt(quantityInput.value) - 1;
+    minusBtn.addEventListener('click', function() {
+        var currentValue = parseInt(quantityInput.value, 10);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
             updateSubtotal();
         }
     });
 
-    plusBtn.addEventListener("click", function() {
-        quantityInput.value = parseInt(quantityInput.value) + 1;
-        updateSubtotal();
-    });
-
-    quantityInput.addEventListener("input", function() {
-        updateSubtotal();
-    });
-
-    updateSubtotal();
+    function updateSubtotal() {
+        var quantity = parseInt(quantityInput.value, 10);
+        var price = parseFloat(document.getElementById('orderPrice').value);
+        subtotal.textContent = 'Subtotal: Rp. ' + (price * quantity).toFixed(2);
+    }
 });
-
 </script>
 
 <?php include('themes/footer.php'); ?>
