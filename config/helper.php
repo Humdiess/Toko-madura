@@ -13,5 +13,17 @@
 
     function format_rupiah($number) {
         return 'Rp. ' . number_format($number, 0, ',', '.');
-    }    
+    }
+
+    function get_all_product_images_src($images, $defaultImage = 'assets/img/default/default_image.png') {
+        $imagePaths = explode(',', $images);
+        $imageSrcArray = [];
+    
+        foreach ($imagePaths as $imagePath) {
+            $imageSrc = !empty(trim($imagePath)) ? "assets/img/product/" . htmlspecialchars(trim($imagePath)) : $defaultImage;
+            $imageSrcArray[] = $imageSrc;
+        }
+    
+        return $imageSrcArray;
+    }
 ?>

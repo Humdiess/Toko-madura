@@ -11,22 +11,29 @@ if (!$product) {
     echo "Produk tidak ditemukan!";
     exit;
 }
+
+echo "<pre>";
+var_dump($product['price']);
+var_dump($product['name']);
+echo "</pre>";
+
+$allImages = get_all_product_images_src($product['images']);
 ?>
+
 <div class="product-detail-wrapper container mt-4">
     <div class="banner position-relative bg-light overflow-hidden py-4 rounded-3">
-        <img src="assets/img/banner/detail-banner.png" alt="">
+        <img src="assets/img/banner/detail-banner.png" alt="promo-banner">
     </div>
 
     <div class="product-detail row gx-4 mt-4">
         <div class="product-image-detail col-lg-4 col-md-12 mb-4">
             <div class="image-detail rounded">
                 <div class="image-detail-preview mb-3 border rounded">
-                    <img id="mainImage" class="img-fluid w-100 rounded" alt="Product Image">
+                    <img id="mainImage" src="<?php echo $allImages[0]; ?>" class="img-fluid w-100 rounded" alt="Product Image">
                 </div>
-                <?php $imagePaths = explode(',', $product['images']); ?>
                 <div class="image-detail-selector d-flex gap-2">
-                    <?php foreach ($imagePaths as $imagePath): ?>
-                    <img src="assets/img/product/<?php echo htmlspecialchars($imagePath); ?>" class="img-thumbnail selector" alt="Product Thumbnail">
+                    <?php foreach ($allImages as $imageSrc): ?>
+                        <img src="<?php echo $imageSrc; ?>" class="img-thumbnail selector" alt="Product Thumbnail">
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -61,19 +68,22 @@ if (!$product) {
             </div>
         </div>
 
-
         <div class="product-checkout col-lg-3 col-md-12 mb-4">
-            <div class="border p-2 rounded-3">
-                <p class="mb-3">Jumlah barang</p>
-                <div class="input-group mb-2 border rounded-3">
-                    <button id="minusBtn" class="btn">-</button>
-                    <input type="number" id="orderQuantity" class="form-control border border-0 text-center" value="1" min="1">
-                    <button id="plusBtn" class="btn">+</button>
+            <!-- <form action=""> -->
+                <input type="text" id="orderName" class="form-control mb-2" placeholder="Masukkan Nama" value="<?php echo htmlspecialchars($product['name']); ?>" hidden>
+                <input type="text" id="orderName" class="form-control mb-2" placeholder="Masukkan Nama" value="<?php echo htmlspecialchars($product['price']); ?>" hidden>
+                <div class="border p-2 rounded-3">
+                    <p class="mb-3">Jumlah barang</p>
+                    <div class="input-group mb-2 border rounded-3">
+                        <button id="minusBtn" class="btn">-</button>
+                        <input type="number" id="orderQuantity" class="form-control border border-0 text-center" value="1" min="1">
+                        <button id="plusBtn" class="btn">+</button>
+                    </div>
+                    <p id="subtotal" class="mb-3">Subtotal: Rp. 0</p>
+                    <button class="btn btn-danger w-100 mb-2" type="submit">Tambah ke Keranjang</button>
+                    <button class="btn border w-100">Beli Sekarang</button>
                 </div>
-                <p id="subtotal" class="mb-3">Subtotal: Rp. 0</p>
-                <button class="btn btn-danger w-100 mb-2">Tambah ke Keranjang</button>
-                <button class="btn border w-100">Beli Sekarang</button>
-            </div>
+            <!-- </form> -->
         </div>
 
     </div>
@@ -150,7 +160,7 @@ if (!$product) {
                 <?php foreach ($products as $product) : ?>
                     <div class="product-card rounded-4 border" onclick="window.location.href='detail.php?id=<?php echo $product['id']; ?>'">
                         <div class="product-card-image">
-                            <img src="assets/img/product/<?php echo htmlspecialchars($product['image']); ?>" alt="product-image" loading="lazy">
+                            <img src="<?php echo get_product_image_src($product['images']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                         </div>
                         <div class="product-card-content">
                             <h5 class="product-name"><?php echo htmlspecialchars($product['name']); ?></h5>
@@ -191,6 +201,47 @@ if (!$product) {
             });
         });
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+    const minusBtn = document.getElementById("minusBtn");
+    const plusBtn = document.getElementById("plusBtn");
+    const quantityInput = document.getElementById("orderQuantity");
+    const subtotalDisplay = document.getElementById("subtotal");
+    const productPrice = <?php echo htmlspecialchars($product['price']); ?>;
+
+    console.log(productPrice);
+
+    function updateSubtotal() {
+        let quantity = parseInt(quantityInput.value);
+
+        if (isNaN(quantity) || quantity < 1) {
+            quantity = 1;
+            quantityInput.value = quantity;
+        }
+
+        const subtotal = quantity * productPrice;
+        subtotalDisplay.textContent = `Subtotal: Rp. ${subtotal.toLocaleString()}`;
+    }
+
+    minusBtn.addEventListener("click", function() {
+        if (quantityInput.value > 1) {
+            quantityInput.value = parseInt(quantityInput.value) - 1;
+            updateSubtotal();
+        }
+    });
+
+    plusBtn.addEventListener("click", function() {
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+        updateSubtotal();
+    });
+
+    quantityInput.addEventListener("input", function() {
+        updateSubtotal();
+    });
+
+    updateSubtotal();
+});
+
 </script>
 
 <?php include('themes/footer.php'); ?>
