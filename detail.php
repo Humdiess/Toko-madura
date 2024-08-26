@@ -3,7 +3,6 @@
 <?php
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-// Mengambil detail produk berdasarkan ID
 $stmt = $pdo->prepare("SELECT * FROM products WHERE id = :id");
 $stmt->execute(['id' => $id]);
 $product = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -13,7 +12,6 @@ if (!$product) {
     exit;
 }
 ?>
-<?php foreach ($products as $product): ?>
 <div class="product-detail-wrapper container mt-4">
     <div class="banner position-relative bg-light overflow-hidden py-4 rounded-3">
         <img src="assets/img/banner/detail-banner.png" alt="">
@@ -149,33 +147,31 @@ if (!$product) {
             </div>
             <div class="product-content">
                 <div class="product-list">
-                    <?php foreach ($products as $product) : ?>
-                        <div class="product-card rounded-4 border" onclick="window.location.href='./detail.php' ">
-                            <div class="product-card-image">
-                                <img src="assets/img/product/product.jpg" alt="product-image" loading="lazy">
-                            </div>
-                            <div class="product-card-content">
-                                <h5 class="product-name"><?php echo htmlspecialchars($product['nama']); ?></h5>
-                                <p class="product-price mb-0">Rp. <?php echo number_format($product['harga'], 0, ',', '.'); ?></p>
-                                <p class="product-location mb-2">
-                                    <i class="fas fa-map-marker-alt text-secondary"></i>
-                                    Jakarta
-                                </p>
-                                <div class="product-rating">
-                                    <i class="fas fa-star"></i>
-                                    <span class="rating-value">4.5</span>
-                                    <span class="rating-count">(200 ulasan)</span>
-                                </div>
+                <?php foreach ($products as $product) : ?>
+                    <div class="product-card rounded-4 border" onclick="window.location.href='detail.php?id=<?php echo $product['id']; ?>'">
+                        <div class="product-card-image">
+                            <img src="assets/img/product/<?php echo htmlspecialchars($product['image']); ?>" alt="product-image" loading="lazy">
+                        </div>
+                        <div class="product-card-content">
+                            <h5 class="product-name"><?php echo htmlspecialchars($product['name']); ?></h5>
+                            <p class="product-price mb-0">Rp. <?php echo number_format($product['price'], 0, ',', '.'); ?></p>
+                            <p class="product-location mb-2">
+                                <i class="fas fa-map-marker-alt text-secondary"></i>
+                                Jakarta
+                            </p>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <span class="rating-value">4.5</span>
+                                <span class="rating-count">(200 ulasan)</span>
                             </div>
                         </div>
-                    <?php endforeach; ?>
+                    </div>
+                <?php endforeach; ?>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-<?php endforeach; ?>
 
 <div class="bottom-navbar d-lg-none">
     <div class="container">
