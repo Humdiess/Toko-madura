@@ -20,7 +20,9 @@ if (isset($_SESSION['user_id'])) {
         </div>
         <div class="nav-center">
             <div class="nav-search">
-                <input type="search" placeholder="Search" class="form-control rounded-pill">
+                <form action="search.php" method="get">
+                    <input type="search" name="search" placeholder="Search" class="form-control rounded-pill" required>
+                </form>
             </div>
         </div>
         <div class="nav-right d-flex align-items-center gap-5">
