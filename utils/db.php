@@ -1,4 +1,11 @@
 <?php
+// utils/db.php
+
+// Check if a session is already active before starting a new one
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 $host = 'localhost';
 $dbname = 'toko_madura';
 $username = 'root';
@@ -10,6 +17,4 @@ try {
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
-
-session_start(); 
 ?>

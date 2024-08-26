@@ -1,3 +1,18 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+include 'utils/db.php';
+
+// Fetch the user data from the database based on the session user_id
+if (isset($_SESSION['user_id'])) {
+    $stmt = $pdo->prepare("SELECT photo FROM users WHERE id = ?");
+    $stmt->execute([$_SESSION['user_id']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+}
+?>
+
 <nav class="navbar border d-flex justify-content-center" id="main-navbar">
     <div class="d-flex justify-content-between align-items-center w-100 nav-main px-5">
         <div class="nav-left">
@@ -31,7 +46,11 @@
                 <?php if (isset($_SESSION['user_id'])): ?>
                     <input type="checkbox dropdown-toggle" id="dropdown-toggler" hidden>
                     <label for="dropdown-toggler" class="profile-img">
-                        <img src="https://avatars.githubusercontent.com/u/118147438?v=4" alt="Profile" class="rounded-circle">
+                        <?php if (!empty($user['photo']) && file_exists("assets/img/profile/" . $user['photo'])): ?>
+                            <img src="assets/img/profile/<?php echo urlencode($user['photo']); ?>" alt="Profile" class="rounded-circle">
+                        <?php else: ?>
+                            <img src="assets/img/profile/default.jpg" alt="Default Profile" class="rounded-circle">
+                        <?php endif; ?>
                     </label>
                     <ul class="dropdown-menu">
                         <li><a href="#">Welcome, <?php echo $_SESSION['role']; ?>!</a></li>

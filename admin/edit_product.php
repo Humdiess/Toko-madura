@@ -1,5 +1,5 @@
 <?php
-include '../db.php';
+include '../utils/db.php';
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header('Location: login.php');
@@ -11,9 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];
+    $category_id = $_POST['category_id']; // Get the selected category
     $images = $_FILES['images'];
 
-    $targetDir = "../assets/img/";
+    $targetDir = "../assets/img/product/";
     $imagePaths = [];
 
     // Get existing images
@@ -32,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-        // Check if image file is a actual image or fake image
+        // Check if image file is an actual image or fake image
         $check = getimagesize($images["tmp_name"][$i]);
         if ($check === false) {
             $uploadOk = 0;
@@ -71,9 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updatedImages = array_merge($existingImages, $imagePaths);
     $imagePathsString = implode(',', $updatedImages);
 
-    // Update product
-    $stmt = $pdo->prepare("UPDATE products SET name = ?, description = ?, price = ?, images = ? WHERE id = ?");
-    $stmt->execute([$name, $description, $price, $imagePathsString, $product_id]);
+    // Update product with category
+    $stmt = $pdo->prepare("UPDATE products SET name = ?, description = ?, price = ?, category_id = ?, images = ? WHERE id = ?");
+    $stmt->execute([$name, $description, $price, $category_id, $imagePathsString, $product_id]);
 
     header('Location: index.php');
     exit();
@@ -84,6 +85,10 @@ $stmt = $pdo->prepare("SELECT * FROM products WHERE id = ?");
 $stmt->execute([$product_id]);
 $product = $stmt->fetch(PDO::FETCH_ASSOC);
 $imagePaths = explode(',', $product['images']);
+
+// Fetch categories
+$categoryStmt = $pdo->query("SELECT * FROM categories");
+$categories = $categoryStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -104,6 +109,15 @@ $imagePaths = explode(',', $product['images']);
         <label for="price">Price:</label>
         <input type="number" name="price" id="price" value="<?php echo htmlspecialchars($product['price']); ?>" required>
         <br>
+        <label for="category">Category:</label>
+        <select name="category_id" id="category" required>
+            <?php foreach ($categories as $category): ?>
+                <option value="<?php echo $category['id']; ?>" <?php if ($category['id'] == $product['category_id']) echo 'selected'; ?>>
+                    <?php echo htmlspecialchars($category['name']); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+        <br>
         <label for="images">Upload New Images:</label>
         <input type="file" name="images[]" id="images" multiple>
         <br>
@@ -113,7 +127,7 @@ $imagePaths = explode(',', $product['images']);
     <h2>Current Images</h2>
     <?php foreach ($imagePaths as $imagePath): ?>
         <?php if (!empty($imagePath)): ?>
-            <img src="../assets/img/<?php echo htmlspecialchars($imagePath); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="100">
+            <img src="../assets/img/product/<?php echo htmlspecialchars($imagePath); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="100">
         <?php endif; ?>
     <?php endforeach; ?>
 </body>
