@@ -1,5 +1,5 @@
 <?php
-include '../db.php';
+include '../utils/db.php';
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     header('Location: login.php');
@@ -10,9 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];
+    $category_id = $_POST['category_id']; // Get the category ID from the form
     $images = $_FILES['images'];
 
-    $targetDir = "../assets/img/";
+    $targetDir = "../assets/img/product/";
     $imagePaths = [];
 
     // Loop through each file
@@ -21,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-        // Check if image file is a actual image or fake image
+        // Check if image file is an actual image or fake image
         $check = getimagesize($images["tmp_name"][$i]);
         if ($check === false) {
             $uploadOk = 0;
@@ -52,25 +53,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Insert product with image paths
+    // Insert product with image paths and category_id
     $imagePathsString = implode(',', $imagePaths);
-    $stmt = $pdo->prepare("INSERT INTO products (name, description, price, images) VALUES (?, ?, ?, ?)");
-    $stmt->execute([$name, $description, $price, $imagePathsString]);
+    $stmt = $pdo->prepare("INSERT INTO products (name, description, price, images, category_id) VALUES (?, ?, ?, ?, ?)");
+    $stmt->execute([$name, $description, $price, $imagePathsString, $category_id]);
 
     header('Location: index.php');
     exit();
 }
 
-$stmt = $pdo->query("SELECT * FROM products");
+$stmt = $pdo->query("SELECT products.*, categories.name as category_name FROM products JOIN categories ON products.category_id = categories.id");
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <?php if (isset($_SESSION['user_id'])): ?>
-        <p>Welcome, <?php echo $_SESSION['role']; ?>!</p>
-        <a href="../logout.php">Logout</a>
-    <?php else: ?>
-        <a href="login.php">Login</a>
-    <?php endif; ?>
+    <p>Welcome, <?php echo $_SESSION['role']; ?>!</p>
+    <a href="../logout.php">Logout</a>
+<?php else: ?>
+    <a href="login.php">Login</a>
+<?php endif; ?>
 
 <!DOCTYPE html>
 <html>
@@ -89,6 +90,16 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <label for="price">Price:</label>
         <input type="number" name="price" id="price" required>
         <br>
+        <label for="category">Category:</label>
+        <select name="category_id" id="category" required>
+            <?php
+            $stmt = $pdo->query("SELECT * FROM categories");
+            while ($category = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                echo "<option value=\"" . htmlspecialchars($category['id']) . "\">" . htmlspecialchars($category['name']) . "</option>";
+            }
+            ?>
+        </select>
+        <br>
         <label for="images">Images:</label>
         <input type="file" name="images[]" id="images" multiple required>
         <br>
@@ -96,24 +107,24 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </form>
 
     <h2>Existing Products</h2>
-<div>
-    <?php foreach ($products as $product): ?>
-        <div>
-            <h3><?php echo htmlspecialchars($product['name']); ?></h3>
-            <p><?php echo htmlspecialchars($product['description']); ?></p>
-            <p><?php echo htmlspecialchars($product['price']); ?></p>
-            <?php $imagePaths = explode(',', $product['images']); ?>
-            <?php foreach ($imagePaths as $imagePath): ?>
-                <img src="../assets/img/<?php echo htmlspecialchars($imagePath); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="100">
-            <?php endforeach; ?>
-            <a href="edit_product.php?product_id=<?php echo $product['id']; ?>">Edit</a>
-            <form action="delete_product.php" method="get">
-                <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
-                <button type="submit">Delete</button>
-            </form>
-
-        </div>
-    <?php endforeach; ?>
-</div>
+    <div>
+        <?php foreach ($products as $product): ?>
+            <div>
+                <h3><?php echo htmlspecialchars($product['name']); ?></h3>
+                <p><?php echo htmlspecialchars($product['description']); ?></p>
+                <p>Price: <?php echo htmlspecialchars($product['price']); ?></p>
+                <p>Category: <?php echo htmlspecialchars($product['category_name']); ?></p>
+                <?php $imagePaths = explode(',', $product['images']); ?>
+                <?php foreach ($imagePaths as $imagePath): ?>
+                    <img src="../assets/img/product/<?php echo htmlspecialchars($imagePath); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" width="100">
+                <?php endforeach; ?>
+                <a href="edit_product.php?product_id=<?php echo $product['id']; ?>">Edit</a>
+                <form action="delete_product.php" method="get">
+                    <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
+                    <button type="submit">Delete</button>
+                </form>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </body>
 </html>
