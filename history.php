@@ -1,4 +1,3 @@
-<!-- order_history.php -->
 <?php
 session_start();
 require_once 'utils/db.php';
@@ -25,44 +24,44 @@ $stmt->execute([$user_id]);
 $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order History</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <h1>Order History</h1>
+<?php include('themes/header.php'); ?>
+
+<div class="container mt-4">
+    <h1 class="mb-4 fw-bold fs-4">Riwayat Pembelian</h1>
 
     <?php if (empty($orders)): ?>
-        <p>You have no orders yet.</p>
+        <div class="alert alert-info">Anda belum memiliki pesanan.</div>
     <?php else: ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Date</th>
-                    <th>Total Price</th>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($orders as $order): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($order['order_id']); ?></td>
-                        <td><?php echo htmlspecialchars($order['order_date']); ?></td>
-                        <td><?php echo htmlspecialchars(number_format($order['total_price'], 2)); ?></td>
-                        <td><?php echo htmlspecialchars($order['product_name']); ?></td>
-                        <td><?php echo htmlspecialchars($order['quantity']); ?></td>
-                        <td><?php echo htmlspecialchars(number_format($order['price'], 2)); ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    <?php endif; ?>
-</body>
-</html>
+        <div class="order-list">
+            <?php
+            $current_order_id = null;
+            foreach ($orders as $order):
+                if ($order['order_id'] !== $current_order_id):
+                    if ($current_order_id !== null):
+                        echo '</div>'; // Close previous order div
+                    endif;
+                    $current_order_id = $order['order_id'];
+            ?>
+                    <div class="order-card mb-4 p-3 border rounded-3">
+                        <h4 class="fw-bold">Order ID: <?php echo htmlspecialchars($order['order_id']); ?></h4>
+                        <p class="text-muted">Tanggal: <?php echo htmlspecialchars(date('d M Y, H:i', strtotime($order['order_date']))); ?></p>
+                        <p class="text-danger fs-5">Total: Rp. <?php echo htmlspecialchars(number_format($order['total_price'], 0, ',', '.')); ?></p>
+                        <ul class="list-unstyled">
+            <?php endif; ?>
+                            <li class="mb-2">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="fw-bold"><?php echo htmlspecialchars($order['product_name']); ?></h5>
+                                        <p class="mb-0">Jumlah: <?php echo htmlspecialchars($order['quantity']); ?></p>
+                                    </div>
+                                    <p class="text-danger mb-0">Rp. <?php echo htmlspecialchars(number_format($order['price'], 0, ',', '.')); ?></p>
+                                </div>
+                            </li>
+            <?php endforeach; ?>
+                        </ul>
+                    </div>
+            <?php endif; ?>
+        </div>
+</div>
+
+<?php include('themes/footer.php'); ?>

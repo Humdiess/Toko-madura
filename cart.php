@@ -154,8 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const productId = this.getAttribute('data-product-id');
             const cartItem = this.closest('.cart-item');
 
-            // AJAX request to delete the item from the database
-            fetch('delete_cart_item.php', {
+            fetch('services/delete_cart_item.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'

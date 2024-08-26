@@ -27,7 +27,7 @@ if (isset($_SESSION['user_id'])) {
         <div class="nav-right d-flex align-items-center gap-5">
             <div class="nav-action d-flex align-items-center gap-4">
                 <div class="cart">
-                    <a href="#">
+                    <a href="cart.php">
                         <i class="fas fa-shopping-cart"></i>
                     </a>
                 </div>
@@ -60,10 +60,10 @@ if (isset($_SESSION['user_id'])) {
                         <?php if ($_SESSION['role'] === 'admin'): ?>
                             <li><a href="admin.php">Manage Products</a></li>
                         <?php endif; ?>
-                        <li><a href="logout.php">Logout</a></li>
+                        <li><a href="auth/logout.php">Logout</a></li>
                     </ul>
                 <?php else: ?>
-                    <a href="login.php" class="btn btn-danger rounded-pill">Login</a>
+                    <a href="auth/login.php" class="btn btn-danger rounded-pill">Login</a>
                 <?php endif; ?>
             </div>
         </div>
