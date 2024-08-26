@@ -9,7 +9,6 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Retrieve cart data based on user_id
 $stmt = $pdo->prepare("
     SELECT c.product_id, c.quantity, p.name, p.price, p.images 
     FROM carts c 
@@ -25,9 +24,15 @@ include('themes/header.php');
 ?>
 
 <div class="container mt-4">
-    <h1 class="fw-medium fs-4 mb-4">Keranjang Belanja</h1>
     <div class="row">
         <div class="col-lg-8">
+            <div class="cart-header d-flex justify-content-between align-items-center mb-3">
+                <h1 class="fw-medium fs-5">Keranjang Belanja</h1>
+                <div class="form-check">
+                    <input type="checkbox" id="selectAllCheckbox" class="form-check-input">
+                    <label class="form-check-label" for="selectAllCheckbox">Pilih Semua</label>
+                </div>
+            </div>
             <form id="cartForm" action="checkout.php" method="post">
                 <?php foreach ($cart_items as $item): ?>
                     <?php
@@ -36,10 +41,14 @@ include('themes/header.php');
                     ?>
                     <div class="cart-item row align-items-center mb-4 p-3 border rounded-3">
                         <div class="col-lg-1 col-md-1 col-sm-2 col-4 text-center">
-                            <input type="checkbox" name="selected_products[<?php echo $item['product_id']; ?>]" value="<?php echo $item['quantity']; ?>" class="product-checkbox">
+                            <input type="checkbox" name="selected_products[<?php echo $item['product_id']; ?>]" value="<?php echo $item['quantity']; ?>" class="product-checkbox" checked>
                         </div>
-                        <div class="col-lg-2 col-md-3 col-sm-4 col-6">
-                            <img src="assets/img/product/<?php echo htmlspecialchars($item['images']); ?>" alt="Product Image" class="img-fluid rounded">
+                        <div class="cart-product-image col-lg-2 col-md-3 col-sm-4 col-6">
+                            <?php
+                                $imagePaths = explode(',', $item['images']);
+                                $imageSrc = !empty($imagePaths[0]) ? "assets/img/product/" . htmlspecialchars($imagePaths[0]) : "assets/img/default/default_image.png";
+                            ?>
+                            <img src="<?php echo $imageSrc; ?>" alt="Product Image" class="img-fluid">
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-4 col-6">
                             <h5 class="fw-bold"><?php echo htmlspecialchars($item['name']); ?></h5>
@@ -47,9 +56,7 @@ include('themes/header.php');
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-4 col-6 text-center">
                             <div class="input-group">
-                                <!-- <button type="button" class="btn btn-outline-secondary btn-sm quantity-decrease" data-product-id="<?php echo $item['product_id']; ?>">-</button> -->
                                 <input type="text" name="quantities[<?php echo $item['product_id']; ?>]" value="<?php echo $item['quantity']; ?>" class="form-control text-center border-0" readonly>
-                                <!-- <button type="button" class="btn btn-outline-secondary btn-sm quantity-increase" data-product-id="<?php echo $item['product_id']; ?>">+</button> -->
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-2 col-sm-4 col-6 text-end">
@@ -65,7 +72,7 @@ include('themes/header.php');
 
         <!-- Subtotal Box -->
         <div class="col-lg-4">
-            <div class="total-price-wrapper mt-4 p-3 border rounded-3">
+            <div class="total-price-wrapper p-3 border rounded-3 mt-5">
                 <h4 class="fw-bold">Subtotal Terpilih:</h4>
                 <p class="fw-bold text-danger">Rp. <span id="selectedSubtotal">0</span></p>
                 <div class="checkout-btn-wrapper mt-4 w-100">
@@ -76,7 +83,7 @@ include('themes/header.php');
     </div>
 
     <!-- Payment Modal -->
-    <!-- <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -104,10 +111,10 @@ include('themes/header.php');
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
     <!-- Success Modal -->
-    <!-- <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body text-center">
@@ -117,20 +124,19 @@ include('themes/header.php');
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 </div>
 
 <?php include('themes/footer.php'); ?>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+        const deselectAllCheckbox = document.getElementById('deselectAllCheckbox');
         const checkboxes = document.querySelectorAll('.product-checkbox');
         const selectedSubtotal = document.getElementById('selectedSubtotal');
 
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', updateSubtotal);
-        });
-
+        // Update subtotal
         function updateSubtotal() {
             let subtotal = 0;
 
@@ -145,6 +151,26 @@ include('themes/header.php');
             selectedSubtotal.textContent = subtotal.toLocaleString('id-ID');
         }
 
+        // Handle "Pilih Semua" checkbox
+        selectAllCheckbox.addEventListener('change', function () {
+            checkboxes.forEach(checkbox => checkbox.checked = selectAllCheckbox.checked);
+            updateSubtotal();
+        });
+
+        // Handle "Batalkan Pilihan Semua" checkbox
+        deselectAllCheckbox.addEventListener('change', function () {
+            if (deselectAllCheckbox.checked) {
+                checkboxes.forEach(checkbox => checkbox.checked = false);
+                selectAllCheckbox.checked = false;
+                updateSubtotal();
+            }
+        });
+
+        // Update subtotal on checkbox change
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateSubtotal);
+        });
+
         // Increase or decrease quantity
         document.querySelectorAll('.quantity-increase, .quantity-decrease').forEach(button => {
             button.addEventListener('click', function () {
@@ -158,102 +184,47 @@ include('themes/header.php');
                     quantity -= 1;
                 }
                 quantityInput.value = quantity;
-
-                // Update subtotal
-                const item = this.closest('.cart-item');
-                const price = parseInt(item.querySelector('.text-danger').textContent.replace(/[^0-9]/g, ''));
-                const newSubtotal = price * quantity;
-                item.querySelector('.subtotal').textContent = newSubtotal.toLocaleString('id-ID');
-
-                // Update selected subtotal
+                // Optionally, send AJAX request to update quantity on the server
                 updateSubtotal();
             });
         });
 
-        // Remove item from cart
+        // Handle remove item
         document.querySelectorAll('.remove-item').forEach(button => {
             button.addEventListener('click', function () {
                 const productId = this.dataset.productId;
-
-                fetch('remove_from_cart.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    },
-                    body: 'product_id=' + productId
-                })
-                .then(response => response.text())
-                .then(data => {
-                    // Reload page to reflect changes
-                    location.reload();
-                });
+                // Optionally, send AJAX request to remove item from server
+                this.closest('.cart-item').remove();
+                updateSubtotal();
             });
         });
 
-        // Payment Modal
+        // Handle payment
         document.getElementById('confirmPaymentButton').addEventListener('click', function () {
-            const paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
-            paymentModal.hide();
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
 
-            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-            successModal.show();
+            // Submit form with selected payment method
+            const form = document.getElementById('cartForm');
+            const formData = new FormData(form);
+            formData.append('paymentMethod', paymentMethod);
+
+            fetch('checkout.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Show success modal
+                    $('#successModal').modal('show');
+                } else {
+                    alert('Pembayaran gagal. Silakan coba lagi.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Terjadi kesalahan. Silakan coba lagi.');
+            });
         });
     });
 </script>
-
-
-
-<?php
-session_start();
-include 'utils/db.php';
-
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit();
-}
-
-// Ambil ID pengguna dari sesi
-$user_id = $_SESSION['user_id'];
-
-// Ambil data keranjang dari tabel carts berdasarkan user_id
-$stmt = $pdo->prepare("
-    SELECT c.product_id, c.quantity, p.name, p.price 
-    FROM carts c 
-    JOIN products p ON c.product_id = p.id 
-    WHERE c.user_id = ?
-");
-$stmt->execute([$user_id]);
-$cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$total_price = 0;
-?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Shopping Cart</title>
-</head>
-<body>
-    <h1>Your Cart</h1>
-    <div>
-        <?php foreach ($cart_items as $item): ?>
-            <?php
-            // Hitung total harga untuk setiap produk
-            $subtotal = $item['price'] * $item['quantity'];
-            $total_price += $subtotal;
-            ?>
-            <div>
-                <h2><?php echo htmlspecialchars($item['name']); ?></h2>
-                <p>Quantity: <?php echo htmlspecialchars($item['quantity']); ?></p>
-                <p>Price: RP<?php echo htmlspecialchars(number_format($item['price'], 2)); ?></p>
-                <p>Subtotal: RP<?php echo htmlspecialchars(number_format($subtotal, 2)); ?></p>
-            </div>
-        <?php endforeach; ?>
-    </div>
-    <p>Total Price: RP <?php echo htmlspecialchars(number_format($total_price, 2)); ?></p>
-    <form action="checkout.php" method="post">
-        <button type="submit">Checkout</button>
-    </form>
-</body>
-</html>
-
