@@ -64,21 +64,21 @@ $allImages = get_all_product_images_src($product['images']);
 
         <div class="product-checkout col-lg-3 col-md-12 mb-4">
         <form action="services/add_to_cart.php" method="post">
-    <input type="hidden" id="productId" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
-    <input type="hidden" id="orderName" name="product_name" value="<?php echo htmlspecialchars($product['name']); ?>">
-    <input type="hidden" id="orderPrice" name="product_price" value="<?php echo htmlspecialchars($product['price']); ?>">
-    <div class="border p-2 rounded-3">
-        <p class="mb-3">Jumlah barang</p>
-        <div class="input-group mb-2 border rounded-3">
-            <button type="button" id="minusBtn" class="btn">-</button>
-            <input type="number" id="orderQuantity" name="quantity" class="form-control border border-0 text-center" value="1" min="1">
-            <button type="button" id="plusBtn" class="btn">+</button>
-        </div>
-        <p id="subtotal" class="mb-3">Subtotal: Rp. 0</p>
-        <button class="btn btn-danger w-100 mb-2" type="submit">Tambah ke Keranjang</button>
-        <a href="checkout.php" class="btn border w-100">Beli Sekarang</a>
-    </div>
-</form>
+            <input type="hidden" id="productId" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
+            <input type="hidden" id="orderName" name="product_name" value="<?php echo htmlspecialchars($product['name']); ?>">
+            <input type="hidden" id="orderPrice" name="product_price" value="<?php echo htmlspecialchars($product['price']); ?>">
+            <div class="border p-2 rounded-3">
+            <p class="mb-3">Jumlah barang</p>
+            <div class="input-group mb-2 border rounded-3">
+                    <button type="button" id="minusBtn" class="btn">-</button>
+                    <input type="number" id="orderQuantity" name="quantity" class="form-control border border-0 text-center" value="1" min="1">
+                    <button type="button" id="plusBtn" class="btn">+</button>
+                </div>
+                <p id="subtotal" class="mb-3">Subtotal: Rp. 0</p>
+                <button class="btn btn-danger w-100 mb-2" type="submit">Tambah ke Keranjang</button>
+                <a href="checkout.php" class="btn border w-100">Beli Sekarang</a>
+            </div>
+        </form>
 
         </div>
     </div>
@@ -151,7 +151,7 @@ $allImages = get_all_product_images_src($product['images']);
             <div class="product-content">
                 <div class="product-list">
                 <?php foreach ($products as $product) : ?>
-                    <div class="product-card rounded-4 border" onclick="window.location.href='detail.php?id=<?php echo $product['id']; ?>'">
+                    <div class="product-card rounded-3 border" onclick="window.location.href='detail.php?id=<?php echo $product['id']; ?>'">
                         <div class="product-card-image">
                             <img src="<?php echo get_product_image_src($product['images']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
                         </div>
