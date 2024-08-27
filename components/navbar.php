@@ -11,7 +11,6 @@ if (isset($_SESSION['user_id'])) {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 }
 ?>
-
 <nav class="navbar border d-flex justify-content-center" id="main-navbar">
     <div class="d-flex justify-content-between align-items-center w-100 nav-main px-5">
         <div class="nav-left">
@@ -36,24 +35,23 @@ if (isset($_SESSION['user_id'])) {
                         <i class="fas fa-bell"></i>
                     </a>
                 </div>
-                <div class="mail">
+                <div class="history">
                     <a href="history.php">
-                        <i class="fas fa-envelope"></i>
+                        <i class="fas fa-clock-rotate-left"></i>
                     </a>
                 </div>
             </div>
             <div class="divider d-none d-md-block"></div>
             <div class="nav-auth dropdown">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <input type="checkbox dropdown-toggle" id="dropdown-toggler" hidden>
-                    <label for="dropdown-toggler" class="profile-img">
+                    <div class="profile-img" onclick="toggleDropdown()">
                         <?php if (!empty($user['photo']) && file_exists("assets/img/profile/" . $user['photo'])): ?>
                             <img src="assets/img/profile/<?php echo urlencode($user['photo']); ?>" alt="Profile" class="rounded-circle">
                         <?php else: ?>
                             <img src="assets/img/profile/default.jpg" alt="Default Profile" class="rounded-circle">
                         <?php endif; ?>
-                    </label>
-                    <ul class="dropdown-menu">
+                    </div>
+                    <ul id="dropdown-menu" class="dropdown-menu">
                         <li><a href="#">Welcome, <?php echo $_SESSION['role']; ?>!</a></li>
                         <li><a href="#">Profile</a></li>
                         <li><a href="#">Settings</a></li>
@@ -69,3 +67,19 @@ if (isset($_SESSION['user_id'])) {
         </div>
     </div>
 </nav>
+
+
+<script>
+    function toggleDropdown() {
+    const dropdown = document.querySelector('.nav-auth');
+    dropdown.classList.toggle('open');
+}
+
+window.onclick = function(event) {
+    if (!event.target.closest('.nav-auth')) {
+        const dropdown = document.querySelector('.nav-auth');
+        dropdown.classList.remove('open');
+    }
+};
+
+</script>

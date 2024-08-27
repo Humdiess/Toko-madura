@@ -1,6 +1,6 @@
 <?php
 include 'utils/db.php';
-include('themes/header.php');
+include('themes/home/header.php');
 
 $searchQuery = isset($_GET['search']) ? trim($_GET['search']) : '';
 
@@ -89,4 +89,4 @@ if ($searchQuery) {
     <i class="fas fa-arrow-up"></i>
 </button>
 
-<?php include 'themes/footer.php'; ?>
+<?php include 'themes/home/footer.php'; ?>
