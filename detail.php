@@ -211,7 +211,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateSubtotal() {
         var quantity = parseInt(quantityInput.value, 10);
         var price = parseFloat(document.getElementById('orderPrice').value);
-        subtotal.textContent = 'Subtotal: Rp. ' + (price * quantity).toFixed(2);
+        subtotal.textContent = 'Subtotal: Rp. ' + (price * quantity).toLocaleString('id-ID');
     }
+
+    updateSubtotal();
 });
+
 </script>

@@ -14,17 +14,17 @@ if ($searchQuery) {
 }
 ?>
 
-<section class="product container mt-5">
+<section class="product container mt-4">
     <div class="product-wrapper">
         <div class="product">
             <div class="product-header mb-3 d-flex justify-content-between">
                 <h1 class="fw-medium fs-5">Hasil pencarian "<?= htmlspecialchars($searchQuery); ?>"</h1>
             </div>
-            <div class="product-content">
-                <div class="product-list">
+            <div class="product-content" >
+                <div class="product-list" style="padding-top: 0 !important;">
                     <?php if ($products): ?>
                         <?php foreach ($products as $product) : ?>
-                            <div class="product-card rounded-4 border" onclick="window.location.href='detail.php?id=<?php echo $product['id']; ?>' ">
+                            <div class="product-card rounded-3 border" onclick="window.location.href='detail.php?id=<?php echo $product['id']; ?>' ">
                                 <div class="product-card-image">
                                 <?php 
                                     $imagePaths = explode(',', $product['images']); 

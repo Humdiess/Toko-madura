@@ -12,51 +12,56 @@ include('themes/home/header.php');
             <div class="cart-header d-flex justify-content-between align-items-center mb-3">
                 <h1 class="fw-medium fs-5">Keranjang Belanja</h1>
                 <div class="form-check">
-                    <input type="checkbox" id="selectAllCheckbox" class="form-check-input">
+                    <input type="checkbox" id="selectAllCheckbox" class="form-check-input" checked>
                     <label class="form-check-label" for="selectAllCheckbox">Pilih Semua</label>
                 </div>
             </div>
             <form id="cartForm" action="checkout.php" method="post">
-                <?php foreach ($cart_items as $item): ?>
-                    <?php
-                    $subtotal = $item['price'] * $item['quantity'];
-                    $total_price += $subtotal;
+                <?php if (empty($cart_items)): ?>
+                    <p>Tidak ada barang di keranjang.</p>
+                <?php else: ?>
+                    <?php 
+                    $total_price = 0;
+                    foreach ($cart_items as $item): 
+                        $subtotal = $item['price'] * $item['quantity'];
+                        $total_price += $subtotal;
                     ?>
-                    <div class="cart-item row align-items-center mb-4 p-3 border rounded-3">
-                        <div class="col-lg-1 col-md-1 col-sm-2 col-4 text-center">
-                            <input type="checkbox" name="selected_products[<?php echo $item['product_id']; ?>]" value="<?php echo $item['quantity']; ?>" class="product-checkbox" checked>
-                        </div>
-                        <div class="cart-product-image col-lg-2 col-md-3 col-sm-4 col-6">
-                            <?php
-                                $imagePaths = explode(',', $item['images']);
-                                $imageSrc = !empty($imagePaths[0]) ? "assets/img/product/" . htmlspecialchars($imagePaths[0]) : "assets/img/default/default_image.png";
-                            ?>
-                            <img src="<?php echo $imageSrc; ?>" alt="Product Image" class="img-fluid">
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-4 col-6">
-                            <h5 class="fw-bold"><?php echo htmlspecialchars($item['name']); ?></h5>
-                            <p class="text-danger">Rp. <?php echo number_format($item['price'], 0, ',', '.'); ?></p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-4 col-6 text-center">
-                            <div class="input-group">
-                                <input type="text" name="quantities[<?php echo $item['product_id']; ?>]" value="<?php echo $item['quantity']; ?>" class="form-control text-center border-0" readonly>
+                        <div class="cart-item row align-items-center mb-4 p-3 border rounded-3">
+                            <div class="col-lg-1 col-md-1 col-sm-2 col-4 text-center">
+                                <input type="checkbox" name="selected_products[<?php echo $item['product_id']; ?>]" value="<?php echo $item['quantity']; ?>" class="product-checkbox" checked>
+                            </div>
+                            <div class="cart-product-image col-lg-2 col-md-3 col-sm-4 col-6">
+                                <?php
+                                    $imagePaths = explode(',', $item['images']);
+                                    $imageSrc = !empty($imagePaths[0]) ? "assets/img/product/" . htmlspecialchars($imagePaths[0]) : "assets/img/default/default_image.png";
+                                ?>
+                                <img src="<?php echo $imageSrc; ?>" alt="Product Image" class="img-fluid">
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-4 col-6">
+                                <h5 class="fw-bold"><?php echo htmlspecialchars($item['name']); ?></h5>
+                                <p class="text-danger">Rp. <?php echo number_format($item['price'], 0, ',', '.'); ?></p>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-6 text-center">
+                                <div class="input-group">
+                                    <input type="text" name="quantities[<?php echo $item['product_id']; ?>]" value="<?php echo $item['quantity']; ?>" class="form-control text-center border-0" readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-6 text-end">
+                                <p class="fw-bold">Subtotal: Rp. <span class="subtotal"><?php echo number_format($subtotal, 0, ',', '.'); ?></span></p>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-12 text-end">
+                                <button type="button" class="btn btn-danger remove-item" data-product-id="<?php echo $item['product_id']; ?>">Hapus</button>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-sm-4 col-6 text-end">
-                            <p class="fw-bold">Subtotal: Rp. <span class="subtotal"><?php echo number_format($subtotal, 0, ',', '.'); ?></span></p>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-sm-12 text-end">
-                            <button type="button" class="btn btn-danger remove-item" data-product-id="<?php echo $item['product_id']; ?>">Hapus</button>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </form>
         </div>
 
         <div class="col-lg-4">
             <div class="total-price-wrapper p-3 border rounded-3 mt-5">
                 <h4 class="fw-bold">Subtotal Terpilih:</h4>
-                <p class="fw-bold text-danger">Rp. <span id="selectedSubtotal">0</span></p>
+                <p class="fw-bold text-danger">Rp. <span id="selectedSubtotal"><?php echo number_format($total_price, 0, ',', '.'); ?></span></p>
                 <div class="checkout-btn-wrapper mt-4 w-100">
                     <button id="payButton" type="button" class="btn btn-danger w-100" data-bs-toggle="modal" data-bs-target="#paymentModal">Bayar</button>
                 </div>
@@ -189,5 +194,8 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Pilih metode pembayaran.');
         }
     });
+
+    // Initialize subtotal
+    updateSubtotal();
 });
 </script>
