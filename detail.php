@@ -63,7 +63,7 @@ $allImages = get_all_product_images_src($product['images']);
         </div>
 
         <div class="product-checkout col-lg-3 col-md-12 mb-4">
-        <form action="services/add_to_cart.php" method="post">
+        <form action="services/c_add_to_cart.php" method="post">
             <input type="hidden" id="productId" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
             <input type="hidden" id="orderName" name="product_name" value="<?php echo htmlspecialchars($product['name']); ?>">
             <input type="hidden" id="orderPrice" name="product_price" value="<?php echo htmlspecialchars($product['price']); ?>">
