@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $targetDir = "../assets/img/product/";
     $imagePaths = [];
 
-    for ($i = 0; i < count($images['name']); $i++) {
+    for ($i = 0; $i < count($images['name']); $i++) {
         $targetFile = $targetDir . basename($images["name"][$i]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
