@@ -76,7 +76,7 @@ $allImages = get_all_product_images_src($product['images']);
                 </div>
                 <p id="subtotal" class="mb-3">Subtotal: Rp. 0</p>
                 <button class="btn btn-danger w-100 mb-2" type="submit">Tambah ke Keranjang</button>
-                <a href="checkout.php" class="btn border w-100">Beli Sekarang</a>
+                <button class="btn btn-outline-secondary w-100" type="submit">Beli sekarang</button>
             </div>
         </form>
 

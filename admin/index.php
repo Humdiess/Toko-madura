@@ -111,7 +111,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <input type="number" name="discount" id="discount" class="form-control" step="0.01" min="0">
                         </div>
                         <div class="mb-3">
-                            <label for="images" class="form-label">Images:</label>
+                            <label for="images" class="form-label">Images (max 5mb):</label>
                             <input type="file" name="images[]" id="images" class="form-control" multiple required>
                         </div>
                     </div>
