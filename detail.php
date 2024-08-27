@@ -1,4 +1,4 @@
-<?php include('themes/header.php'); ?>
+<?php include('themes/home/header.php'); ?>
 
 <?php
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
@@ -176,6 +176,8 @@ $allImages = get_all_product_images_src($product['images']);
     </div>
 </section>
 
+<?php include('themes/home/footer.php'); ?>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var mainImage = document.getElementById('mainImage');
@@ -213,5 +215,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-
-<?php include('themes/footer.php'); ?>

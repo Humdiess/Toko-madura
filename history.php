@@ -24,7 +24,7 @@ $stmt->execute([$user_id]);
 $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<?php include('themes/header.php'); ?>
+<?php include('themes/home/header.php'); ?>
 
 <div class="container mt-4">
     <h1 class="mb-4 fw-bold fs-4">Riwayat Pembelian</h1>
@@ -64,4 +64,4 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
 </div>
 
-<?php include('themes/footer.php'); ?>
+<?php include('themes/home/footer.php'); ?>

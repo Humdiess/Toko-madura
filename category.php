@@ -1,7 +1,7 @@
 <?php
 include 'utils/db.php';
 include 'config/helper.php';
-include('themes/header.php');
+include('themes/home/header.php');
 
 // Ambil kategori dari URL
 $selectedCategory = isset($_GET['category']) ? htmlspecialchars($_GET['category']) : '';
@@ -89,4 +89,4 @@ $products = getProductsByCategory($pdo, $selectedCategory);
     <i class="fas fa-arrow-up"></i>
 </button>
 
-<?php include 'themes/footer.php'; ?>
+<?php include 'themes/home/footer.php'; ?>

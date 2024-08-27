@@ -1,6 +1,6 @@
 <?php
 include 'utils/db.php';
-include('themes/header.php');
+include('themes/home/header.php');
 
 $stmt = $pdo->query("SELECT * FROM products");
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -9,7 +9,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <section class="hero container py-3">
     <div class="hero-wrapper">
         <div class="category-selector align-items-center gap-2 mb-3">
-            <p class="text-center mb-0 fw-semibold">Kategori pilihan : </p>
+            <p class="text-center mb-0">Kategori pilihan : </p>
             <ul class="category-list nav gap-3">
                 <li class="nav-item"><a href="./detail.php">Sabun</a></li>
                 <li class="nav-item"><a href="#">Bumbu dapur</a></li>
@@ -17,7 +17,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <li class="nav-item"><a href="#">Peralatan dapur</a></li>
             </ul>
         </div>
-        <div class="slider-container overflow-hidden rounded-4">
+        <div class="slider-container overflow-hidden rounded-3">
             <div class="slider">
                 <div class="slide">
                     <img src="assets/img/banner/banner-1.png" alt="banner">
@@ -194,4 +194,4 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <i class="fas fa-arrow-up"></i>
 </button>
 
-<?php include 'themes/footer.php'; ?>
+<?php include 'themes/home/footer.php'; ?>
