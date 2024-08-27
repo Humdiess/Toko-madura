@@ -7,6 +7,7 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
+// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $description = $_POST['description'];
@@ -24,29 +25,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
+        // Check if the file is an image
         $check = getimagesize($images["tmp_name"][$i]);
         if ($check === false) {
             $uploadOk = 0;
-            echo "File " . $images["name"][$i] . " is not an image.";
+            echo "File " . htmlspecialchars($images["name"][$i]) . " is not an image.<br>";
         }
 
+        // Check file size
         if ($images["size"][$i] > 5000000) {
             $uploadOk = 0;
-            echo "Sorry, your file " . $images["name"][$i] . " is too large.";
+            echo "Sorry, your file " . htmlspecialchars($images["name"][$i]) . " is too large.<br>";
         }
 
-        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+        // Allow certain file formats
+        if (!in_array($imageFileType, ["jpg", "png", "jpeg", "gif"])) {
             $uploadOk = 0;
-            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed for file " . $images["name"][$i] . ".";
+            echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed for file " . htmlspecialchars($images["name"][$i]) . ".<br>";
         }
 
         if ($uploadOk == 0) {
-            echo "Sorry, your file " . $images["name"][$i] . " was not uploaded.";
+            echo "Sorry, your file " . htmlspecialchars($images["name"][$i]) . " was not uploaded.<br>";
         } else {
             if (move_uploaded_file($images["tmp_name"][$i], $targetFile)) {
                 $imagePaths[] = basename($images["name"][$i]);
             } else {
-                echo "Sorry, there was an error uploading your file " . $images["name"][$i] . ".";
+                echo "Sorry, there was an error uploading your file " . htmlspecialchars($images["name"][$i]) . ".<br>";
             }
         }
     }
@@ -59,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
+// Fetch products
 $stmt = $pdo->query("SELECT products.*, categories.name as category_name FROM products JOIN categories ON products.category_id = categories.id");
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -70,6 +75,8 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             Add Product
         </button>
     </div>
+    
+    <!-- Modal for Adding Product -->
     <div class="modal fade" id="createProductModal" tabindex="-1" aria-labelledby="createProductModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -158,7 +165,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editProductModal<?php echo $product['id']; ?>">
                             Edit
                         </button>
-                        <form action="delete_product.php" method="get" class="d-inline">
+                        <form action="delete_product.php" method="post" class="d-inline">
                             <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
@@ -173,23 +180,27 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="detailProductModalLabel<?php echo $product['id']; ?>"><?php echo htmlspecialchars($product['name']); ?> Details</h5>
+                                <h5 class="modal-title" id="detailProductModalLabel<?php echo $product['id']; ?>">Product Details</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
+                                <h5><?php echo htmlspecialchars($product['name']); ?></h5>
                                 <p><strong>Description:</strong> <?php echo htmlspecialchars($product['description']); ?></p>
                                 <p><strong>Price:</strong> <?php echo htmlspecialchars($product['price']); ?></p>
                                 <p><strong>Category:</strong> <?php echo htmlspecialchars($product['category_name']); ?></p>
                                 <p><strong>Rating:</strong> <?php echo htmlspecialchars($product['rating']); ?></p>
                                 <p><strong>Discount:</strong> <?php echo htmlspecialchars($product['discount']); ?></p>
-                                <p><strong>Images:</strong></p>
-                                <?php
-                                $images = explode(',', $product['images']);
-                                foreach ($images as $image):
-                                    $imageSrc = file_exists("../assets/img/product/" . $image) ? "../assets/img/product/" . $image : "../assets/img/default/default_image.png";
+                                <div class="row">
+                                    <?php
+                                    $imagePaths = explode(',', $product['images']);
+                                    foreach ($imagePaths as $imagePath) {
+                                        if (!empty($imagePath)) {
+                                            $imageSrc = file_exists("../assets/img/product/" . $imagePath) ? "../assets/img/product/" . $imagePath : "../assets/img/default/default_image.png";
+                                            echo '<div class="col-3 mb-3"><img src="' . htmlspecialchars($imageSrc) . '" class="img-fluid" alt="' . htmlspecialchars($product['name']) . '"></div>';
+                                        }
+                                    }
                                     ?>
-                                    <img src="<?php echo htmlspecialchars($imageSrc); ?>" alt="Product Image" class="img-thumbnail mb-2" style="width: 150px; height: 150px; object-fit: cover;">
-                                <?php endforeach; ?>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -202,48 +213,47 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="modal fade" id="editProductModal<?php echo $product['id']; ?>" tabindex="-1" aria-labelledby="editProductModalLabel<?php echo $product['id']; ?>" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <form action="update_product.php" method="post" enctype="multipart/form-data">
-                                <input type="hidden" name="id" value="<?php echo htmlspecialchars($product['id']); ?>">
+                            <form action="edit_product.php" method="post" enctype="multipart/form-data">
+                                <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="editProductModalLabel<?php echo $product['id']; ?>">Edit Product</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="mb-3">
-                                        <label for="name" class="form-label">Product Name:</label>
-                                        <input type="text" name="name" id="name" class="form-control" value="<?php echo htmlspecialchars($product['name']); ?>" required>
+                                        <label for="editName<?php echo $product['id']; ?>" class="form-label">Product Name:</label>
+                                        <input type="text" name="name" id="editName<?php echo $product['id']; ?>" class="form-control" value="<?php echo htmlspecialchars($product['name']); ?>" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="description" class="form-label">Description:</label>
-                                        <textarea name="description" id="description" class="form-control" required><?php echo htmlspecialchars($product['description']); ?></textarea>
+                                        <label for="editDescription<?php echo $product['id']; ?>" class="form-label">Description:</label>
+                                        <textarea name="description" id="editDescription<?php echo $product['id']; ?>" class="form-control" required><?php echo htmlspecialchars($product['description']); ?></textarea>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="price" class="form-label">Price:</label>
-                                        <input type="number" name="price" id="price" class="form-control" value="<?php echo htmlspecialchars($product['price']); ?>" required>
+                                        <label for="editPrice<?php echo $product['id']; ?>" class="form-label">Price:</label>
+                                        <input type="number" name="price" id="editPrice<?php echo $product['id']; ?>" class="form-control" value="<?php echo htmlspecialchars($product['price']); ?>" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="category" class="form-label">Category:</label>
-                                        <select name="category_id" id="category" class="form-select" required>
+                                        <label for="editCategory<?php echo $product['id']; ?>" class="form-label">Category:</label>
+                                        <select name="category_id" id="editCategory<?php echo $product['id']; ?>" class="form-select" required>
                                             <?php
                                             $stmt = $pdo->query("SELECT * FROM categories");
                                             while ($category = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                                $selected = $category['id'] == $product['category_id'] ? 'selected' : '';
-                                                echo "<option value=\"" . htmlspecialchars($category['id']) . "\" $selected>" . htmlspecialchars($category['name']) . "</option>";
+                                                echo "<option value=\"" . htmlspecialchars($category['id']) . "\"" . ($category['id'] == $product['category_id'] ? " selected" : "") . ">" . htmlspecialchars($category['name']) . "</option>";
                                             }
                                             ?>
                                         </select>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="rating" class="form-label">Rating (Optional):</label>
-                                        <input type="number" name="rating" id="rating" class="form-control" step="0.1" min="0" max="5" value="<?php echo htmlspecialchars($product['rating']); ?>">
+                                        <label for="editRating<?php echo $product['id']; ?>" class="form-label">Rating (Optional):</label>
+                                        <input type="number" name="rating" id="editRating<?php echo $product['id']; ?>" class="form-control" value="<?php echo htmlspecialchars($product['rating']); ?>" step="0.1" min="0" max="5">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="discount" class="form-label">Discount (Optional):</label>
-                                        <input type="number" name="discount" id="discount" class="form-control" step="0.01" min="0" value="<?php echo htmlspecialchars($product['discount']); ?>">
+                                        <label for="editDiscount<?php echo $product['id']; ?>" class="form-label">Discount (Optional):</label>
+                                        <input type="number" name="discount" id="editDiscount<?php echo $product['id']; ?>" class="form-control" value="<?php echo htmlspecialchars($product['discount']); ?>" step="0.01" min="0">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="images" class="form-label">Images:</label>
-                                        <input type="file" name="images[]" id="images" class="form-control" multiple>
+                                        <label for="editImages<?php echo $product['id']; ?>" class="form-label">Images:</label>
+                                        <input type="file" name="images[]" id="editImages<?php echo $product['id']; ?>" class="form-control" multiple>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -254,7 +264,6 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                     </div>
                 </div>
-
             <?php endforeach; ?>
         </tbody>
     </table>
