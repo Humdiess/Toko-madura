@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-include 'app/controller/cartcontroller.php';
+include 'services/c_cartController.php';
 
 include('themes/home/header.php'); 
 ?>
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const productId = this.getAttribute('data-product-id');
             const cartItem = this.closest('.cart-item');
 
-            fetch('services/delete_cart_item.php', {
+            fetch('services/c_delete_cart_item.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'

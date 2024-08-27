@@ -63,11 +63,12 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <div class="container mt-5">
-    <h1>Manage Products</h1>
-    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createProductModal">
-        Add Product
-    </button>
-
+    <div class="admin-header d-flex justify-content-between align-items-center">
+        <h1>Manage Products</h1>
+        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createProductModal">
+            Add Product
+        </button>
+    </div>
     <div class="modal fade" id="createProductModal" tabindex="-1" aria-labelledby="createProductModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -118,8 +119,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 
-    <h2>Existing Products</h2>
-    <table class="table table-striped">
+    <table class="table border rounded-3 mt-3">
         <thead>
             <tr>
                 <th scope="col">Image</th>
@@ -156,7 +156,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
                         <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailProductModal<?php echo $product['id']; ?>">
-                            Show Details
+                            Details
                         </button>
                     </td>   
                 </tr>
