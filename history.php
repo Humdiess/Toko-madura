@@ -43,7 +43,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     $current_order_id = $order['order_id'];
             ?>
                     <div class="order-card mb-4 p-3 border rounded-3">
-                        <h4 class="fw-bold">Order ID: <?php echo htmlspecialchars($order['order_id']); ?></h4>
+                        <h4 class="fw-bold fs-5">Order ID: <?php echo htmlspecialchars($order['order_id']); ?></h4>
                         <p class="text-muted">Tanggal: <?php echo htmlspecialchars(date('d M Y, H:i', strtotime($order['order_date']))); ?></p>
                         <p class="text-danger fs-5">Total: Rp. <?php echo htmlspecialchars(number_format($order['total_price'], 0, ',', '.')); ?></p>
                         <ul class="list-unstyled">

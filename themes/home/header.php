@@ -1,6 +1,7 @@
 <?php
     include 'utils/db.php';
     include_once 'config/helper.php';
+    include 'config/config.php';
     
     $stmt = $pdo->query("SELECT * FROM products");
     $products = $stmt->fetchAll(PDO::FETCH_ASSOC);

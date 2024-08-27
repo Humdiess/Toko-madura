@@ -14,7 +14,7 @@ if (isset($_SESSION['user_id'])) {
 <nav class="navbar border d-flex justify-content-center" id="main-navbar">
     <div class="d-flex justify-content-between align-items-center w-100 nav-main px-5">
         <div class="nav-left">
-            <a class="navbar-brand fw-bold fs-3" href="/toko-madura">Madura<span class="text-danger fw-bold fs-6">.shop</span></a>
+            <a class="navbar-brand fw-bold fs-3" href="<?php echo BASE_URL ?>">Madura<span class="text-danger fw-bold fs-6">.shop</span></a>
         </div>
         <div class="nav-center">
             <div class="nav-search">
@@ -51,15 +51,17 @@ if (isset($_SESSION['user_id'])) {
                         <?php else: ?>
                             <img src="https://avatars.githubusercontent.com/u/118147438?v=4" alt="Default Profile" class="rounded-circle">
                         <?php endif; ?>
-                    </label>
-                    <ul class="dropdown-menu">
+                    </div>
+                    <ul id="dropdown-menu" class="dropdown-menu">
+                        <li><a href="history.php">Histori transaksi</a></li>
+                        <li><a href="cart.php">Keranjang belanja</a></li>
                         <?php if ($_SESSION['role'] === 'admin'): ?>
-                            <li><a href="admin.php">Manage Products</a></li>
+                            <li><a href="<?php echo BASE_URL . 'admin' ?>">Manage Products</a></li>
                         <?php endif; ?>
-                        <li><a href="auth/logout.php">Logout</a></li>
+                        <li><a class="text-danger" href="auth/logout.php">Logout</a></li>
                     </ul>
                 <?php else: ?>
-                    <a href="auth/login.php" class="btn btn-danger rounded-pill">Login</a>
+                    <a href="auth/login.php" class="btn btn-danger rounded-pill px-4">Login</a>
                 <?php endif; ?>
             </div>
         </div>
