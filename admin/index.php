@@ -114,7 +114,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 
-    <table class="table border rounded-3 mt-3">
+    <table class="table border rounded-3 mt-3 bg-white">
         <thead>
             <tr>
                 <th scope="col">Image</th>
