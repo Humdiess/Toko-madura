@@ -1,5 +1,6 @@
+<?php include('../themes/auth/header.php'); ?>
+
 <?php
-session_start();
 include '../utils/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -25,26 +26,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="col-md-6 animate__animated animate__fadeInDown">
+        <div class="card border rounded-3">
+            <div class="card-header text-center bg-white">
+                <h3 class="text-danger">Login</h3>
+            </div>
+            <div class="card-body">
+                <form action="login.php" method="post">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" name="username" id="username" class="form-control" placeholder="Enter your username" autocomplete="off" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" autocomplete="off" required>
+                    </div>
+                    <?php if (isset($error)): ?>
+                        <div class="alert alert-danger">
+                            <?= $error; ?>
+                        </div>
+                    <?php endif; ?>
+                    <button type="submit" class="btn text-white w-100 bg-danger">Login</button>
+                </form>
+            </div>
+            <div class="card-footer text-center bg-white">
+                <p>Don't have an account? <a href="register.php" class="text-danger">Sign up here</a></p>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
-    <h1>Login</h1>
-    <form action="login.php" method="post">
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username" required>
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required>
-        <br>
-        <button type="submit">Login</button>
-    </form>
-    
-    <?php if (isset($error)) echo "<p>$error</p>"; ?>
-
-    <p>Belum punya akun? <a href="register.php">Daftar di sini</a></p>
-</body>
-</html>
+<?php include('../themes/auth/footer.php'); ?>

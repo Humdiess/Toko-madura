@@ -114,19 +114,33 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <h2>Existing Products</h2>
-    <div class="row">
-        <?php foreach ($products as $product): ?>
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo htmlspecialchars($product['name']); ?></h5>
-                        <p class="card-text"><?php echo htmlspecialchars($product['description']); ?></p>
-                        <p class="card-text">Price: <?php echo htmlspecialchars($product['price']); ?></p>
-                        <p class="card-text">Category: <?php echo htmlspecialchars($product['category_name']); ?></p>
-                        <?php $imagePaths = explode(',', $product['images']); ?>
-                        <?php foreach ($imagePaths as $imagePath): ?>
-                            <img src="../assets/img/product/<?php echo htmlspecialchars($imagePath); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="img-fluid mb-2">
-                        <?php endforeach; ?>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Price</th>
+                <th scope="col">Category</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($products as $product): ?>
+                <tr>
+                    <td>
+                        <?php
+                        $imagePaths = explode(',', $product['images']);
+                        $firstImage = !empty($imagePaths[0]) ? $imagePaths[0] : 'default_image.png';
+                        $imageSrc = file_exists("../assets/img/product/" . $firstImage) ? "../assets/img/product/" . $firstImage : "../assets/img/default/default_image.png";
+                        ?>
+                        <img src="<?php echo htmlspecialchars($imageSrc); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;">
+                    </td>
+                    <td><?php echo htmlspecialchars($product['name']); ?></td>
+                    <td><?php echo htmlspecialchars($product['description']); ?></td>
+                    <td><?php echo htmlspecialchars($product['price']); ?></td>
+                    <td><?php echo htmlspecialchars($product['category_name']); ?></td>
+                    <td>
                         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editProductModal<?php echo $product['id']; ?>">
                             Edit
                         </button>
@@ -134,59 +148,98 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
                             <button type="submit" class="btn btn-danger">Delete</button>
                         </form>
-                    </div>
-                </div>
-            </div>
+                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#detailProductModal<?php echo $product['id']; ?>">
+                            Show Details
+                        </button>
+                    </td>   
+                </tr>
 
-            <div class="modal fade" id="editProductModal<?php echo $product['id']; ?>" tabindex="-1" aria-labelledby="editProductModalLabel<?php echo $product['id']; ?>" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form action="edit_product.php" method="post" enctype="multipart/form-data">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editProductModalLabel<?php echo $product['id']; ?>">Edit Product</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">Product Name:</label>
-                                    <input type="text" name="name" id="name" class="form-control" value="<?php echo htmlspecialchars($product['name']); ?>" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="description" class="form-label">Description:</label>
-                                    <textarea name="description" id="description" class="form-control" required><?php echo htmlspecialchars($product['description']); ?></textarea>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="price" class="form-label">Price:</label>
-                                    <input type="number" name="price" id="price" class="form-control" value="<?php echo htmlspecialchars($product['price']); ?>" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="category" class="form-label">Category:</label>
-                                    <select name="category_id" id="category" class="form-select" required>
-                                        <?php
-                                        $stmt = $pdo->query("SELECT * FROM categories");
-                                        while ($category = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                                            $selected = $category['id'] == $product['category_id'] ? 'selected' : '';
-                                            echo "<option value=\"" . htmlspecialchars($category['id']) . "\" $selected>" . htmlspecialchars($category['name']) . "</option>";
-                                        }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="images" class="form-label">Images:</label>
-                                    <input type="file" name="images[]" id="images" class="form-control" multiple>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save Changes</button>
-                            </div>
-                        </form>
+                <!-- Modal for Product Details -->
+<?php foreach ($products as $product): ?>
+    <div class="modal fade" id="detailProductModal<?php echo $product['id']; ?>" tabindex="-1" aria-labelledby="detailProductModalLabel<?php echo $product['id']; ?>" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailProductModalLabel<?php echo $product['id']; ?>">Product Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="product-detail">
+                        <div class="product-image">
+                            <?php
+                            $imagePaths = explode(',', $product['images']);
+                            $firstImage = !empty($imagePaths[0]) ? $imagePaths[0] : 'default_image.png';
+                            $imageSrc = file_exists("../assets/img/product/" . $firstImage) ? "../assets/img/product/" . $firstImage : "../assets/img/default/default_image.png";
+                            ?>
+                            <img src="<?php echo htmlspecialchars($imageSrc); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="img-thumbnail" style="width: 100%; height: auto; object-fit: cover;">
+                        </div>
+                        <div class="product-info mt-3">
+                            <h2><?php echo htmlspecialchars($product['name']); ?></h2>
+                            <p><?php echo htmlspecialchars($product['description']); ?></p>
+                            <p>Price: Rp. <?php echo htmlspecialchars($product['price']); ?></p>
+                            <p>Category: <?php echo htmlspecialchars($product['category_name']); ?></p>
+                        </div>
                     </div>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
-        <?php endforeach; ?>
+        </div>
     </div>
+<?php endforeach; ?>
+
+
+                <div class="modal fade" id="editProductModal<?php echo $product['id']; ?>" tabindex="-1" aria-labelledby="editProductModalLabel<?php echo $product['id']; ?>" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <form action="edit_product.php" method="post" enctype="multipart/form-data">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editProductModalLabel<?php echo $product['id']; ?>">Edit Product</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($product['id']); ?>">
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">Product Name:</label>
+                                        <input type="text" name="name" id="name" class="form-control" value="<?php echo htmlspecialchars($product['name']); ?>" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="description" class="form-label">Description:</label>
+                                        <textarea name="description" id="description" class="form-control" required><?php echo htmlspecialchars($product['description']); ?></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="price" class="form-label">Price:</label>
+                                        <input type="number" name="price" id="price" class="form-control" value="<?php echo htmlspecialchars($product['price']); ?>" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="category" class="form-label">Category:</label>
+                                        <select name="category_id" id="category" class="form-select" required>
+                                            <?php
+                                            $stmt = $pdo->query("SELECT * FROM categories");
+                                            while ($category = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                                $selected = $category['id'] == $product['category_id'] ? 'selected' : '';
+                                                echo "<option value=\"" . htmlspecialchars($category['id']) . "\" $selected>" . htmlspecialchars($category['name']) . "</option>";
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="images" class="form-label">Images:</label>
+                                        <input type="file" name="images[]" id="images" class="form-control" multiple>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>
 
 <?php include '../themes/admin/footer.php'; ?>

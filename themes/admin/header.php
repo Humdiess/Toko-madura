@@ -1,3 +1,5 @@
+<?php include '../config/config.php'; ?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -25,31 +27,16 @@
                 <button class="navbar-toggler collapsed" type="button" aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <h1 class="navbar-brand" style="font-family: 'Lobster';">
-                    PosApp
+                <h1 class="navbar-brand">
+                    <a class="navbar-brand fw-bold fs-3" href="/toko-madura">Madura<span class="text-danger fw-bold fs-6">.shop</span></a>
                 </h1>
-                <div class="user-profile p-3">
-                    <input type="checkbox" id="myprofile">
-                    <label for="myprofile" class="myprofile-container">
-                        <div class="myprofile-thumb d-flex align-items-center">
-                            <img src="path/to/profile_img.jpg" class="rounded-full" style="width: 32px" alt="image">
-                            <p class="mb-0 ms-2">Username</p>
-                        </div>
-                    </label>
-
-                    <div class="dropdown-content mt-2">
-                        <a href="/myprofile">
-                           👀 My Profile
-                        </a>
-                        <a href="/toko-madura">
-                            🏠 Home
-                        </a>
-                        <a href="../auth/logout.php" class="text-danger">⬅️ Logout</a>
-                    </div>
-                </div>
                 <div class="collapse navbar-collapse" id="sidebar-menu">
                     <ul class="navbar-nav mt-2">
-                        <!-- Insert your static navigation items here -->
+                        <li class="nav-item gap-2">
+                            <a class="nav-link" href="<?php echo ADMIN_URL ?>">
+                                <i class="fas fa-box me-2"></i> Products
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -92,7 +92,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </div>
 </section>
 
-<section class="promo-container py-5 text-dark ">
+<section class="promo-container py-5 text-dark">
     <div class="promo-wrapper container text-center">
         <div class="promo">
             <div class="promo-header mb-4">
@@ -100,7 +100,10 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
             <div class="promo-content d-flex justify-content-center">
                 <div class="promo-list">
-                    <?php foreach ($products as $product) : ?>
+                    <?php foreach ($products as $product) : 
+                        $originalPrice = $product['price'];
+                        $discountedPrice = $originalPrice - ($originalPrice * 0.17);
+                    ?>
                         <div class="promo-product-card rounded-lg-4 border position-relative overflow-hidden" onclick="window.location.href='detail.php?id=<?php echo $product['id']; ?>' ">
                             <div class="discount-badge position-absolute top-0 start-0 text-white p-2 rounded-end">-17%</div>
                             <div class="promo-product-card-image">
@@ -110,8 +113,8 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="promo-product-card-content p-3 text-start bg-white">
                                 <h5 class="promo-product-name text-dark mb-1"><?php echo htmlspecialchars($product['name']); ?></h5>
                                 <div class="promo-product-pricing d-flex align-items-center">
-                                    <p class="promo-product-price mb-0 text-success fw-bold"><?php echo format_rupiah($product['price']); ?></p>
-                                    <p class="promo-product-original-price mb-0 text-muted ms-2 text-decoration-line-through">Rp. 15.000</p>
+                                    <p class="promo-product-price mb-0 text-success fw-bold"><?php echo format_rupiah($discountedPrice); ?></p>
+                                    <p class="promo-product-original-price mb-0 text-muted ms-2 text-decoration-line-through"><?php echo format_rupiah($originalPrice); ?></p>
                                 </div>
                                 <p class="promo-product-location mb-2 text-secondary"><i class="fas fa-map-marker-alt"></i> Jakarta</p>
                                 <div class="promo-product-rating d-flex align-items-center gap-1 text-warning">
@@ -125,6 +128,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 </section>
+
 
 <section class="product container mt-5">
     <div class="product-wrapper">

@@ -18,3 +18,5 @@ document.querySelectorAll('.bottom-tab-bar .nav-link').forEach(link => {
         this.classList.add('active');
     });
 });
+
+
