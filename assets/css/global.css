@@ -81,12 +81,10 @@ body {
 
 ::-webkit-scrollbar-track {
     background: #f3f3f3 !important;
-    border-radius: 10px !important;
 }
 
 ::-webkit-scrollbar-thumb {
     background: #e74c3c !important;
-    border-radius: 10px !important;
     transition: background 0.3s ease !important;
 }
 

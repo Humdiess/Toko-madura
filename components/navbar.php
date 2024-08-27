@@ -61,24 +61,23 @@ if (isset($_SESSION['user_id'])) {
                     </ul>
                 <?php else: ?>
                     <a href="auth/login.php" class="btn btn-danger rounded-pill px-4">Login</a>
+                    <a href="auth/register.php" class="btn btn-secondary rounded-pill px-4 ms-2">Register</a>
                 <?php endif; ?>
             </div>
         </div>
     </div>
 </nav>
 
-
 <script>
     function toggleDropdown() {
-    const dropdown = document.querySelector('.nav-auth');
-    dropdown.classList.toggle('open');
-}
-
-window.onclick = function(event) {
-    if (!event.target.closest('.nav-auth')) {
         const dropdown = document.querySelector('.nav-auth');
-        dropdown.classList.remove('open');
+        dropdown.classList.toggle('open');
     }
-};
 
+    window.onclick = function(event) {
+        if (!event.target.closest('.nav-auth')) {
+            const dropdown = document.querySelector('.nav-auth');
+            dropdown.classList.remove('open');
+        }
+    };
 </script>
