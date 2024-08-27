@@ -33,7 +33,6 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <th scope="col">Total Price</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Payment Method</th>
-                <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -45,9 +44,6 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo htmlspecialchars($order['total_price']); ?></td>
                     <td><?php echo htmlspecialchars($order['created_at']); ?></td>
                     <td><?php echo htmlspecialchars($order['payment_method']); ?></td>
-                    <td>
-                        <a href="orders.php?action=delete&order_id=<?php echo htmlspecialchars($order['id']); ?>" class="btn btn-danger">Mark as Completed</a>
-                    </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

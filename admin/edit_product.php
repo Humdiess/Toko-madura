@@ -11,29 +11,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];
-    $category_id = $_POST['category_id']; // Get the selected category
+    $category_id = $_POST['category_id'];
     $images = $_FILES['images'];
 
     $targetDir = "../assets/img/product/";
     $imagePaths = [];
 
-    // Get existing images
     $stmt = $pdo->prepare("SELECT images FROM products WHERE id = ?");
     $stmt->execute([$product_id]);
     $product = $stmt->fetch(PDO::FETCH_ASSOC);
     $existingImages = explode(',', $product['images']);
 
-    // Process new images
     for ($i = 0; $i < count($images['name']); $i++) {
         if (empty($images['tmp_name'][$i])) {
-            continue; // Skip if no file is uploaded
+            continue;
         }
 
         $targetFile = $targetDir . basename($images["name"][$i]);
         $uploadOk = 1;
         $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
 
-        // Check if image file is an actual image or fake image
         $check = getimagesize($images["tmp_name"][$i]);
         if ($check === false) {
             $uploadOk = 0;
@@ -41,21 +38,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             continue;
         }
 
-        // Check file size (limit to 5MB)
         if ($images["size"][$i] > 5000000) {
             $uploadOk = 0;
             echo "Sorry, your file " . $images["name"][$i] . " is too large.";
             continue;
         }
 
-        // Allow certain file formats
         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
             $uploadOk = 0;
             echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed for file " . $images["name"][$i] . ".";
             continue;
         }
 
-        // Check if $uploadOk is set to 0 by an error
         if ($uploadOk == 0) {
             echo "Sorry, your file " . $images["name"][$i] . " was not uploaded.";
             continue;
@@ -68,11 +62,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Merge existing images with new images
     $updatedImages = array_merge($existingImages, $imagePaths);
     $imagePathsString = implode(',', $updatedImages);
 
-    // Update product with category
     $stmt = $pdo->prepare("UPDATE products SET name = ?, description = ?, price = ?, category_id = ?, images = ? WHERE id = ?");
     $stmt->execute([$name, $description, $price, $category_id, $imagePathsString, $product_id]);
 
@@ -86,7 +78,6 @@ $stmt->execute([$product_id]);
 $product = $stmt->fetch(PDO::FETCH_ASSOC);
 $imagePaths = explode(',', $product['images']);
 
-// Fetch categories
 $categoryStmt = $pdo->query("SELECT * FROM categories");
 $categories = $categoryStmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
