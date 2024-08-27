@@ -12,6 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = $_POST['description'];
     $price = $_POST['price'];
     $category_id = $_POST['category_id'];
+    $rating = $_POST['rating']; // Get the rating value
     $images = $_FILES['images'];
 
     $targetDir = "../assets/img/product/";
@@ -65,8 +66,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updatedImages = array_merge($existingImages, $imagePaths);
     $imagePathsString = implode(',', $updatedImages);
 
-    $stmt = $pdo->prepare("UPDATE products SET name = ?, description = ?, price = ?, category_id = ?, images = ? WHERE id = ?");
-    $stmt->execute([$name, $description, $price, $category_id, $imagePathsString, $product_id]);
+    // Update product with category and rating
+    $stmt = $pdo->prepare("UPDATE products SET name = ?, description = ?, price = ?, category_id = ?, images = ?, rating = ? WHERE id = ?");
+    $stmt->execute([$name, $description, $price, $category_id, $imagePathsString, $rating, $product_id]);
 
     header('Location: index.php');
     exit();
@@ -108,6 +110,9 @@ $categories = $categoryStmt->fetchAll(PDO::FETCH_ASSOC);
                 </option>
             <?php endforeach; ?>
         </select>
+        <br>
+        <label for="rating">Rating (0-5):</label>
+        <input type="number" name="rating" id="rating" value="<?php echo htmlspecialchars($product['rating']); ?>" step="0.1" min="0" max="5" required>
         <br>
         <label for="images">Upload New Images:</label>
         <input type="file" name="images[]" id="images" multiple>

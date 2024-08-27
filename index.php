@@ -98,33 +98,40 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="promo-header mb-4">
                 <h1 class="promo-title fw-bold fs-3 text-white">Rayakan Kemerdekaan dengan Diskon Merdeka 17%!</h1>
             </div>
-            <div class="promo-content d-flex justify-content-center">
-                <div class="promo-list">
-                    <?php foreach ($products as $product) : 
-                        $originalPrice = $product['price'];
-                        $discountedPrice = $originalPrice - ($originalPrice * 0.17);
-                    ?>
-                        <div class="promo-product-card rounded-lg-4 border position-relative overflow-hidden" onclick="window.location.href='detail.php?id=<?php echo $product['id']; ?>' ">
-                            <div class="discount-badge position-absolute top-0 start-0 text-white p-2 rounded-end">-17%</div>
-                            <div class="promo-product-card-image">
-                                <img src="<?php echo get_product_image_src($product['images']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
-                            </div>
+          <div class="promo-content d-flex justify-content-center">
+    <div class="promo-list">
+        <?php foreach ($products as $product) : 
+            $originalPrice = $product['price'];
+            $discount = isset($product['discount']) ? $product['discount'] : 0; // Ambil nilai diskon dari produk, default 0
+            $discountedPrice = $originalPrice - $discount;
 
-                            <div class="promo-product-card-content p-3 text-start bg-white">
-                                <h5 class="promo-product-name text-dark mb-1"><?php echo htmlspecialchars($product['name']); ?></h5>
-                                <div class="promo-product-pricing d-flex align-items-center">
-                                    <p class="promo-product-price mb-0 text-success fw-bold"><?php echo format_rupiah($discountedPrice); ?></p>
-                                    <p class="promo-product-original-price mb-0 text-muted ms-2 text-decoration-line-through"><?php echo format_rupiah($originalPrice); ?></p>
-                                </div>
-                                <p class="promo-product-location mb-2 text-secondary"><i class="fas fa-map-marker-alt"></i> Jakarta</p>
-                                <div class="promo-product-rating d-flex align-items-center gap-1 text-warning">
-                                    <i class="fas fa-star"></i><span class="rating-value">4.5</span><span class="rating-count text-muted">(200 ulasan)</span>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
+            // Cek apakah diskon lebih dari 0
+            if ($discount > 0) : // Hanya tampilkan produk jika diskon lebih dari 0
+        ?>
+            <div class="promo-product-card rounded-lg-4 border position-relative overflow-hidden" onclick="window.location.href='detail.php?id=<?php echo $product['id']; ?>' ">
+                <div class="discount-badge position-absolute top-0 start-0 text-white p-2 rounded-end">-<?php echo $discount * 100; ?>%</div>
+                <div class="promo-product-card-image">
+                    <img src="<?php echo get_product_image_src($product['images']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
+                </div>
+
+                <div class="promo-product-card-content p-3 text-start bg-white">
+                    <h5 class="promo-product-name text-dark mb-1"><?php echo htmlspecialchars($product['name']); ?></h5>
+                    <div class="promo-product-pricing d-flex align-items-center">
+                        <p class="promo-product-price mb-0 text-success fw-bold"><?php echo format_rupiah($discountedPrice); ?></p>
+                        <p class="promo-product-original-price mb-0 text-muted ms-2 text-decoration-line-through"><?php echo format_rupiah($originalPrice); ?></p>
+                    </div>
+                    <p class="promo-product-location mb-2 text-secondary"><i class="fas fa-map-marker-alt"></i> Jakarta</p>
+                    <div class="promo-product-rating d-flex align-items-center gap-1 text-warning">
+                        <i class="fas fa-star"></i><span class="rating-value">4.5</span><span class="rating-count text-muted">(200 ulasan)</span>
+                    </div>
                 </div>
             </div>
+        <?php 
+            endif; // Akhir dari kondisi diskon > 0
+        endforeach; ?>
+    </div>
+</div>
+
         </div>
     </div>
 </section>

@@ -44,11 +44,12 @@ if (isset($_SESSION['user_id'])) {
             <div class="divider d-none d-md-block"></div>
             <div class="nav-auth dropdown">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <div class="profile-img" onclick="toggleDropdown()">
+                    <input type="checkbox" id="dropdown-toggler" hidden>
+                    <label for="dropdown-toggler" class="profile-img">
                         <?php if (!empty($user['photo']) && file_exists("assets/img/profile/" . $user['photo'])): ?>
                             <img src="assets/img/profile/<?php echo urlencode($user['photo']); ?>" alt="Profile" class="rounded-circle">
                         <?php else: ?>
-                            <img src="assets/img/profile/default.jpg" alt="Default Profile" class="rounded-circle">
+                            <img src="https://avatars.githubusercontent.com/u/118147438?v=4" alt="Default Profile" class="rounded-circle">
                         <?php endif; ?>
                     </div>
                     <ul id="dropdown-menu" class="dropdown-menu">
