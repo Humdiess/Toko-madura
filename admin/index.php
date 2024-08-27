@@ -11,7 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $description = $_POST['description'];
     $price = $_POST['price'];
-    $category_id = $_POST['category_id']; 
+    $category_id = $_POST['category_id'];
+    $rating = isset($_POST['rating']) ? $_POST['rating'] : null; 
     $images = $_FILES['images'];
 
     $targetDir = "../assets/img/product/";
@@ -50,8 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $imagePathsString = implode(',', $imagePaths);
-    $stmt = $pdo->prepare("INSERT INTO products (name, description, price, images, category_id) VALUES (?, ?, ?, ?, ?)");
-    $stmt->execute([$name, $description, $price, $imagePathsString, $category_id]);
+    $stmt = $pdo->prepare("INSERT INTO products (name, description, price, images, category_id, rating) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$name, $description, $price, $imagePathsString, $category_id, $rating]);
 
     header('Location: index.php');
     exit();
@@ -100,6 +101,10 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             </select>
                         </div>
                         <div class="mb-3">
+                            <label for="rating" class="form-label">Rating (Optional):</label>
+                            <input type="number" name="rating" id="rating" class="form-control" step="0.1" min="0" max="5">
+                        </div>
+                        <div class="mb-3">
                             <label for="images" class="form-label">Images:</label>
                             <input type="file" name="images[]" id="images" class="form-control" multiple required>
                         </div>
@@ -122,6 +127,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <th scope="col">Description</th>
                 <th scope="col">Price</th>
                 <th scope="col">Category</th>
+                <th scope="col">Rating</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -140,6 +146,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo htmlspecialchars($product['description']); ?></td>
                     <td><?php echo htmlspecialchars($product['price']); ?></td>
                     <td><?php echo htmlspecialchars($product['category_name']); ?></td>
+                    <td><?php echo htmlspecialchars($product['rating']); ?></td>
                     <td>
                         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editProductModal<?php echo $product['id']; ?>">
                             Edit
@@ -155,41 +162,45 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 </tr>
 
                 <!-- Modal for Product Details -->
-<?php foreach ($products as $product): ?>
-    <div class="modal fade" id="detailProductModal<?php echo $product['id']; ?>" tabindex="-1" aria-labelledby="detailProductModalLabel<?php echo $product['id']; ?>" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="detailProductModalLabel<?php echo $product['id']; ?>">Product Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="product-detail">
-                        <div class="product-image">
-                            <?php
-                            $imagePaths = explode(',', $product['images']);
-                            $firstImage = !empty($imagePaths[0]) ? $imagePaths[0] : 'default_image.png';
-                            $imageSrc = file_exists("../assets/img/product/" . $firstImage) ? "../assets/img/product/" . $firstImage : "../assets/img/default/default_image.png";
+              <!-- Modal for Product Details -->
+<div class="modal fade" id="detailProductModal<?php echo $product['id']; ?>" tabindex="-1" aria-labelledby="detailProductModalLabel<?php echo $product['id']; ?>" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailProductModalLabel<?php echo $product['id']; ?>">Product Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="product-detail">
+                    <div class="product-images">
+                        <?php
+                        $imagePaths = explode(',', $product['images']);
+                        foreach ($imagePaths as $imagePath) {
+                            $imageSrc = !empty($imagePath) && file_exists("../assets/img/product/" . $imagePath) ? "../assets/img/product/" . $imagePath : "../assets/img/default/default_image.png";
                             ?>
-                            <img src="<?php echo htmlspecialchars($imageSrc); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="img-thumbnail" style="width: 100%; height: auto; object-fit: cover;">
-                        </div>
-                        <div class="product-info mt-3">
-                            <h2><?php echo htmlspecialchars($product['name']); ?></h2>
-                            <p><?php echo htmlspecialchars($product['description']); ?></p>
-                            <p>Price: Rp. <?php echo htmlspecialchars($product['price']); ?></p>
-                            <p>Category: <?php echo htmlspecialchars($product['category_name']); ?></p>
-                        </div>
+                            <img src="<?php echo htmlspecialchars($imageSrc); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" class="img-fluid" style="width: 300px; height: 300px; object-fit: cover; margin-right: 10px;">
+                            <?php
+                        }
+                        ?>
+                    </div>
+                    <div class="product-info mt-3">
+                        <h3>Product Name: <?php echo htmlspecialchars($product['name']); ?></h3>
+                        <p>Description: <?php echo htmlspecialchars($product['description']); ?></p>
+                        <p>Price: <?php echo htmlspecialchars($product['price']); ?></p>
+                        <p>Category: <?php echo htmlspecialchars($product['category_name']); ?></p>
+                        <p>Rating: <?php echo htmlspecialchars($product['rating']); ?></p>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
-<?php endforeach; ?>
+</div>
 
 
+                <!-- Modal for Editing Product -->
                 <div class="modal fade" id="editProductModal<?php echo $product['id']; ?>" tabindex="-1" aria-labelledby="editProductModalLabel<?php echo $product['id']; ?>" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -223,6 +234,10 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                             }
                                             ?>
                                         </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="rating" class="form-label">Rating (Optional):</label>
+                                        <input type="number" name="rating" id="rating" class="form-control" step="0.1" min="0" max="5" value="<?php echo htmlspecialchars($product['rating']); ?>">
                                     </div>
                                     <div class="mb-3">
                                         <label for="images" class="form-label">Images:</label>
