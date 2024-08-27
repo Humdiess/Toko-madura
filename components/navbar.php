@@ -55,7 +55,7 @@ if (isset($_SESSION['user_id'])) {
                         <li><a href="history.php">Histori transaksi</a></li>
                         <li><a href="cart.php">Keranjang belanja</a></li>
                         <?php if ($_SESSION['role'] === 'admin'): ?>
-                            <li><a href="<?php echo ADMIN_URL ?>">Manage Products</a></li>
+                            <li><a href="<?php echo BASE_URL . 'admin' ?>">Manage Products</a></li>
                         <?php endif; ?>
                         <li><a class="text-danger" href="auth/logout.php">Logout</a></li>
                     </ul>

@@ -33,7 +33,7 @@
                 <div class="collapse navbar-collapse" id="sidebar-menu">
                     <ul class="navbar-nav mt-2">
                         <li class="nav-item gap-2">
-                            <a class="nav-link" href="<?php echo ADMIN_URL ?>">
+                            <a class="nav-link" href="<?php echo BASE_URL . 'admin'?>">
                                 <i class="fas fa-box me-2"></i> Products
                             </a>
                         </li>
