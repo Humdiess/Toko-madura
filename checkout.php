@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $pdo->prepare("DELETE FROM carts WHERE user_id = ?");
         $stmt->execute([$user_id]);
 
-        header('Location: thank_you.php');
+        header('Location: history.php');
         exit();
     } catch (PDOException $e) {
         die('Error: ' . $e->getMessage());
