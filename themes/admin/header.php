@@ -41,10 +41,10 @@
                         <a href="/myprofile">
                            👀 My Profile
                         </a>
-                        <a href="/">
+                        <a href="/toko-madura">
                             🏠 Home
                         </a>
-                        <a href="/logout" class="text-danger">⬅️ Logout</a>
+                        <a href="../auth/logout.php" class="text-danger">⬅️ Logout</a>
                     </div>
                 </div>
                 <div class="collapse navbar-collapse" id="sidebar-menu">
