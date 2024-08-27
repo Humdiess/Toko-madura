@@ -20,7 +20,7 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $total_price = 0;
 
-include('themes/header.php'); 
+include('themes/home/header.php'); 
 ?>
 
 <div class="container mt-4">
@@ -113,7 +113,7 @@ include('themes/header.php');
     </div>
 </div>
 
-<?php include('themes/footer.php'); ?>
+<?php include('themes/home/footer.php'); ?>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {

@@ -37,6 +37,7 @@
 
     <!-- icon -->
     <script src="https://kit.fontawesome.com/cff8b87f33.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="assets/img/default/app-logo.png">
     <title>Madura</title>
 </head>
 <body>  
