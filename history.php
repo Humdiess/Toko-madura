@@ -30,7 +30,7 @@ $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <h1 class="mb-4 fw-bold fs-4">Riwayat Pembelian</h1>
 
     <?php if (empty($orders)): ?>
-        <div class="alert alert-info">Anda belum memiliki pesanan.</div>
+        <div class="alert alert-danger">Anda belum memiliki pesanan.</div>
     <?php else: ?>
         <div class="order-list">
             <?php

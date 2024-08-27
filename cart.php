@@ -18,7 +18,9 @@ include('themes/home/header.php');
             </div>
             <form id="cartForm" action="checkout.php" method="post">
                 <?php if (empty($cart_items)): ?>
-                    <p>Tidak ada barang di keranjang.</p>
+                    <div class="alert alert-danger" role="alert">
+                        <p class="mb-0">Tidak ada barang di keranjang.</p>
+                    </div>
                 <?php else: ?>
                     <?php 
                     $total_price = 0;
@@ -152,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.text())
             .then(data => {
                 if (data === 'success') {
-                    cartItem.remove();  // Remove the item from the DOM
+                    cartItem.remove();
                     updateSubtotal();
                 } else {
                     alert('Error removing item from cart');
@@ -175,27 +177,23 @@ document.addEventListener('DOMContentLoaded', function () {
         const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
 
         if (selectedPaymentMethod) {
-            // Remove previous payment method input if exists
             const existingPaymentMethodInput = form.querySelector('input[name="paymentMethod"]');
             if (existingPaymentMethodInput) {
                 existingPaymentMethodInput.remove();
             }
 
-            // Create and append new payment method input
             const paymentMethodInput = document.createElement('input');
             paymentMethodInput.type = 'hidden';
             paymentMethodInput.name = 'paymentMethod';
             paymentMethodInput.value = selectedPaymentMethod.value;
             form.appendChild(paymentMethodInput);
 
-            // Submit the form
             form.submit();
         } else {
             alert('Pilih metode pembayaran.');
         }
     });
 
-    // Initialize subtotal
     updateSubtotal();
 });
 </script>

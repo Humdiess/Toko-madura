@@ -25,7 +25,7 @@ $products = getProductsByCategory($pdo, $selectedCategory);
                 </h1>
             </div>
             <div class="product-content">
-                <div class="product-list">
+                <div class="product-list" style="padding-top: 0 !important;">
                     <?php if ($products): ?>
                         <?php foreach ($products as $product) : ?>
                             <div class="product-card rounded-4 border" onclick="window.location.href='detail.php?id=<?php echo $product['id']; ?>' ">

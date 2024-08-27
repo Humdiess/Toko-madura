@@ -30,10 +30,18 @@ if (isset($_SESSION['user_id'])) {
                         <i class="fas fa-shopping-cart"></i>
                     </a>
                 </div>
-                <div class="notification">
-                    <a href="#">
+                <!-- Notification Dropdown -->
+                <div class="notification dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-bell"></i>
                     </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown">
+                        <li><a class="dropdown-item" href="#">Notification 1</a></li>
+                        <li><a class="dropdown-item" href="#">Notification 2</a></li>
+                        <li><a class="dropdown-item" href="#">Notification 3</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">See All Notifications</a></li>
+                    </ul>
                 </div>
                 <div class="history">
                     <a href="history.php">
@@ -44,12 +52,11 @@ if (isset($_SESSION['user_id'])) {
             <div class="divider d-none d-md-block"></div>
             <div class="nav-auth dropdown">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <input type="checkbox" id="dropdown-toggler" hidden>
-                    <label for="dropdown-toggler" class="profile-img">
+                    <div class="profile-img" onclick="toggleDropdown()">
                         <?php if (!empty($user['photo']) && file_exists("assets/img/profile/" . $user['photo'])): ?>
                             <img src="assets/img/profile/<?php echo urlencode($user['photo']); ?>" alt="Profile" class="rounded-circle">
                         <?php else: ?>
-                            <img src="https://avatars.githubusercontent.com/u/118147438?v=4" alt="Default Profile" class="rounded-circle">
+                            <img src="assets/img/profile/default.jpg" alt="Default Profile" class="rounded-circle">
                         <?php endif; ?>
                     </div>
                     <ul id="dropdown-menu" class="dropdown-menu">
