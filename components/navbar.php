@@ -52,9 +52,8 @@ if (isset($_SESSION['user_id'])) {
                         <?php endif; ?>
                     </div>
                     <ul id="dropdown-menu" class="dropdown-menu">
-                        <li><a href="#">Welcome, <?php echo $_SESSION['role']; ?>!</a></li>
-                        <li><a href="#">Profile</a></li>
-                        <li><a href="#">Settings</a></li>
+                        <li><a href="history.php">Histori transaksi</a></li>
+                        <li><a href="cart.php">Keranjang belanja</a></li>
                         <?php if ($_SESSION['role'] === 'admin'): ?>
                             <li><a href="<?php echo ADMIN_URL ?>">Manage Products</a></li>
                         <?php endif; ?>
