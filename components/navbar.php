@@ -60,7 +60,7 @@ if (isset($_SESSION['user_id'])) {
                         <li><a class="text-danger" href="auth/logout.php">Logout</a></li>
                     </ul>
                 <?php else: ?>
-                    <a href="auth/login.php" class="btn btn-danger rounded-pill">Login</a>
+                    <a href="auth/login.php" class="btn btn-danger rounded-pill px-4">Login</a>
                 <?php endif; ?>
             </div>
         </div>
