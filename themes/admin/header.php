@@ -31,10 +31,15 @@
                     <a class="navbar-brand fw-bold fs-3" href="/toko-madura">Madura<span class="text-danger fw-bold fs-6">.shop</span></a>
                 </h1>
                 <div class="collapse navbar-collapse" id="sidebar-menu">
-                    <ul class="navbar-nav mt-2">
+                    <ul class="navbar-nav mt-2 gap-2">
                         <li class="nav-item gap-2">
                             <a class="nav-link" href="<?php echo BASE_URL . 'admin'?>">
                                 <i class="fas fa-box me-2"></i> Products
+                            </a>
+                        </li>
+                        <li class="nav-item gap-2">
+                            <a class="nav-link" href="<?php echo BASE_URL . 'admin/order.php'?>">
+                                <i class="fas fa-shopping-cart me-2"></i> Orders
                             </a>
                         </li>
                     </ul>

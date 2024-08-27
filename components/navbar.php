@@ -54,7 +54,7 @@ if (isset($_SESSION['user_id'])) {
                     </div>
                     <ul id="dropdown-menu" class="dropdown-menu">
                         <li><a href="history.php">Histori transaksi</a></li>
-                        <li><a href="cart.php">Keranjang belanja</a></li>
+                        <li><a href="cart.php">Keranjang</a></li>
                         <?php if ($_SESSION['role'] === 'admin'): ?>
                             <li><a href="<?php echo BASE_URL . 'admin' ?>">Manage Products</a></li>
                         <?php endif; ?>
@@ -62,24 +62,23 @@ if (isset($_SESSION['user_id'])) {
                     </ul>
                 <?php else: ?>
                     <a href="auth/login.php" class="btn btn-danger rounded-pill px-4">Login</a>
+                    <a href="auth/register.php" class="btn btn-secondary rounded-pill px-4 ms-2">Register</a>
                 <?php endif; ?>
             </div>
         </div>
     </div>
 </nav>
 
-
 <script>
     function toggleDropdown() {
-    const dropdown = document.querySelector('.nav-auth');
-    dropdown.classList.toggle('open');
-}
-
-window.onclick = function(event) {
-    if (!event.target.closest('.nav-auth')) {
         const dropdown = document.querySelector('.nav-auth');
-        dropdown.classList.remove('open');
+        dropdown.classList.toggle('open');
     }
-};
 
+    window.onclick = function(event) {
+        if (!event.target.closest('.nav-auth')) {
+            const dropdown = document.querySelector('.nav-auth');
+            dropdown.classList.remove('open');
+        }
+    };
 </script>
