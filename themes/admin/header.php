@@ -43,7 +43,7 @@
                             </a>
                         </li>
                         <li class="nav-item mt-auto">
-                            <a class="nav-link text-danger" href="auth/logout.php">
+                            <a class="nav-link text-danger" href="../auth/logout.php">
                                 <i class="fas fa-sign-out-alt me-2"></i> Logout
                             </a>
                         </li>

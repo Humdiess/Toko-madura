@@ -31,11 +31,11 @@ if (isset($_SESSION['user_id'])) {
                     </a>
                 </div>
                 <!-- Notification Dropdown -->
-                <div class="notification">
+                <!-- <div class="notification">
                     <a class="nav-link" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-bell"></i>
                     </a>
-                </div>
+                </div> -->
                 <div class="history">
                     <a href="history.php">
                         <i class="fas fa-clock-rotate-left"></i>
